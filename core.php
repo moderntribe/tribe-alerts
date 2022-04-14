@@ -20,12 +20,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Prevent duplicate autoloading during tests
 if ( ! class_exists( \Tribe\Alert\Core::class ) ) {
-	require trailingslashit( __DIR__ ) . 'vendor/autoload.php';
+	// Require the vendor folder via multiple locations
+	$autoloaders = (array) apply_filters( 'tribe/alerts/autoloaders', [
+		trailingslashit( WP_CONTENT_DIR ) . '../vendor/autoload.php',
+		trailingslashit( WP_CONTENT_DIR ) . 'vendor/autoload.php',
+		trailingslashit( __DIR__ ) . 'vendor/autoload.php',
+	] );
+
+	$autoload = current( array_filter( $autoloaders, 'file_exists' ) );
+
+	require_once $autoload;
 }
 
 add_action( 'plugins_loaded', static function (): void {
+	if ( ! class_exists( 'ACF' ) ) {
+		add_action(
+			'admin_notices',
+			static function (): void { ?>
+				<div class="notice notice-error">
+					<p><?php esc_html_e( 'Tribe Alerts requires Advanced Custom Fields Pro to be installed and activated!', 'tribe-alerts' ); ?></p>
+				</div>
+			<?php }
+		);
+
+		return;
+	}
+
 	tribe_alert()->init( __FILE__ );
-}, 1, 0 );
+}, 5, 0 );
 
 
 function tribe_alert(): \Tribe\Alert\Core {
