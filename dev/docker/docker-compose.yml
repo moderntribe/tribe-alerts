@@ -30,7 +30,7 @@ x-php: &php
     working_dir: /application
     user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
     volumes:
-        - ../..:/application/www/public/wp-content/plugins/:package_slug:rw,nocopy,cached
+        - ../..:/application/www/public/wp-content/plugins/tribe-alerts:rw,nocopy,cached
         - ../..:/application/www:rw,nocopy,cached
         - ./php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/zz-overrides.ini
         - ./php/msmtp.conf:/etc/msmtprc:ro
@@ -44,9 +44,9 @@ x-php: &php
         - COMPOSER_MEMORY_LIMIT=-1
         - COMPOSER_PROCESS_TIMEOUT=0
         - COMPOSER_HOME=/application/.composer
-        - PHP_IDE_CONFIG=serverName=:package_slug.tribe
-        - DOMAIN_CURRENT_SITE=:package_slug.tribe
-        - DB_NAME=tribe_starter
+        - PHP_IDE_CONFIG=serverName=tribe-alerts.tribe
+        - DOMAIN_CURRENT_SITE=tribe-alerts.tribe
+        - DB_NAME=tribe_tribe_alerts
         - DB_USER=root
         - DB_PASSWORD=password
         - DB_HOST=mysql
@@ -72,7 +72,7 @@ services:
         links:
             - php-fpm:php
         environment:
-            - VIRTUAL_HOST=:package_slug.tribe,*.:package_slug.tribe
+            - VIRTUAL_HOST=tribe-alerts.tribe,*.tribe-alerts.tribe
 
     ##################################################
     # Testing Containers
@@ -95,9 +95,9 @@ services:
             - COMPOSER_PROCESS_TIMEOUT=0
             - COMPOSER_HOME=/application/.composer
             - PAGER=more
-            - PHP_IDE_CONFIG=serverName=:package_slugtest.tribe
-            - DOMAIN_CURRENT_SITE=:package_slugtest.tribe
-            - DB_NAME=tribe_starter_acceptance
+            - PHP_IDE_CONFIG=serverName=tribe-alertstest.tribe
+            - DOMAIN_CURRENT_SITE=tribe-alertstest.tribe
+            - DB_NAME=tribe_tribe_alerts_acceptance
             - DB_USER=root
             - DB_PASSWORD=password
             - DB_HOST=mysql
@@ -112,7 +112,7 @@ services:
         links:
             - php-tests:php
         environment:
-            - VIRTUAL_HOST=:package_slugtest.tribe,*.:package_slugtest.tribe
+            - VIRTUAL_HOST=tribe-alertstest.tribe,*.tribe-alertstest.tribe
 
     chrome:
         <<: *chrome

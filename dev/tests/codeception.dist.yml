@@ -65,7 +65,7 @@ modules:
             multisite: false
             plugins:
                 - advanced-custom-fields-pro/acf.php
-                - :package_slug/core.php
+                - tribe-alerts/core.php
             activatePlugins:
                 - advanced-custom-fields-pro/acf.php
-                - :package_slug/core.php
+                - tribe-alerts/core.php

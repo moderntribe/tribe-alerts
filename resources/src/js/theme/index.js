@@ -1,3 +1,3 @@
 document.addEventListener('DOMContentLoaded', function () {
-	console.log(':package_name theme scripts initialized');
+	console.log('Tribe Alerts theme scripts initialized');
 });

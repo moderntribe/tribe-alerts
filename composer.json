@@ -1,16 +1,16 @@
 {
-  "name": ":vendor_slug/:package_slug",
-  "description": ":package_description",
+  "name": "moderntribe/tribe-alerts",
+  "description": "Tribe Alerts WordPress Plugin",
   "type": "wordpress-plugin",
-  "homepage": "https://github.com/:vendor_slug/:package_slug",
+  "homepage": "https://github.com/moderntribe/tribe-alerts",
   "keywords": [
-    ":vendor_name",
-    ":package_slug"
+    "Modern Tribe",
+    "tribe-alerts"
   ],
   "authors": [
     {
-      "name": ":author_name",
-      "email": "author@domain.com",
+      "name": "Modern Tribe",
+      "email": "admin@tri.be",
       "role": "Developer"
     }
   ],
@@ -57,7 +57,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Tribe\\Starter\\": "src"
+      "Tribe\\Alert\\": "src"
     }
   },
   "autoload-dev": {

@@ -1,19 +1,14 @@
-# :package_name
+# Tribe Alerts
 
-:package_description
+Tribe Alerts WordPress Plugin
 
 ---
-This package can be used to scaffold a modern WordPress plugin. Follow these steps to get started:
-
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run `php ./configure.php` to run a script that will replace all placeholders throughout all the files.
-3. Manually delete `undo-configure.php` once you're satisfied with the replacement.
-4. Commit the `composer.lock` file.
-5. Adjust this README to suit your plugin.
+Display custom banner alerts on your website.
 ---
 
 ### Requirements
 - php7.4+
+- Advanced Custom Fields Pro
 - nvm or fnm
 - node 16+
 - yarn 1.22+

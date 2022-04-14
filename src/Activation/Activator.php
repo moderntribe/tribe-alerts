@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Starter\Activation;
+namespace Tribe\Alert\Activation;
 
-use Tribe\Starter\Core;
+use Tribe\Alert\Core;
 
 /**
  * Invoked during plugin activation.
  *
- * @package Tribe\Starter\Activation
+ * @package Tribe\Alert\Activation
  */
 class Activator implements Operable {
 

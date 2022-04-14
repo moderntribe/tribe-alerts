@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Starter;
+namespace Tribe\Alert;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Throwable;
-use Tribe\Starter\Resources\Resource_Definer;
-use Tribe\Starter\Resources\Resource_Subscriber;
+use Tribe\Alert\Resources\Resource_Definer;
+use Tribe\Alert\Resources\Resource_Subscriber;
 
 /**
  * Class Core
  *
- * @package Tribe\Starter
+ * @package Tribe\Alert
  */
 final class Core {
 

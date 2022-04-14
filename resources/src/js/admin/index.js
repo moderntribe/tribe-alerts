@@ -1,3 +1,3 @@
 document.addEventListener('DOMContentLoaded', function () {
-	console.log(':package_name admin scripts initialized');
+	console.log('Tribe Alerts admin scripts initialized');
 });

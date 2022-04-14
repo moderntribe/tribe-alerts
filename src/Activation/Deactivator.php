@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Starter\Activation;
+namespace Tribe\Alert\Activation;
 
 /**
  * Invoked during plugin deactivation.
  *
- * @package Tribe\Starter\Activation
+ * @package Tribe\Alert\Activation
  */
 class Deactivator implements Operable {
 

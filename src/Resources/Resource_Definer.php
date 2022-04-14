@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Starter\Resources;
+namespace Tribe\Alert\Resources;
 
 use DI;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Definer_Interface;
-use Tribe\Starter\Core;
+use Tribe\Alert\Core;
 
 class Resource_Definer implements Definer_Interface {
 

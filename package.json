@@ -1,8 +1,8 @@
 {
-  "name": ":package_slug",
+  "name": "tribe-alerts",
   "version": "1.0.0",
   "private": true,
-  "description": ":package_description",
+  "description": "Tribe Alerts WordPress Plugin",
   "main": "webpack.mix.js",
   "scripts": {
     "dev": "yarn run development",
@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/:vendor_slug/:package_slug.git"
+    "url": "git+https://github.com/moderntribe/tribe-alerts.git"
   },
   "bugs": {
-    "url": "https://github.com/:vendor_slug/:package_slug/issues"
+    "url": "https://github.com/moderntribe/tribe-alerts/issues"
   },
-  "homepage": "https://github.com/:vendor_slug/:package_slug#readme",
+  "homepage": "https://github.com/moderntribe/tribe-alerts#readme",
   "devDependencies": {
     "@babel/preset-react": "^7.16.7",
     "@stefanzweifel/esbuild-mix-manifest-plugin": "^0.1.0",

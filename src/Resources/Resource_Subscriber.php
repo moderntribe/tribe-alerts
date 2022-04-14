@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Starter\Resources;
+namespace Tribe\Alert\Resources;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
-use Tribe\Starter\Resources\Admin\Admin_Script_Loader;
-use Tribe\Starter\Resources\Admin\Editor_Script_Loader;
-use Tribe\Starter\Resources\Theme\Script_Loader;
+use Tribe\Alert\Resources\Admin\Admin_Script_Loader;
+use Tribe\Alert\Resources\Admin\Editor_Script_Loader;
+use Tribe\Alert\Resources\Theme\Script_Loader;
 
 /**
  * Class Asset_Subscriber
  *
- * @package Tribe\Starter
+ * @package Tribe\Alert
  */
 class Resource_Subscriber extends Abstract_Subscriber {
 

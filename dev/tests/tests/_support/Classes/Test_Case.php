@@ -18,7 +18,7 @@ class Test_Case extends WPTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->container = tribe_starter()->get_container();
+		$this->container = tribe_alert()->get_container();
 	}
 
 }

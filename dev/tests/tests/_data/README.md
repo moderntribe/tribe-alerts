@@ -5,4 +5,4 @@ For this plugin starter specifically, if the WordPress version is going to be up
 Additionally, you'll need to replace the URL's in the dump.sql with the package slug, so it's properly replaced when the plugin is initially configured:
 
 search: `//square1` _(if the domain you used to create the dump is `http://square1test.tribe`)_.
-replace: `//:package_slug`, _so it becomes `http://:package_slugtest.tribe`.
+replace: `//tribe-alerts`, _so it becomes `http://tribe-alertstest.tribe`.

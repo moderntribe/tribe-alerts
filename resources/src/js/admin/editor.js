@@ -1,3 +1,3 @@
 document.addEventListener('DOMContentLoaded', function () {
-	console.log(':package_name block editor scripts initialized');
+	console.log('Tribe Alerts block editor scripts initialized');
 });
