@@ -24,9 +24,9 @@ jobs:
 
     steps:
       - name: Use docker-compose v2
-        uses: KengoTODA/actions-setup-docker-compose@main
+        uses: KengoTODA/actions-setup-docker-compose@v1
         with:
-          version: '2.4.1'
+          version: 'v2.4.1'
 
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
