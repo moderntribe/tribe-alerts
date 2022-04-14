@@ -1,0 +1,95 @@
+{
+  "name": ":vendor_slug/:package_slug",
+  "description": ":package_description",
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/:vendor_slug/:package_slug",
+  "keywords": [
+    ":vendor_name",
+    ":package_slug"
+  ],
+  "authors": [
+    {
+      "name": ":author_name",
+      "email": "author@domain.com",
+      "role": "Developer"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.12.2",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%VERSION}"
+        },
+        "require": {
+          "ffraenz/private-composer-installer": "^5.0"
+        }
+      }
+    }
+  ],
+  "require": {
+    "php": "^7.4||^8.0",
+    "ext-json": "*",
+    "ext-readline": "*",
+    "php-di/php-di": "^6.3",
+    "moderntribe/square1-container": "^3.4"
+  },
+  "require-dev": {
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "codeception/module-asserts": "^1.3",
+    "codeception/module-cli": "^1.1",
+    "codeception/module-db": "^1.1",
+    "codeception/module-filesystem": "^1.0",
+    "codeception/module-phpbrowser": "^1.0",
+    "codeception/module-webdriver": "^1.4",
+    "codeception/util-universalframework": "^1.0",
+    "composer/installers": "^2.0",
+    "johnpbloch/wordpress-core": "5.9.3",
+    "johnpbloch/wordpress-core-installer": "2.0.*",
+    "larapack/dd": "^1.1",
+    "lucatume/function-mocker": "^1.3",
+    "lucatume/wp-browser": "^3.0",
+    "moderntribe/coding-standards": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tribe\\Starter\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tribe\\Tests\\": "dev/tests/tests/_support/Classes/"
+    }
+  },
+  "scripts": {
+    "lint": "vendor/bin/phpcs --standard=phpcs.xml.dist",
+    "format": "vendor/bin/phpcbf --standard=phpcs.xml.dist"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": {
+      "php": "7.4.7"
+    },
+    "allow-plugins": {
+      "ffraenz/private-composer-installer": true,
+      "composer/installers": true,
+      "johnpbloch/wordpress-core-installer": true,
+      "cweagans/composer-patches": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "wordpress-install-dir": "public/wp",
+    "installer-paths": {
+      "public/wp-content/plugins/{$name}": [
+        "type:wordpress-plugin"
+      ]
+    }
+  }
+}

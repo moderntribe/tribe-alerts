@@ -1,0 +1,77 @@
+# OS generated files #
+######################
+
+.DS_Store*
+ehthumbs.db
+._*
+*~
+.svn
+.cvs
+*.bak
+*.swp
+Thumbs.db
+.DS_Store
+.idea
+pimple.json
+.phpstorm.meta.php
+
+# IDE generated files #
+######################
+
+.vscode
+
+# Vim generated files #
+#######################
+
+*.un~
+
+# Packages #
+############
+
+*.7z
+*.dmg
+*.gz
+*.bz2
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tgz
+
+# Logs and databases #
+######################
+
+*.log
+*.sql
+
+# Docker #
+##########
+dev/docker/composer/
+dev/docker/docker-compose.override.yml
+
+# Testing #
+#######################
+!dev/tests/tests/_data/*.sql
+dev/tests/tests/_support/_generated/
+dev/tests/wp
+dev/tests/wp-content/plugins/*
+!dev/tests/wp-content/plugins/.gitkeep
+
+# Project #
+############
+npm-debug.log
+yarn-error.log
+/resources/dist
+/node_modules
+/public/wp
+/public/wp-content/*
+!/public/wp-content/plugins/.gitkeep
+!/public/wp-content/themes/.gitkeep
+!/public/wp-content/object-cache.php
+!/public/wp-content/memcached-object-cache.php
+/.env
+/vendor
+/phpcs.xml
+/phpunit.xml
+.phpunit.result.cache

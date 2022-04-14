@@ -1,0 +1,74 @@
+{
+  "name": ":package_slug",
+  "version": "1.0.0",
+  "private": true,
+  "description": ":package_description",
+  "main": "webpack.mix.js",
+  "scripts": {
+    "dev": "yarn run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "yarn run production",
+    "production": "mix --production",
+    "lint": "eslint resources/src",
+    "format": "prettier --write resources/src/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/:vendor_slug/:package_slug.git"
+  },
+  "bugs": {
+    "url": "https://github.com/:vendor_slug/:package_slug/issues"
+  },
+  "homepage": "https://github.com/:vendor_slug/:package_slug#readme",
+  "devDependencies": {
+    "@babel/preset-react": "^7.16.7",
+    "@stefanzweifel/esbuild-mix-manifest-plugin": "^0.1.0",
+    "browser-sync": "^2.27.9",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "laravel-mix": "^6.0.43",
+    "laravel-mix-esbuild": "^1.1.0",
+    "postcss-assets": "^6.0.0",
+    "postcss-custom-media": "^8.0.0",
+    "postcss-custom-properties": "^12.1.7",
+    "postcss-import": "^14.1.0",
+    "postcss-import-ext-glob": "^2.0.1",
+    "postcss-mixins": "^9.0.2",
+    "postcss-nested": "^5.0.6",
+    "prettier": "^2.6.2",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.50.0",
+    "sass-loader": "^12.1.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ]
+    }
+  },
+  "prettier": {
+    "tabWidth": 4,
+    "singleQuote": true,
+    "semi": true,
+    "trailingComma": "es5",
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "printWidth": 100
+  }
+}

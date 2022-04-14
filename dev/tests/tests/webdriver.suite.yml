@@ -1,0 +1,33 @@
+# This is a sample as to how to use tribe-chrome to drive your acceptance tests
+
+# Any tests that require JavaScript should use the chrome driver, and a separate suite should be created for them
+# Ensure you pass the user-agent "tribe-tester" otherwise tests-config.php won't be loaded properly
+actor: WebDriverTester
+bootstrap: _bootstrap.php
+modules:
+    enabled:
+        - \Helper\Webdriver
+        - WPDb
+        - WPWebDriver
+        - Asserts
+    config:
+        WPDb:
+            populate: true
+            cleanup: false
+        WPWebDriver:
+            url: '%ACCEPTANCE_WP_URL%'
+            adminUsername: %WP_ADMIN_USERNAME%
+            adminPassword: %WP_ADMIN_PASSWORD%
+            adminPath: %WP_ADMIN_PATH%
+            browser: chrome
+            host: %CHROMEDRIVER_HOST%
+            port: %CHROMEDRIVER_PORT%
+            window_size: 1366x768
+            wait: 5
+            capabilities:
+                # Google changed this format in chromedriver 2.31
+                "goog:chromeOptions":
+                    args: ["--no-sandbox", "--headless", "--disable-gpu", "--user-agent=tribe-tester", "--ignore-certificate-errors"]
+                # support the old format because it appears our selenium server doesn't recognize the new format
+                "chromeOptions":
+                    args: ["--no-sandbox", "--headless", "--disable-gpu", "--user-agent=tribe-tester", "--ignore-certificate-errors"]

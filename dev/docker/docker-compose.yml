@@ -1,0 +1,126 @@
+version: "3.4"
+
+x-networks: &proxynetwork
+    networks:
+        - proxy
+
+x-internaldns: &internaldns
+    dns: 172.20.10.250
+
+x-nginx: &nginx
+    image: nginx:stable-alpine
+    working_dir: /application
+    volumes:
+        - ../..:/application/www:ro,nocopy,cached
+        - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./nginx/fastcgi.conf:/etc/nginx/fastcgi_params
+
+x-memcached: &memcached
+    image: memcached:alpine
+
+x-chrome: &chrome
+    image: 'selenium/standalone-chrome:3.141.59'
+    volumes:
+        - '/dev/shm:/dev/shm'
+    ports:
+        - 4444
+
+x-php: &php
+    image: moderntribe/squareone-php:74-3.0
+    working_dir: /application
+    user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
+    volumes:
+        - ../..:/application/www/public/wp-content/plugins/:package_slug:rw,nocopy,cached
+        - ../..:/application/www:rw,nocopy,cached
+        - ./php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/zz-overrides.ini
+        - ./php/msmtp.conf:/etc/msmtprc:ro
+        - ./wp-cli.yml:/application/wp-cli.yml
+        - ./composer:/application/.composer
+    external_links:
+        - "tribe-mysql:mysql"
+        - "tribe-mail:mail"
+    environment:
+        - COMPOSER_ALLOW_SUPERUSER=1
+        - COMPOSER_MEMORY_LIMIT=-1
+        - COMPOSER_PROCESS_TIMEOUT=0
+        - COMPOSER_HOME=/application/.composer
+        - PHP_IDE_CONFIG=serverName=:package_slug.tribe
+        - DOMAIN_CURRENT_SITE=:package_slug.tribe
+        - DB_NAME=tribe_starter
+        - DB_USER=root
+        - DB_PASSWORD=password
+        - DB_HOST=mysql
+        - DB_TABLE_PREFIX=tribe_
+        - WP_DEBUG_LOG='php://stderr'
+
+services:
+
+    memcached:
+        <<: *memcached
+        <<: *proxynetwork
+
+    php-fpm:
+        <<: *php
+        <<: *proxynetwork
+        <<: *internaldns
+        links:
+            - memcached
+
+    webserver:
+        <<: *nginx
+        <<: *proxynetwork
+        links:
+            - php-fpm:php
+        environment:
+            - VIRTUAL_HOST=:package_slug.tribe,*.:package_slug.tribe
+
+    ##################################################
+    # Testing Containers
+    ##################################################
+
+    memcached-tests:
+        <<: *memcached
+        <<: *proxynetwork
+
+    php-tests:
+        <<: *php
+        <<: *proxynetwork
+        <<: *internaldns
+        links:
+            - memcached-tests:memcached
+            - chrome
+        environment:
+            - COMPOSER_ALLOW_SUPERUSER=1
+            - COMPOSER_MEMORY_LIMIT=-1
+            - COMPOSER_PROCESS_TIMEOUT=0
+            - COMPOSER_HOME=/application/.composer
+            - PAGER=more
+            - PHP_IDE_CONFIG=serverName=:package_slugtest.tribe
+            - DOMAIN_CURRENT_SITE=:package_slugtest.tribe
+            - DB_NAME=tribe_starter_acceptance
+            - DB_USER=root
+            - DB_PASSWORD=password
+            - DB_HOST=mysql
+            - DB_TABLE_PREFIX=tribe_
+            - WP_DEBUG_LOG='php://stderr'
+            - TRIBE_GLOMAR=false
+            - DISABLE_OBJECT_CACHE=true
+
+    webserver-tests:
+        <<: *nginx
+        <<: *proxynetwork
+        links:
+            - php-tests:php
+        environment:
+            - VIRTUAL_HOST=:package_slugtest.tribe,*.:package_slugtest.tribe
+
+    chrome:
+        <<: *chrome
+        <<: *proxynetwork
+        <<: *internaldns
+
+networks:
+  proxy:
+    external: true
+    name: global_proxy
+
