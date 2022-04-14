@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Alert\Settings;
 
@@ -18,6 +18,5 @@ class Alert_Settings extends ACF_Settings {
 	public function get_parent_slug(): string {
 		return sprintf( 'edit.php?post_type=%s', Alert::NAME );
 	}
-
 
 }

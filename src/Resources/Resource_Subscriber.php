@@ -2,10 +2,10 @@
 
 namespace Tribe\Alert\Resources;
 
-use Tribe\Libs\Container\Abstract_Subscriber;
 use Tribe\Alert\Resources\Admin\Admin_Script_Loader;
 use Tribe\Alert\Resources\Admin\Editor_Script_Loader;
 use Tribe\Alert\Resources\Theme\Script_Loader;
+use Tribe\Libs\Container\Abstract_Subscriber;
 
 /**
  * Class Asset_Subscriber
