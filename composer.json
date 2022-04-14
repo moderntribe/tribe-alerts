@@ -35,7 +35,7 @@
     "php": "^7.4||^8.0",
     "ext-json": "*",
     "ext-readline": "*",
-    "php-di/php-di": "^6.3",
+    "johnbillion/extended-cpts": "^5.0",
     "moderntribe/tribe-libs": "^3.4.13"
   },
   "require-dev": {
@@ -58,7 +58,10 @@
   "autoload": {
     "psr-4": {
       "Tribe\\Alert\\": "src"
-    }
+    },
+    "files": [
+      "src/functions.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
