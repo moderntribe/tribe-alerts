@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Use docker-compose v2
-        uses: KengoTODA/actions-setup-docker-compose@v1
+        uses: KengoTODA/actions-setup-docker-compose@main
         with:
           version: 'v2.4.1'
 
