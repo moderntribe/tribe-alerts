@@ -27,7 +27,7 @@ trait With_Field_Prefix {
 	 */
 	protected function get_key_with_prefix( string $name ): string {
 		if ( ! defined( 'self::NAME' ) ) {
-			throw new InvalidArgumentException( 'Cannot find the NAME constant. This trait should be used in an extended Block_Config class' );
+			throw new InvalidArgumentException( 'Cannot find the NAME constant. This trait should be used in an extended ACF\ACF_Meta_Group class' );
 		}
 
 		return sprintf( '%s_%s_%s', $this->field_prefix, self::NAME, $name );
