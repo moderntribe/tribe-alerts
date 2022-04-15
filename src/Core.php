@@ -5,11 +5,15 @@ namespace Tribe\Alert;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Throwable;
+use Tribe\Alert\Components\Alert\Alert_Definer;
 use Tribe\Alert\Meta\Meta_Definer;
 use Tribe\Alert\Resources\Resource_Definer;
 use Tribe\Alert\Resources\Resource_Subscriber;
 use Tribe\Alert\Settings\Settings_Definer;
+use Tribe\Alert\View\View_Definer;
+use Tribe\Libs\Object_Meta\Object_Meta_Definer;
 use Tribe\Libs\Object_Meta\Object_Meta_Subscriber;
+use Tribe\Libs\Pipeline\Pipeline_Definer;
 use Tribe\Libs\Settings\Settings_Subscriber;
 
 /**
@@ -35,9 +39,13 @@ final class Core {
 	 * @var \Tribe\Libs\Container\Definer_Interface[]
 	 */
 	private array $definers = [
+		Object_Meta_Definer::class,
 		Meta_Definer::class,
+		Pipeline_Definer::class,
 		Resource_Definer::class,
 		Settings_Definer::class,
+		View_Definer::class,
+		Alert_Definer::class,
 	];
 
 	/**
