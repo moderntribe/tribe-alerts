@@ -25,12 +25,14 @@ trait With_Field_Prefix {
 	 *
 	 * @return string The prefixed key.
 	 */
-	protected function get_key_with_prefix( string $name ): string {
+	protected function get_key_with_prefix( string $name, string $parent = '' ): string {
 		if ( ! defined( 'self::NAME' ) ) {
 			throw new InvalidArgumentException( 'Cannot find the NAME constant. This trait should be used in an extended ACF\ACF_Meta_Group class' );
 		}
 
-		return sprintf( '%s_%s_%s', $this->field_prefix, self::NAME, $name );
+		$parent = $parent ?: self::NAME;
+
+		return sprintf( '%s_%s_%s', $this->field_prefix, $parent, $name );
 	}
 
 }
