@@ -36,7 +36,9 @@
     "ext-json": "*",
     "ext-readline": "*",
     "johnbillion/extended-cpts": "^5.0",
-    "moderntribe/tribe-libs": "^3.4.13"
+    "league/plates": "^3.4",
+    "moderntribe/tribe-libs": "^3.4.13",
+    "spatie/data-transfer-object": "^2.8"
   },
   "require-dev": {
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
