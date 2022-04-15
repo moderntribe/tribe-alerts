@@ -27,9 +27,9 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 	public const FIELD_RULES_SPECIFY_PAGES = 'alert_rules_specify_pages';
 	public const FIELD_RULES_EXCLUDE_PAGES = 'alert_rules_exclude_pages';
 
-	public const OPTION_EVERY_PAGE    = 'alert_every_page';
-	public const OPTION_SPECIFIC_PAGE = 'alert_specific_page';
-	public const OPTION_EXCLUDE       = 'alert_exclude';
+	public const OPTION_EVERY_PAGE = 'alert_every_page';
+	public const OPTION_INCLUDE    = 'alert_include';
+	public const OPTION_EXCLUDE    = 'alert_exclude';
 
 	public function get_keys(): array {
 		return [
@@ -82,7 +82,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 
 		$fields = [];
 
-		$fields[] = new Field( self::NAME . '_' . self::FIELD_CTA_LINK, [
+		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_LINK, [
 			'label'   => esc_html__( 'Call to Action', 'tribe' ),
 			'name'    => self::FIELD_CTA_LINK,
 			'type'    => 'link',
@@ -91,7 +91,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			],
 		] );
 
-		$fields[] = new Field( self::NAME . '_' . self::FIELD_CTA_ADD_ARIA_LABEL, [
+		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_ADD_ARIA_LABEL, [
 			'label'   => esc_html__( 'Add Screen Reader Text', 'tribe' ),
 			'name'    => self::FIELD_CTA_ADD_ARIA_LABEL,
 			'type'    => 'true_false',
@@ -101,7 +101,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			],
 		] );
 
-		$fields[] = new Field( self::NAME . '_' . self::FIELD_CTA_ARIA_LABEL, [
+		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_ARIA_LABEL, [
 			'label'             => __( 'Screen Reader Label', 'tribe' ),
 			'instructions'      => __(
 				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable.',
@@ -112,7 +112,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'conditional_logic' => [
 				[
 					[
-						'field'    => $this->get_key_with_prefix( self::FIELD_CTA_ADD_ARIA_LABEL ),
+						'field'    => $this->get_key_with_prefix( self::FIELD_CTA_ADD_ARIA_LABEL, self::GROUP_CTA ),
 						'operator' => '==',
 						'value'    => 1,
 					],
@@ -136,19 +136,19 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 
 		$fields = [];
 
-		$fields[] = new Field( self::NAME . '_' . self::FIELD_RULES_DISPLAY_TYPE, [
+		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_DISPLAY_TYPE, [
 			'label'         => esc_html__( 'Show', 'tribe' ),
 			'name'          => self::FIELD_RULES_DISPLAY_TYPE,
 			'type'          => 'radio',
 			'choices'       => [
-				self::OPTION_EVERY_PAGE    => esc_html__( 'Show on every page', 'tribe-alerts' ),
-				self::OPTION_SPECIFIC_PAGE => esc_html__( 'Show only on specified pages', 'tribe-alerts' ),
-				self::OPTION_EXCLUDE       => esc_html__( 'Exclude from specific pages', 'tribe-alerts' ),
+				self::OPTION_EVERY_PAGE => esc_html__( 'Show on every page', 'tribe-alerts' ),
+				self::OPTION_INCLUDE    => esc_html__( 'Show only on specified pages', 'tribe-alerts' ),
+				self::OPTION_EXCLUDE    => esc_html__( 'Exclude from specific pages', 'tribe-alerts' ),
 			],
 			'default_value' => self::OPTION_EVERY_PAGE,
 		] );
 
-		$fields[] = new Field( self::NAME . '_' . self::FIELD_RULES_SPECIFY_PAGES, [
+		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_SPECIFY_PAGES, [
 			'label'             => esc_html__( 'Select pages where the alert will appear', 'tribe-alerts' ),
 			'name'              => self::FIELD_RULES_SPECIFY_PAGES,
 			'type'              => 'relationship',
@@ -157,9 +157,9 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'conditional_logic' => [
 				[
 					[
-						'field'    => $this->get_key_with_prefix( self::FIELD_RULES_DISPLAY_TYPE ),
+						'field'    => $this->get_key_with_prefix( self::FIELD_RULES_DISPLAY_TYPE, self::GROUP_RULES ),
 						'operator' => '==',
-						'value'    => self::OPTION_SPECIFIC_PAGE,
+						'value'    => self::OPTION_INCLUDE,
 					],
 				],
 			],
@@ -174,7 +174,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'return_format'     => 'object', // object, id
 		] );
 
-		$fields[] = new Field( self::NAME . '_' . self::FIELD_RULES_EXCLUDE_PAGES, [
+		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_EXCLUDE_PAGES, [
 			'label'             => esc_html__( 'Will appear on every page but the following selected pages', 'tribe-alerts' ),
 			'name'              => self::FIELD_RULES_EXCLUDE_PAGES,
 			'type'              => 'relationship',
@@ -183,7 +183,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'conditional_logic' => [
 				[
 					[
-						'field'    => $this->get_key_with_prefix( self::FIELD_RULES_DISPLAY_TYPE ),
+						'field'    => $this->get_key_with_prefix( self::FIELD_RULES_DISPLAY_TYPE, self::GROUP_RULES ),
 						'operator' => '==',
 						'value'    => self::OPTION_EXCLUDE,
 					],
