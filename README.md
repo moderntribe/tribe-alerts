@@ -70,6 +70,18 @@ yarn production
 
 See more options: `yarn mix --help`
 
+### Displaying an Alert
+
+Add the following code to render the alert view:
+
+```php
+
+<?php if ( function_exists( '\Tribe\Alert\render_alert' ) ) {
+    \Tribe\Alert\render_alert();
+} ?>
+
+```
+
 ### Credits
 
 - Based on [Spatie Skeleton](https://github.com/spatie/package-skeleton-php)
