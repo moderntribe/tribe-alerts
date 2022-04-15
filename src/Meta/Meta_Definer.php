@@ -24,7 +24,7 @@ class Meta_Definer implements Definer_Interface {
 				] ),
 
 			Alert_Meta::class           => DI\autowire()
-				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
+				->constructorParameter( 'object_types', static fn() => [
 					'post_types' => [ Alert::NAME ],
 				] ),
 		];
