@@ -11,16 +11,15 @@ class Config extends Post_Type_Config {
 
 	public function get_args(): array {
 		return [
-			'hierarchical'      => false,
-			'has_archive'       => false,
-			'public'            => false,
-			'show_in_nav_menus' => true,
-			'show_ui'           => true,
-			'enter_title_here'  => esc_html__( 'Enter Alert Title', 'tribe-alerts' ),
-			'map_meta_cap'      => true,
-			'supports'          => [ 'title' ],
-			'menu_icon'         => 'dashicons-warning',
-			'capability_type'   => 'post', // to use default WP caps
+			'hierarchical'     => false,
+			'has_archive'      => false,
+			'public'           => false,
+			'show_ui'          => true,
+			'enter_title_here' => esc_html__( 'Enter Alert Title', 'tribe-alerts' ),
+			'map_meta_cap'     => true,
+			'supports'         => [ 'title' ],
+			'menu_icon'        => 'dashicons-warning',
+			'capability_type'  => 'post', // to use default WP caps
 		];
 	}
 
