@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Open permissions on output and directories
-        run:  chmod 777 dev/tests/tests/_output
+        run: chmod 777 dev/tests/tests/_output
 
       - name: Create composer .env
         run: echo "${{ secrets.COMPOSER_ENV }}" > .env
@@ -100,9 +100,9 @@ jobs:
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
         working-directory: dev/docker
 
-       - name: Run functional tests
-         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run functional
-         working-directory: dev/docker
+      - name: Run functional tests
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run functional
+        working-directory: dev/docker
 
       # - name: Run acceptance tests
       #   run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
