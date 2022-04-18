@@ -67,7 +67,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tribe\\Tests\\": "dev/tests/tests/_support/Classes/"
+      "Tribe\\Tests\\": "dev/tests/tests/_support/Classes/",
+      "Tribe\\Tests\\Traits\\": "dev/tests/tests/_support/Traits/"
     }
   },
   "scripts": {
