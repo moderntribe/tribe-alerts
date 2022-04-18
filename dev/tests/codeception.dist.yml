@@ -63,6 +63,7 @@ modules:
             tablePrefix: "%TABLE_PREFIX%"
             domain: "%WP_DOMAIN%"
             multisite: false
+            theme: twentytwentytwo
             plugins:
                 - advanced-custom-fields-pro/acf.php
                 - tribe-alerts/core.php
