@@ -17,16 +17,16 @@ class Included_Posts_Rule implements Rule {
 		$type = $rules[ Alert_Meta::FIELD_RULES_DISPLAY_TYPE ] ?? '';
 
 		if ( $type === Alert_Meta::OPTION_INCLUDE ) {
-			global $post;
+			$post = get_post();
 
 			if ( ! isset( $post->ID ) ) {
 				return $next( $rules );
 			}
 
-			$included_posts = $rules[ Alert_Meta::FIELD_RULES_SPECIFY_PAGES ] ?? [];
+			$included_posts = $rules[ Alert_Meta::FIELD_RULES_INCLUDE_PAGES ] ?? [];
 
-			foreach ( $included_posts as $excluded_post ) {
-				if ( $post->ID === $excluded_post->ID ) {
+			foreach ( $included_posts as $included_post ) {
+				if ( $post->ID === $included_post->ID ) {
 					return true;
 				}
 			}

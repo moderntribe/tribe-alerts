@@ -18,18 +18,18 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 	public const FIELD_MESSAGE = 'alert_message';
 
 	public const GROUP_CTA                = 'alert_cta';
-	public const FIELD_CTA_LINK           = 'alert_cta_link';
-	public const FIELD_CTA_ADD_ARIA_LABEL = 'alert_add_aria';
-	public const FIELD_CTA_ARIA_LABEL     = 'alert_aria_label';
+	public const FIELD_CTA_LINK           = 'cta';
+	public const FIELD_CTA_ADD_ARIA_LABEL = 'add_aria_label';
+	public const FIELD_CTA_ARIA_LABEL     = 'aria_label';
 
 	public const GROUP_RULES               = 'alert_rules';
-	public const FIELD_RULES_DISPLAY_TYPE  = 'alert_rules_display_type';
-	public const FIELD_RULES_SPECIFY_PAGES = 'alert_rules_specify_pages';
-	public const FIELD_RULES_EXCLUDE_PAGES = 'alert_rules_exclude_pages';
+	public const FIELD_RULES_DISPLAY_TYPE  = 'display_type';
+	public const FIELD_RULES_INCLUDE_PAGES = 'include_pages';
+	public const FIELD_RULES_EXCLUDE_PAGES = 'exclude_pages';
 
-	public const OPTION_EVERY_PAGE = 'alert_every_page';
-	public const OPTION_INCLUDE    = 'alert_include';
-	public const OPTION_EXCLUDE    = 'alert_exclude';
+	public const OPTION_EVERY_PAGE = 'every_page';
+	public const OPTION_INCLUDE    = 'include';
+	public const OPTION_EXCLUDE    = 'exclude';
 
 	public function get_keys(): array {
 		return [
@@ -83,7 +83,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		$fields = [];
 
 		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_LINK, [
-			'label'   => esc_html__( 'Call to Action', 'tribe' ),
+			'label'   => esc_html__( 'Link', 'tribe-alerts' ),
 			'name'    => self::FIELD_CTA_LINK,
 			'type'    => 'link',
 			'wrapper' => [
@@ -92,20 +92,20 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		] );
 
 		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_ADD_ARIA_LABEL, [
-			'label'   => esc_html__( 'Add Screen Reader Text', 'tribe' ),
+			'label'   => esc_html__( 'Add Screen Reader Text', 'tribe-alerts' ),
 			'name'    => self::FIELD_CTA_ADD_ARIA_LABEL,
 			'type'    => 'true_false',
-			'message' => esc_html__( 'Add Screen Reader Text', 'tribe' ),
+			'message' => esc_html__( 'Add Screen Reader Text', 'tribe-alerts' ),
 			'wrapper' => [
 				'class' => 'tribe-acf-hide-label',
 			],
 		] );
 
 		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_ARIA_LABEL, [
-			'label'             => __( 'Screen Reader Label', 'tribe' ),
+			'label'             => __( 'Screen Reader Label', 'tribe-alerts' ),
 			'instructions'      => __(
 				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable.',
-				'tribe'
+				'tribe-alerts'
 			),
 			'name'              => self::FIELD_CTA_ARIA_LABEL,
 			'type'              => 'text',
@@ -137,7 +137,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		$fields = [];
 
 		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_DISPLAY_TYPE, [
-			'label'         => esc_html__( 'Show', 'tribe' ),
+			'label'         => esc_html__( 'Show', 'tribe-alerts' ),
 			'name'          => self::FIELD_RULES_DISPLAY_TYPE,
 			'type'          => 'radio',
 			'choices'       => [
@@ -148,9 +148,9 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'default_value' => self::OPTION_EVERY_PAGE,
 		] );
 
-		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_SPECIFY_PAGES, [
+		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_INCLUDE_PAGES, [
 			'label'             => esc_html__( 'Select pages where the alert will appear', 'tribe-alerts' ),
-			'name'              => self::FIELD_RULES_SPECIFY_PAGES,
+			'name'              => self::FIELD_RULES_INCLUDE_PAGES,
 			'type'              => 'relationship',
 			'instructions'      => sprintf( esc_html__( 'Select up to %d posts', 'tribe-alerts' ), self::MAX_POSTS ),
 			'required'          => false,

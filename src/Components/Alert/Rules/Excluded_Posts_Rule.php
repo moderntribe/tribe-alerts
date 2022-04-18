@@ -17,7 +17,7 @@ class Excluded_Posts_Rule implements Rule {
 		$type = $rules[ Alert_Meta::FIELD_RULES_DISPLAY_TYPE ] ?? '';
 
 		if ( $type === Alert_Meta::OPTION_EXCLUDE ) {
-			global $post;
+			$post = get_post();
 
 			if ( ! isset( $post->ID ) ) {
 				return $next( $rules );

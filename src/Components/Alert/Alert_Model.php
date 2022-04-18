@@ -25,13 +25,14 @@ class Alert_Model {
 			return new Alert_Dto();
 		}
 
-		$alert = Alert::factory( $this->active_alert->ID );
+		$alert     = Alert::factory( $this->active_alert->ID );
+		$group_cta = (array) $alert->get_meta( Alert_Meta::GROUP_CTA );
 
 		return new Alert_Dto( [
 			'id'      => $this->active_alert->ID,
 			'title'   => get_the_title( $this->active_alert ),
 			'content' => $alert->get_meta( Alert_Meta::FIELD_MESSAGE ),
-			'cta'     => $alert->get_meta( Alert_Meta::GROUP_CTA ),
+			'cta'     => array_merge( $group_cta, (array) $group_cta[ Alert_Meta::FIELD_CTA_LINK ] ?? [] ),
 		] );
 	}
 
