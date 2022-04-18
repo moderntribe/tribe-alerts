@@ -1,7 +1,7 @@
 # Codeception Test Suite Configuration
 
-# suite for WordPress acceptance tests.
-# perform tests in browser using WPBrowser or WPWebDriver modules.
+# suite for WordPress functional tests.
+# perform tests in browser using WPBrowser or WPWebDriver modules with JavaScript support.
 actor: FunctionalTester
 bootstrap: _bootstrap.php
 modules:
@@ -18,7 +18,7 @@ modules:
             adminPath: %WP_ADMIN_PATH%
         WPDb:
             populate: true
-            cleanup: true
+            cleanup: false
             waitlock: 10
         WPLoader:
           loadOnly: true

@@ -10,6 +10,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
 		add_action( 'wp_footer', static function (): void {
+			echo '<!-- tribe alerts -->';
 			render_alert();
 		} );
 	}
