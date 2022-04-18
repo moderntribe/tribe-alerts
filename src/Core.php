@@ -10,6 +10,7 @@ use Tribe\Alert\Meta\Meta_Definer;
 use Tribe\Alert\Resources\Resource_Definer;
 use Tribe\Alert\Resources\Resource_Subscriber;
 use Tribe\Alert\Settings\Settings_Definer;
+use Tribe\Alert\Theme\Theme_Subscriber;
 use Tribe\Alert\View\View_Definer;
 use Tribe\Libs\Object_Meta\Object_Meta_Definer;
 use Tribe\Libs\Object_Meta\Object_Meta_Subscriber;
@@ -55,6 +56,7 @@ final class Core {
 		Object_Meta_Subscriber::class,
 		Resource_Subscriber::class,
 		Settings_Subscriber::class,
+		Theme_Subscriber::class,
 
 		// Custom Post Types
 		Post_Types\Alert\Subscriber::class,

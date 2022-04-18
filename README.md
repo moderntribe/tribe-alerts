@@ -72,7 +72,7 @@ See more options: `yarn mix --help`
 
 ### Displaying an Alert
 
-Add the following code to render the alert view:
+The alert front-end is set to automatically display using the `wp_footer` hook. If you need to manually add it a theme or a plugin, add the following code to render the alert view:
 
 ```php
 
