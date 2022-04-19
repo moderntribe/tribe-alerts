@@ -15,3 +15,7 @@
 # Skip automatic frontend building during bootstrap
 build:
     skip-fe: true
+
+# Use docker compose v2
+docker:
+  compose-binary: "docker compose"

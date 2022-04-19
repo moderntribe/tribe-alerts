@@ -70,6 +70,18 @@ yarn production
 
 See more options: `yarn mix --help`
 
+### Displaying an Alert
+
+The alert front-end is set to automatically display using the `wp_footer` hook. If you need to manually add it a theme or a plugin, add the following code to render the alert view:
+
+```php
+
+<?php if ( function_exists( '\Tribe\Alert\render_alert' ) ) {
+    \Tribe\Alert\render_alert();
+} ?>
+
+```
+
 ### Credits
 
 - Based on [Spatie Skeleton](https://github.com/spatie/package-skeleton-php)

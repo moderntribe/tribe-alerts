@@ -17,7 +17,7 @@ class Manifest_Loader {
 	/**
 	 * Cached value of the manifest.json.
 	 *
-	 * @var array|null
+	 * @var string[]|null
 	 */
 	protected ?array $cache = null;
 

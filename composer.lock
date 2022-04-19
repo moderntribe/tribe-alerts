@@ -4,8 +4,266 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b0de6e781466cd96c511171c7485ace",
+    "content-hash": "39dc7b8cd6910e6468dcffb6bb71ec00",
     "packages": [
+        {
+            "name": "enshrined/svg-sanitize",
+            "version": "0.13.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/darylldoyle/svg-sanitizer.git",
+                "reference": "bc66593f255b7d2613d8f22041180036979b6403"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/bc66593f255b7d2613d8f22041180036979b6403",
+                "reference": "bc66593f255b7d2613d8f22041180036979b6403",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "^0.1.2",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "enshrined\\svgSanitize\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Daryll Doyle",
+                    "email": "daryll@enshrined.co.uk"
+                }
+            ],
+            "description": "An SVG sanitizer for PHP",
+            "support": {
+                "issues": "https://github.com/darylldoyle/svg-sanitizer/issues",
+                "source": "https://github.com/darylldoyle/svg-sanitizer/tree/develop"
+            },
+            "time": "2020-01-20T01:34:17+00:00"
+        },
+        {
+            "name": "filp/whoops",
+            "version": "2.14.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "a63e5e8f26ebbebf8ed3c5c691637325512eb0dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/a63e5e8f26ebbebf8ed3c5c691637325512eb0dc",
+                "reference": "a63e5e8f26ebbebf8ed3c5c691637325512eb0dc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9 || ^7.0 || ^8.0",
+                "psr/log": "^1.0.1 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9 || ^1.0",
+                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.3",
+                "symfony/var-dumper": "^2.6 || ^3.0 || ^4.0 || ^5.0"
+            },
+            "suggest": {
+                "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
+                "whoops/soap": "Formats errors as SOAP responses"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Whoops\\": "src/Whoops/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Dobreira",
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php error handling for cool kids",
+            "homepage": "https://filp.github.io/whoops/",
+            "keywords": [
+                "error",
+                "exception",
+                "handling",
+                "library",
+                "throwable",
+                "whoops"
+            ],
+            "support": {
+                "issues": "https://github.com/filp/whoops/issues",
+                "source": "https://github.com/filp/whoops/tree/2.14.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/denis-sokolov",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-07T12:00:00+00:00"
+        },
+        {
+            "name": "johnbillion/args",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/johnbillion/args.git",
+                "reference": "a1a3feb05cc9fc3914ed96eeab009259aea326c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johnbillion/args/zipball/a1a3feb05cc9fc3914ed96eeab009259aea326c1",
+                "reference": "a1a3feb05cc9fc3914ed96eeab009259aea326c1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "humanmade/coding-standards": "^1.1",
+                "johnbillion/falsey-assertequals-detector": "^3",
+                "phpdocumentor/reflection": "~4.0",
+                "phpstan/phpstan": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.0",
+                "roots/wordpress": "^5.7.0"
+            },
+            "type": "library",
+            "extra": {
+                "wordpress-install-dir": "vendor/wordpress/wordpress"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Args\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "John Blackbourn",
+                    "homepage": "https://johnblackbourn.com/"
+                }
+            ],
+            "description": "I don't want to get into an argument about this.",
+            "support": {
+                "issues": "https://github.com/johnbillion/args/issues",
+                "source": "https://github.com/johnbillion/args/tree/0.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/johnbillion",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-12-18T21:21:14+00:00"
+        },
+        {
+            "name": "johnbillion/extended-cpts",
+            "version": "5.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/johnbillion/extended-cpts.git",
+                "reference": "d6d83bb41eba9a3603929244c71f3f806c2a14d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johnbillion/extended-cpts/zipball/d6d83bb41eba9a3603929244c71f3f806c2a14d8",
+                "reference": "d6d83bb41eba9a3603929244c71f3f806c2a14d8",
+                "shasum": ""
+            },
+            "require": {
+                "johnbillion/args": "^0.9.0",
+                "php": ">= 7.4.0"
+            },
+            "require-dev": {
+                "automattic/phpcs-neutron-standard": "1.7.0",
+                "cweagans/composer-patches": "^1.7",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+                "johnbillion/falsey-assertequals-detector": "*",
+                "lucatume/wp-browser": "^3.0",
+                "phpcompatibility/phpcompatibility-wp": "^2",
+                "phpstan/phpstan": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9",
+                "roots/wordpress": "^5.8.0",
+                "szepeviktor/phpstan-wordpress": "^1.0",
+                "vlucas/phpdotenv": "^3",
+                "wp-cli/core-command": "^2",
+                "wp-cli/db-command": "^2",
+                "wp-coding-standards/wpcs": "2.3.0"
+            },
+            "suggest": {
+                "seravo/wp-custom-bulk-actions": "Custom Bulk Actions",
+                "wpackagist-plugin/rewrite-testing": "Rewrite Rule Testing"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "5.0-dev"
+                },
+                "patches": {
+                    "lucatume/wp-browser": {
+                        "https://github.com/lucatume/wp-browser/issues/554": "tests/patches/wp-browser-554.patch"
+                    }
+                },
+                "wordpress-install-dir": "tests/wordpress"
+            },
+            "autoload": {
+                "files": [
+                    "functions.php"
+                ],
+                "psr-4": {
+                    "ExtCPTs\\": "src",
+                    "ExtCPTs\\Tests\\": "tests/integration"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "John Blackbourn",
+                    "homepage": "https://johnblackbourn.com/"
+                }
+            ],
+            "description": "A library which provides extended functionality to WordPress custom post types and taxonomies.",
+            "homepage": "https://github.com/johnbillion/extended-cpts/",
+            "support": {
+                "issues": "https://github.com/johnbillion/extended-cpts/issues",
+                "source": "https://github.com/johnbillion/extended-cpts/tree/5.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/johnbillion",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-13T16:19:47+00:00"
+        },
         {
             "name": "laravel/serializable-closure",
             "version": "v1.1.1",
@@ -66,22 +324,193 @@
             "time": "2022-02-11T19:23:53+00:00"
         },
         {
-            "name": "moderntribe/square1-container",
-            "version": "3.4.13",
+            "name": "league/plates",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/moderntribe/square1-container.git",
-                "reference": "ea080f1b3c40e27935e3dc0fc74fa42e211ae5f9"
+                "url": "https://github.com/thephpleague/plates.git",
+                "reference": "6d3ee31199b536a4e003b34a356ca20f6f75496a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-container/zipball/ea080f1b3c40e27935e3dc0fc74fa42e211ae5f9",
-                "reference": "ea080f1b3c40e27935e3dc0fc74fa42e211ae5f9",
+                "url": "https://api.github.com/repos/thephpleague/plates/zipball/6d3ee31199b536a4e003b34a356ca20f6f75496a",
+                "reference": "6d3ee31199b536a4e003b34a356ca20f6f75496a",
                 "shasum": ""
             },
             "require": {
+                "php": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Plates\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "role": "Developer"
+                },
+                {
+                    "name": "RJ Garcia",
+                    "email": "ragboyjr@icloud.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Plates, the native PHP template system that's fast, easy to use and easy to extend.",
+            "homepage": "https://platesphp.com",
+            "keywords": [
+                "league",
+                "package",
+                "templates",
+                "templating",
+                "views"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/plates/issues",
+                "source": "https://github.com/thephpleague/plates/tree/v3.4.0"
+            },
+            "time": "2020-12-25T05:00:37+00:00"
+        },
+        {
+            "name": "mhcg/monolog-wp-cli",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mhcg/monolog-wp-cli.git",
+                "reference": "33cd515fa7e5eac2ebca8aac995aa97a4ab2b77b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mhcg/monolog-wp-cli/zipball/33cd515fa7e5eac2ebca8aac995aa97a4ab2b77b",
+                "reference": "33cd515fa7e5eac2ebca8aac995aa97a4ab2b77b",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "^2.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "8.5.* || 9.0.*",
+                "squizlabs/php_codesniffer": "^3.5",
+                "wp-cli/wp-cli": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MHCG\\Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Heydon",
+                    "email": "contact@mhcg.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Extension for Monolog to support outputting to WP-CLI (The WordPress command line interface) when running wp command lines.",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3",
+                "wp-cli"
+            ],
+            "support": {
+                "issues": "https://github.com/mhcg/monolog-wp-cli/issues",
+                "source": "https://github.com/mhcg/monolog-wp-cli",
+                "wiki": "https://github.com/mhcg/monolog-wp-cli/wiki"
+            },
+            "time": "2020-03-23T20:17:57+00:00"
+        },
+        {
+            "name": "moderntribe/tribe-libs",
+            "version": "3.4.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moderntribe/tribe-libs.git",
+                "reference": "1d63f2e172d44a3e9df456e2b0ac3513dbf80fa2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/1d63f2e172d44a3e9df456e2b0ac3513dbf80fa2",
+                "reference": "1d63f2e172d44a3e9df456e2b0ac3513dbf80fa2",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "enshrined/svg-sanitize": "^0.13.3",
+                "filp/whoops": "^2.2@dev",
+                "mhcg/monolog-wp-cli": "^1.0",
+                "monolog/monolog": "^2.0",
                 "php": "^7.2",
-                "php-di/php-di": "^6.0"
+                "php-di/php-di": "^6.0",
+                "psr/log": "^1.1 || ^2.0 || ^3.0",
+                "twig/twig": "^3.0"
+            },
+            "replace": {
+                "moderntribe/square1-acf": "self.version",
+                "moderntribe/square1-assets": "self.version",
+                "moderntribe/square1-blog-copier": "self.version",
+                "moderntribe/square1-cache": "self.version",
+                "moderntribe/square1-cli": "self.version",
+                "moderntribe/square1-container": "self.version",
+                "moderntribe/square1-generators": "self.version",
+                "moderntribe/square1-log": "self.version",
+                "moderntribe/square1-media": "self.version",
+                "moderntribe/square1-nav": "self.version",
+                "moderntribe/square1-object-meta": "self.version",
+                "moderntribe/square1-oembed": "self.version",
+                "moderntribe/square1-p2p": "self.version",
+                "moderntribe/square1-pipeline": "self.version",
+                "moderntribe/square1-post-meta": "self.version",
+                "moderntribe/square1-post-type": "self.version",
+                "moderntribe/square1-queues": "self.version",
+                "moderntribe/square1-queues-mysql": "self.version",
+                "moderntribe/square1-request": "self.version",
+                "moderntribe/square1-required-page": "self.version",
+                "moderntribe/square1-routes": "self.version",
+                "moderntribe/square1-schema": "self.version",
+                "moderntribe/square1-settings": "self.version",
+                "moderntribe/square1-taxonomy": "self.version",
+                "moderntribe/square1-twig": "self.version",
+                "moderntribe/square1-user": "self.version",
+                "moderntribe/square1-utils": "self.version",
+                "moderntribe/square1-whoops": "self.version"
+            },
+            "require-dev": {
+                "automattic/phpcs-neutron-standard": "^1.5",
+                "automattic/vipwpcs": "^2.0.0",
+                "composer/composer": "^1.0 || ^2.0",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0 || ^0.7.0",
+                "lucatume/wp-browser": "^3.0.9",
+                "phpcompatibility/php-compatibility": "*",
+                "phpcompatibility/phpcompatibility-wp": "^2.0",
+                "phpstan/phpstan": "^0.12.25",
+                "phpunit/phpunit": "^8.0",
+                "sirbrillig/phpcs-variable-analysis": "^2.0.1",
+                "squizlabs/php_codesniffer": "^3.4.2",
+                "symplify/monorepo-builder": "^8.2",
+                "szepeviktor/phpstan-wordpress": "^0.6.0",
+                "wp-cli/wp-cli": "^2.5"
             },
             "type": "library",
             "extra": {
@@ -90,20 +519,150 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "src/Assets/version.php",
+                    "src/Cache/functions.php"
+                ],
                 "psr-4": {
-                    "Tribe\\Libs\\Container\\": ""
+                    "Tribe\\Libs\\ACF\\": "src/ACF/",
+                    "Tribe\\Libs\\CLI\\": "src/CLI/",
+                    "Tribe\\Libs\\Log\\": "src/Log/",
+                    "Tribe\\Libs\\Nav\\": "src/Nav/",
+                    "Tribe\\Libs\\P2P\\": "src/P2P/",
+                    "Tribe\\Libs\\Twig\\": "src/Twig/",
+                    "Tribe\\Libs\\User\\": "src/User/",
+                    "Tribe\\Libs\\Cache\\": "src/Cache/",
+                    "Tribe\\Libs\\Media\\": "src/Media/",
+                    "Tribe\\Libs\\Utils\\": "src/Utils/",
+                    "Tribe\\Libs\\Assets\\": "src/Assets/",
+                    "Tribe\\Libs\\Oembed\\": "src/Oembed/",
+                    "Tribe\\Libs\\Queues\\": "src/Queues/",
+                    "Tribe\\Libs\\Routes\\": "src/Routes/",
+                    "Tribe\\Libs\\Schema\\": "src/Schema/",
+                    "Tribe\\Libs\\Whoops\\": "src/Whoops/",
+                    "Tribe\\Libs\\Request\\": "src/Request/",
+                    "Tribe\\Libs\\Pipeline\\": "src/Pipeline/",
+                    "Tribe\\Libs\\Settings\\": "src/Settings/",
+                    "Tribe\\Libs\\Taxonomy\\": "src/Taxonomy/",
+                    "Tribe\\Libs\\Container\\": "src/Container/",
+                    "Tribe\\Libs\\Post_Meta\\": "src/Post_Meta/",
+                    "Tribe\\Libs\\Post_Type\\": "src/Post_Type/",
+                    "Tribe\\Libs\\Generators\\": "src/Generators/",
+                    "Tribe\\Libs\\Blog_Copier\\": "src/Blog_Copier/",
+                    "Tribe\\Libs\\Object_Meta\\": "src/Object_Meta/",
+                    "Tribe\\Libs\\Queues_Mysql\\": "src/Queues_Mysql/",
+                    "Tribe\\Libs\\Required_Page\\": "src/Required_Page/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0-only"
             ],
-            "description": "A dependency injection container wrapper for square one",
+            "description": "A library for use on Modern Tribe service projects.",
             "support": {
-                "issues": "https://github.com/moderntribe/square1-container/issues",
-                "source": "https://github.com/moderntribe/square1-container/tree/3.4.13"
+                "issues": "https://github.com/moderntribe/tribe-libs/issues",
+                "source": "https://github.com/moderntribe/tribe-libs/tree/3.4.13"
             },
-            "time": "2021-12-28T22:31:08+00:00"
+            "time": "2022-04-05T14:10:27+00:00"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "4192345e260f1d51b365536199744b987e160edc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4192345e260f1d51b365536199744b987e160edc",
+                "reference": "4192345e260f1d51b365536199744b987e160edc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "psr/log": "^1.0.1 || ^2.0 || ^3.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0 || 2.0.0 || 3.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
+                "doctrine/couchdb": "~1.0@dev",
+                "elasticsearch/elasticsearch": "^7",
+                "graylog2/gelf-php": "^1.4.2",
+                "mongodb/mongodb": "^1.8",
+                "php-amqplib/php-amqplib": "~2.4 || ^3",
+                "php-console/php-console": "^3.1.3",
+                "phpspec/prophecy": "^1.6.1",
+                "phpstan/phpstan": "^0.12.91",
+                "phpunit/phpunit": "^8.5",
+                "predis/predis": "^1.1",
+                "rollbar/rollbar": "^1.3 || ^2 || ^3",
+                "ruflin/elastica": ">=0.90@dev",
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "elasticsearch/elasticsearch": "Allow sending log messages to an Elasticsearch server via official client",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-curl": "Required to send log messages using the IFTTTHandler, the LogglyHandler, the SendGridHandler, the SlackWebhookHandler or the TelegramBotHandler",
+                "ext-mbstring": "Allow to work properly with unicode symbols",
+                "ext-mongodb": "Allow sending log messages to a MongoDB server (via driver)",
+                "ext-openssl": "Required to send log messages using SSL",
+                "ext-sockets": "Allow sending log messages to a Syslog server (via UDP driver)",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+                "php-console/php-console": "Allow sending log messages to Google Chrome",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "https://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "https://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "support": {
+                "issues": "https://github.com/Seldaek/monolog/issues",
+                "source": "https://github.com/Seldaek/monolog/tree/2.5.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Seldaek",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/monolog/monolog",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-04-08T15:43:54+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -325,6 +884,360 @@
                 "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
             "time": "2021-11-05T16:50:12+00:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/1.1.4"
+            },
+            "time": "2021-05-03T11:20:27+00:00"
+        },
+        {
+            "name": "spatie/data-transfer-object",
+            "version": "2.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/data-transfer-object.git",
+                "reference": "167ebbe56ead65ef23abcfae7b75f932afd496a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/data-transfer-object/zipball/167ebbe56ead65ef23abcfae7b75f932afd496a4",
+                "reference": "167ebbe56ead65ef23abcfae7b75f932afd496a4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "suggest": {
+                "phpstan/phpstan": "Take advantage of checkUninitializedProperties with \\Spatie\\DataTransferObject\\PHPstan\\PropertiesAreAlwaysInitializedExtension"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DataTransferObject\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Data transfer objects with batteries included",
+            "homepage": "https://github.com/spatie/data-transfer-object",
+            "keywords": [
+                "data-transfer-object",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/data-transfer-object/issues",
+                "source": "https://github.com/spatie/data-transfer-object/tree/2.8.4"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-12-07T05:41:11+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "30885182c981ab175d4d034db0f6f469898070ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/30885182c981ab175d4d034db0f6f469898070ab",
+                "reference": "30885182c981ab175d4d034db0f6f469898070ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "provide": {
+                "ext-ctype": "*"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.25.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-10-20T20:35:02+00:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "0abb51d2f102e00a4eefcf46ba7fec406d245825"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0abb51d2f102e00a4eefcf46ba7fec406d245825",
+                "reference": "0abb51d2f102e00a4eefcf46ba7fec406d245825",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "provide": {
+                "ext-mbstring": "*"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.25.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-11-30T18:21:41+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v3.3.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "8442df056c51b706793adf80a9fd363406dd3674"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8442df056c51b706793adf80a9fd363406dd3674",
+                "reference": "8442df056c51b706793adf80a9fd363406dd3674",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-ctype": "^1.8",
+                "symfony/polyfill-mbstring": "^1.3"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Twig Team",
+                    "role": "Contributors"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "https://twig.symfony.com",
+            "keywords": [
+                "templating"
+            ],
+            "support": {
+                "issues": "https://github.com/twigphp/Twig/issues",
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.10"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-04-06T06:47:41+00:00"
         }
     ],
     "packages-dev": [
@@ -6343,88 +7256,6 @@
             "time": "2022-01-26T16:34:36+00:00"
         },
         {
-            "name": "symfony/polyfill-ctype",
-            "version": "v1.25.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "30885182c981ab175d4d034db0f6f469898070ab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/30885182c981ab175d4d034db0f6f469898070ab",
-                "reference": "30885182c981ab175d4d034db0f6f469898070ab",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "provide": {
-                "ext-ctype": "*"
-            },
-            "suggest": {
-                "ext-ctype": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.23-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for ctype functions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "ctype",
-                "polyfill",
-                "portable"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.25.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2021-10-20T20:35:02+00:00"
-        },
-        {
             "name": "symfony/polyfill-intl-grapheme",
             "version": "v1.25.0",
             "source": {
@@ -6588,89 +7419,6 @@
                 }
             ],
             "time": "2021-02-19T12:13:01+00:00"
-        },
-        {
-            "name": "symfony/polyfill-mbstring",
-            "version": "v1.25.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "0abb51d2f102e00a4eefcf46ba7fec406d245825"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0abb51d2f102e00a4eefcf46ba7fec406d245825",
-                "reference": "0abb51d2f102e00a4eefcf46ba7fec406d245825",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "provide": {
-                "ext-mbstring": "*"
-            },
-            "suggest": {
-                "ext-mbstring": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.23-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for the Mbstring extension",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "mbstring",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.25.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2021-11-30T18:21:41+00:00"
         },
         {
             "name": "symfony/polyfill-php73",

@@ -16,6 +16,11 @@ require('laravel-mix-esbuild');
 mix.setPublicPath('resources/dist');
 
 /**
+ * Add a unique query string when files are generated.
+ */
+mix.version();
+
+/**
  * Javascript entry points.
  */
 mix.js('resources/src/js/theme/index.js', 'js/theme')
