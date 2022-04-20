@@ -28,6 +28,7 @@ jobs:
           filters: |
             pluginsrc:
               - added|modified: 'src/**/*.php'
+              - added|modified: 'resources/views/**/*.php'
 
       - name: Setup PHP extension cache
         if: ${{ steps.filter.outputs.pluginsrc == 'true' }}
