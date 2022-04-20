@@ -15,4 +15,12 @@ class Link extends FlexibleDataTransferObject {
 	public string $aria_label   = '';
 	public bool $add_aria_label = false;
 
+	public function __construct( array $parameters = [] ) {
+		if ( empty( $parameters['title'] ) ) {
+			$parameters['title'] = esc_html__( 'Find out more', 'tribe-alerts' );
+		}
+
+		parent::__construct( $parameters );
+	}
+
 }
