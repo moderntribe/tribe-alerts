@@ -1,1 +1,20 @@
 /* front-end styles */
+
+.tribe-alerts {
+	display: none;
+
+	&.tribe-alert-visible {
+		display: block;
+	}
+}
+
+.tribe-alerts__container {
+	position: relative;
+	padding: var(--spacer-20);
+}
+
+.tribe-alerts__close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}

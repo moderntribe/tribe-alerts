@@ -6,16 +6,50 @@
  */
 ?>
 
-<div data-alert-id="<?php echo $this->escape( $dto->id ) ?>"
-	 data-alert-title="<?php echo $this->escape( $dto->title ) ?>"
-	 data-alert-content="<?php echo $this->escape( $dto->content ) ?>"
-	 data-alert-link="<?php echo $this->escape( $dto->cta->url, 'esc_url' ) ?>"
-	 data-alert-link-title="<?php echo $this->escape( $dto->cta->title ) ?>"
-	 data-alert-link-target="<?php echo $this->escape( $dto->cta->target ) ?>"
+<div
+	class="tribe-alerts"
+	id="tribe-alerts"
+	data-alert-id="<?php echo $this->escape( $dto->id ) ?>"
 >
-	<script>
-		// @TODO FE: unsure you how you want to build this, using data objects, or we can just output
-		// everything in a global JS object.
-		const tribeAlert = <?php echo wp_json_encode( $dto->toArray() ) ?>;
-	</script>
+	<div class="tribe-alerts__container">
+
+		<button
+			class="tribe-alerts__close icon icon-close"
+			data-alert-btn="close"
+		>
+			<span class="u-visually-hidden">Close alert</span>
+		</button>
+
+		<?php
+
+		if( $dto->title ) :
+
+			printf('<h2 class="tribe-alerts__title">%s</h2>',
+				$this->escape( $dto->title )
+			);
+
+		endif;
+
+		if( $dto->content ) :
+
+			printf( '<div class="tribe-alerts__content">%s</div>',
+				$this->escape( $dto->content )
+			);
+
+		endif;
+
+		if( $dto->cta->url ) :
+
+			printf( '<a class="a-link tribe-alerts__link" href="%1$s" %3$s %4$s >%2$s</a>',
+				$this->escape( $dto->cta->url, 'esc_url' ),
+				$dto->cta->title ? $this->escape( $dto->cta->title ) : __('Find out more', 'tribe'),
+				$dto->cta->target ? 'target="' . $this->escape( $dto->cta->target ) . '"' : '',
+				$dto->cta->aria_label ? 'aria-label="' . $this->escape( $dto->cta->aria_label ) . '"' : '',
+			);
+
+		endif;
+
+		?>
+	</div>
+
 </div>
