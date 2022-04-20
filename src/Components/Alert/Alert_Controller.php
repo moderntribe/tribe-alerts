@@ -4,6 +4,7 @@ namespace Tribe\Alert\Components\Alert;
 
 use League\Plates\Engine;
 use Tribe\Alert\Components\Controller;
+use Tribe\Libs\Utils\Markup_Utils;
 
 class Alert_Controller extends Controller {
 
@@ -25,8 +26,16 @@ class Alert_Controller extends Controller {
 		}
 
 		echo $this->view->render( self::VIEW, [
-			'dto' => $alert,
+			'dto'             => $alert,
+			'link_attributes' => $this->get_link_attributes( $alert ),
 		] );
+	}
+
+	protected function get_link_attributes( Alert_Dto $alert ): string {
+		return Markup_Utils::concat_attrs( array_filter( [
+			'target'     => $alert->cta->target ?: '',
+			'aria-label' => $alert->cta->aria_label ?: '',
+		] ) );
 	}
 
 }
