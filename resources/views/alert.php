@@ -22,21 +22,17 @@
 
 		<?php
 
-		if( $dto->title ) :
+		if( $dto->title ) : ?>
 
-			printf('<h2 class="tribe-alerts__title">%s</h2>',
-				$this->escape( $dto->title )
-			);
+			<h2 class="tribe-alerts__title"><?php echo $this->escape( $dto->title ) ?></h2>
 
-		endif;
+		<?php endif;
 
-		if( $dto->content ) :
+		if( $dto->content ) : ?>
 
-			printf( '<div class="tribe-alerts__content">%s</div>',
-				$this->escape( $dto->content )
-			);
+			<div class="tribe-alerts__content"><?php echo $this->escape( $dto->content ); ?></div>
 
-		endif;
+		<?php endif;
 
 		if( $dto->cta->url ) :
 

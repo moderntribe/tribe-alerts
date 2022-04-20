@@ -4,19 +4,22 @@
  *
  * ----------------------------------------------------------------------------- */
 
+let alert;
+const alertVisible = 'tribe-alert-visible';
+
 /**
  * @function showAlert
  * @description Check if alert ID is saved in local storage, if not show the alert
  */
 
-const showAlert = ( alert ) => {
+const showAlert = () => {
 	const storage = JSON.parse( localStorage.getItem( `tribe-alert-closed` ) );
 
 	if( storage && storage.includes( alert.dataset.alertId ) ) {
 		return;
 	}
 
-	alert.classList.add( 'tribe-alert-visible' );
+	alert.classList.add( alertVisible );
 };
 
 /**
@@ -24,15 +27,14 @@ const showAlert = ( alert ) => {
  * @description Add Alert ID to local storage and remove visible class on container
  */
 
-const closeAlert = ( e ) => {
-	const alert = e.target.closest('#tribe-alerts');
+const closeAlert = () => {
 	const alertID = alert.dataset.alertId;
 	const closedAlerts = localStorage.getItem( 'tribe-alert-closed' ) ? JSON.parse( localStorage.getItem( 'tribe-alert-closed' ) ) : [];
 
 	closedAlerts.push( alertID );
 
 	localStorage.setItem( 'tribe-alert-closed', JSON.stringify( closedAlerts ) );
-	alert.classList.remove( 'tribe-alert-visible' );
+	alert.classList.remove( alertVisible );
 };
 
 /**
@@ -40,7 +42,7 @@ const closeAlert = ( e ) => {
  * @description Alert close click event
  */
 
-const bindEvents = ( alert ) => {
+const bindEvents = () => {
 
 	const closeBtn = alert.querySelector('[ data-alert-btn ]');
 
@@ -52,13 +54,13 @@ const bindEvents = ( alert ) => {
  * @description Kick off this module's functions
  */
 
-const init = ( alert ) => {
+const init = () => {
 	if ( ! alert ) {
 		return;
 	}
 
-	bindEvents( alert );
-	showAlert( alert );
+	bindEvents();
+	showAlert();
 
 	console.info( 'Tribe Alerts FE: Initialized Alert component scripts.' );
 
@@ -71,8 +73,8 @@ const init = ( alert ) => {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-	const alert = document.getElementById('tribe-alerts');
+	alert = document.getElementById('tribe-alerts');
 
-	init( alert );
+	init();
 
 });
