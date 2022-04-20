@@ -33,8 +33,8 @@ class Alert_Controller extends Controller {
 
 	protected function get_link_attributes( Alert_Dto $alert ): string {
 		return Markup_Utils::concat_attrs( array_filter( [
-			'target'     => $alert->cta->target ?: '',
-			'aria-label' => $alert->cta->aria_label ?: '',
+			'target'     => $alert->cta->target,
+			'aria-label' => $alert->cta->aria_label,
 		] ) );
 	}
 
