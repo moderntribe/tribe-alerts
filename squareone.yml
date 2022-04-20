@@ -19,3 +19,13 @@ build:
 # Use docker compose v2
 docker:
   compose-binary: "docker compose"
+
+# Custom project commands
+commands:
+  # so project:test
+  test:
+    signature: test
+    description: Run all automated test suites at once
+    cmd:
+      - so test -- run integration
+      - so test -- run functional
