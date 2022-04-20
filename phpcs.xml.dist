@@ -17,6 +17,7 @@
 
     <!-- Directories/files to be checked -->
     <file>src</file>
+    <file>resources/views</file>
     <file>core.php</file>
     <file>index.php</file>
 
