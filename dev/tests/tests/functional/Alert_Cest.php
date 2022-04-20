@@ -46,20 +46,20 @@ class Alert_Cest {
 		$I->seeResponseCodeIs( 200 );
 
 		$I->seeInSource( '<!-- tribe alerts -->' );
-		$I->dontSeeInSource( 'const tribeAlert =' );
+		$I->dontSeeElement( '.tribe-alerts' );
 
 		$I->amOnPage( '/another-excluded-alert' );
 		$I->seeResponseCodeIs( 200 );
 
 		$I->seeInSource( '<!-- tribe alerts -->' );
-		$I->dontSeeInSource( 'const tribeAlert =' );
+		$I->dontSeeElement( '.tribe-alerts' );
 
 		$I->amOnPage( '/regular-post' );
 		$I->seeResponseCodeIs( 200 );
 
 		$I->seeInSource( '<!-- tribe alerts -->' );
-		$I->seeInSource( 'const tribeAlert =' );
-		$I->seeInSource( 'Test excluded alert message' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test excluded alert message' );
 	}
 
 	public function test_it_includes_alert_on_specific_posts( FunctionalTester $I ) {
@@ -102,21 +102,21 @@ class Alert_Cest {
 		$I->seeResponseCodeIs( 200 );
 
 		$I->seeInSource( '<!-- tribe alerts -->' );
-		$I->dontSeeInSource( 'const tribeAlert =' );
+		$I->dontSeeElement( '.tribe-alerts' );
 
 		$I->amOnPage( '/included-alert' );
 		$I->seeResponseCodeIs( 200 );
 
 		$I->seeInSource( '<!-- tribe alerts -->' );
-		$I->seeInSource( 'const tribeAlert =' );
-		$I->seeInSource( 'Test included alert message' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test included alert message' );
 
 		$I->amOnPage( '/another-included-alert' );
 		$I->seeResponseCodeIs( 200 );
 
 		$I->seeInSource( '<!-- tribe alerts -->' );
-		$I->seeInSource( 'const tribeAlert =' );
-		$I->seeInSource( 'Test included alert message' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test included alert message' );
 	}
 
 	public function test_it_displays_a_global_alert_on_multiple_urls( FunctionalTester $I ) {
@@ -144,15 +144,15 @@ class Alert_Cest {
 
 		$I->amOnPage( '/' );
 
-		$I->seeInSource( 'const tribeAlert =' );
-		$I->seeInSource( 'Test alert message' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
 
 		$I->amOnPage( '/regular-post' );
 		$I->seeResponseCodeIs( 200 );
 
 		$I->seeInSource( '<!-- tribe alerts -->' );
-		$I->seeInSource( 'const tribeAlert =' );
-		$I->seeInSource( 'Test alert message' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
 	}
 
 	public function test_it_does_not_display_on_a_404_page( FunctionalTester $I ) {
@@ -173,15 +173,15 @@ class Alert_Cest {
 
 		$I->amOnPage( '/' );
 
-		$I->seeInSource( 'const tribeAlert =' );
-		$I->seeInSource( 'Test alert message' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
 
 		$I->amOnPage( '/a-missing-url' );
 		$I->seeResponseCodeIs( 404 );
 
 		$I->seeInSource( '<!-- tribe alerts -->' );
-		$I->dontSeeInSource( 'const tribeAlert =' );
-		$I->dontSeeInSource( 'Test alert message' );
+		$I->dontSeeElement( '.tribe-alerts' );
+		$I->dontSee( 'Test alert message' );
 	}
 
 }
