@@ -18,9 +18,4 @@
 		// everything in a global JS object.
 		const tribeAlert = <?php echo wp_json_encode( $dto->toArray() ) ?>;
 	</script>
-
-	<?php $test = [
-		'break_php_cs' => true,
-	];
-	?>
 </div>
