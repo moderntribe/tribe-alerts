@@ -18,7 +18,7 @@
 			class="tribe-alerts__close icon icon-close"
 			data-alert-btn="close"
 		>
-			<span class="u-visually-hidden">Close alert</span>
+			<span class="u-visually-hidden"><?php esc_html_e( 'Close alert', 'tribe-alerts' ); ?></span>
 		</button>
 
 		<?php if ( $dto->title ) : ?>
