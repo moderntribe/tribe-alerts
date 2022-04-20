@@ -10,14 +10,14 @@
  */
 
 const showAlert = ( alert ) => {
-	const storage = localStorage.getItem( `tribe-alert-closed` );
+	const storage = JSON.parse( localStorage.getItem( `tribe-alert-closed` ) );
 
 	if( storage && storage.includes( alert.dataset.alertId ) ) {
 		return;
 	}
 
 	alert.classList.add( 'tribe-alert-visible' );
-}
+};
 
 /**
  * @function closeAlert
@@ -33,7 +33,7 @@ const closeAlert = ( e ) => {
 
 	localStorage.setItem( 'tribe-alert-closed', JSON.stringify( closedAlerts ) );
 	alert.classList.remove( 'tribe-alert-visible' );
-}
+};
 
 /**
  * @function bindEvents
@@ -45,7 +45,7 @@ const bindEvents = ( alert ) => {
 	const closeBtn = alert.querySelector('[ data-alert-btn ]');
 
 	closeBtn.addEventListener('click', closeAlert, true );
-}
+};
 
 /**
  * @function init
