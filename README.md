@@ -23,6 +23,10 @@ Display custom banner alerts on your website.
 5. Run: `yarn mix`
 6. Activate your plugins in the WordPress dashboard and start developing!
 
+### Pull Requests / Building
+
+Ensure you run `yarn prod` before submitting a PR to ensure the `resources/dist` folder is updated with the build.
+
 ### Front end
 
 Front end building is powered by [Laravel Mix](https://laravel-mix.com/).
