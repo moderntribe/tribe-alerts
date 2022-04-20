@@ -25,17 +25,17 @@
 
 .tribe-alerts__container {
 	position: relative;
-	padding: 30px;
 
 	.tribe-alert-visible & {
+		padding: 30px;
 		opacity: 1;
 		animation-duration: 1s;
-		animation-name: slidein;
+		animation-name: fadein;
 		animation-fill-mode: forwards;
 	}
 }
 
-@keyframes slidein {
+@keyframes fadein {
 	from {
 		opacity: 0;
 		background: #ffffff;
