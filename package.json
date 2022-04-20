@@ -47,7 +47,7 @@
   },
   "eslintConfig": {
     "parserOptions": {
-      "ecmaVersion": 2020
+      "ecmaVersion": 11
     },
     "extends": [
       "prettier"
