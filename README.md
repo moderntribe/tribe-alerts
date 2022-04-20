@@ -25,7 +25,7 @@ Display custom banner alerts on your website.
 
 ### Pull Requests / Building
 
-Ensure you run `yarn prod` before submitting a PR to ensure the `resources/dist` folder is updated with the build.
+Ensure you run `yarn prod` before submitting a PR to ensure the `resources/dist` folder is updated with the latest build.
 
 ### Front end
 
