@@ -13,13 +13,13 @@ const alertVisible = 'tribe-alert-visible';
  */
 
 const showAlert = () => {
-	const storage = JSON.parse( localStorage.getItem( `tribe-alert-closed` ) );
+	const storage = JSON.parse(localStorage.getItem(`tribe-alert-closed`));
 
-	if( storage && storage.includes( alert.dataset.alertId ) ) {
+	if (storage && storage.includes(alert.dataset.alertId)) {
 		return;
 	}
 
-	alert.classList.add( alertVisible );
+	alert.classList.add(alertVisible);
 };
 
 /**
@@ -29,12 +29,14 @@ const showAlert = () => {
 
 const closeAlert = () => {
 	const alertID = alert.dataset.alertId;
-	const closedAlerts = localStorage.getItem( 'tribe-alert-closed' ) ? JSON.parse( localStorage.getItem( 'tribe-alert-closed' ) ) : [];
+	const closedAlerts = localStorage.getItem('tribe-alert-closed')
+		? JSON.parse(localStorage.getItem('tribe-alert-closed'))
+		: [];
 
-	closedAlerts.push( alertID );
+	closedAlerts.push(alertID);
 
-	localStorage.setItem( 'tribe-alert-closed', JSON.stringify( closedAlerts ) );
-	alert.classList.remove( alertVisible );
+	localStorage.setItem('tribe-alert-closed', JSON.stringify(closedAlerts));
+	alert.classList.remove(alertVisible);
 };
 
 /**
@@ -43,10 +45,9 @@ const closeAlert = () => {
  */
 
 const bindEvents = () => {
-
 	const closeBtn = alert.querySelector('[ data-alert-btn ]');
 
-	closeBtn.addEventListener('click', closeAlert, true );
+	closeBtn.addEventListener('click', closeAlert, true);
 };
 
 /**
@@ -55,15 +56,14 @@ const bindEvents = () => {
  */
 
 const init = () => {
-	if ( ! alert ) {
+	if (!alert) {
 		return;
 	}
 
 	bindEvents();
 	showAlert();
 
-	console.info( 'Tribe Alerts FE: Initialized Alert component scripts.' );
-
+	console.info('Tribe Alerts FE: Initialized Alert component scripts.');
 };
 
 /**
@@ -72,9 +72,7 @@ const init = () => {
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-
 	alert = document.getElementById('tribe-alerts');
 
 	init();
-
 });

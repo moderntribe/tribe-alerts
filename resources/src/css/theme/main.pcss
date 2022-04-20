@@ -1,5 +1,17 @@
 /* front-end styles */
 
+.u-visually-hidden {
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
 .tribe-alerts {
 	display: none;
 
@@ -17,7 +29,7 @@
 
 	.tribe-alert-visible & {
 		opacity: 1;
-		animation-duration: 2s;
+		animation-duration: 1s;
 		animation-name: slidein;
 		animation-fill-mode: forwards;
 	}
