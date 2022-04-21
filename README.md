@@ -80,7 +80,7 @@ The alert front-end is set to automatically display using the `wp_footer` hook. 
 
 ```php
 
-<?php if ( function_exists( '\Tribe\Alert\render_alert' ) ) {
+<?php if ( function_exists( 'tribe_alerts' ) && function_exists( '\Tribe\Alert\render_alert' ) ) {
     \Tribe\Alert\render_alert();
 } ?>
 
