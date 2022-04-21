@@ -17,7 +17,7 @@ class Resource_Subscriber extends Abstract_Subscriber {
 	public function register(): void {
 		add_action( 'wp_enqueue_scripts', function (): void {
 			$this->container->get( Script_Loader::class )->enqueue();
-		} );
+		}, 100, 0 );
 
 		add_action( 'admin_enqueue_scripts', function (): void {
 			$this->container->get( Admin_Script_Loader::class )->enqueue();
