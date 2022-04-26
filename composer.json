@@ -29,6 +29,10 @@
           "ffraenz/private-composer-installer": "^5.0"
         }
       }
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:nickforddesign/acf-swatch.git"
     }
   ],
   "require": {
@@ -38,6 +42,7 @@
     "johnbillion/extended-cpts": "^5.0",
     "league/plates": "^3.4",
     "moderntribe/tribe-libs": "^3.4.13",
+    "nickford/acf-swatch": "^1.0",
     "spatie/data-transfer-object": "^2.8"
   },
   "require-dev": {

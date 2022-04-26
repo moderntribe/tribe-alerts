@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39dc7b8cd6910e6468dcffb6bb71ec00",
+    "content-hash": "e3f265f8729b2247a4e961cb4df1297e",
     "packages": [
         {
             "name": "enshrined/svg-sanitize",
@@ -663,6 +663,37 @@
                 }
             ],
             "time": "2022-04-08T15:43:54+00:00"
+        },
+        {
+            "name": "nickford/acf-swatch",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nickforddev/acf-swatch.git",
+                "reference": "a4b814d9f10fac04032bc5c3f74ac4ce0572fc6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nickforddev/acf-swatch/zipball/a4b814d9f10fac04032bc5c3f74ac4ce0572fc6b",
+                "reference": "a4b814d9f10fac04032bc5c3f74ac4ce0572fc6b",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Ford",
+                    "email": "nickforddesign@gmail.com"
+                }
+            ],
+            "description": "This is a simple ACF Add-on field allowing the creation of color swatches that behave as radio buttons.",
+            "support": {
+                "source": "https://github.com/nickforddev/acf-swatch/tree/1.0.7",
+                "issues": "https://github.com/nickforddev/acf-swatch/issues"
+            },
+            "time": "2018-11-29T16:23:16+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -8800,5 +8831,5 @@
     "platform-overrides": {
         "php": "7.4.7"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
