@@ -29,4 +29,5 @@ class Alert_Color_Options implements Color_Options_Manager {
 
 		return $color ? sanitize_html_class( sprintf( 'tribe_alerts--%s', $color['class'] ) ) : '';
 	}
+
 }
