@@ -92,6 +92,18 @@ You can hide the automatic `wp_footer` output by defining the following in your 
 define( 'TRIBE_ALERTS_AUTOMATIC_OUTPUT', false );
 ```
 
+### Enabling Color Options
+
+Color options are disabled by default. You can enable it by defining the following in your wp-config.php:
+
+```php
+define( 'TRIBE_ALERTS_COLOR_OPTIONS', false );
+```
+
+An array of default color options could be overwritten within `alert.color_options` DI container.
+
+Manager class should implement an interface `Color_Class_Manager`.
+
 ### Credits
 
 - Based on [Spatie Skeleton](https://github.com/spatie/package-skeleton-php)
