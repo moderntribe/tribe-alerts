@@ -5,10 +5,12 @@
  * @var \Tribe\Alert\Components\Alert\Alert_Dto $dto
  * @var string                                  $link_attributes
  */
+
+$tribe_classes = $dto->color_class ? "tribe_alerts--colored {$dto->color_class}" : '';
 ?>
 
 <div
-	class="tribe-alerts"
+	class="tribe-alerts <?php echo $this->e( $tribe_classes ); ?>"
 	id="tribe-alerts"
 	data-alert-id="<?php echo $this->e( $dto->id ); ?>"
 >

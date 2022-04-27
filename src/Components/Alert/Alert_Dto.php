@@ -7,9 +7,10 @@ use Tribe\Alert\Field_Models\Link;
 
 class Alert_Dto extends FlexibleDataTransferObject {
 
-	public int $id         = 0;
-	public string $title   = '';
-	public string $content = '';
-	public ?Link $cta      = null;
+	public int $id             = 0;
+	public string $title       = '';
+	public string $content     = '';
+	public ?Link $cta          = null;
+	public string $color_class = '';
 
 }

@@ -4,6 +4,7 @@ namespace Tribe\Alert\Meta;
 
 use DI;
 use Psr\Container\ContainerInterface;
+use Tribe\Alert\Components\Alert\Alert_Color_Options;
 use Tribe\Alert\Post_Types\Alert\Alert;
 use Tribe\Alert\Settings\Alert_Settings;
 use Tribe\Libs\Container\Definer_Interface;
@@ -17,16 +18,15 @@ class Meta_Definer implements Definer_Interface {
 				DI\get( Alert_Settings_Meta::class ),
 				DI\get( Alert_Meta::class ),
 			] ),
-
 			Alert_Settings_Meta::class  => DI\autowire()
 				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
 					'settings_pages' => [ $c->get( Alert_Settings::class )->get_slug() ],
 				] ),
-
 			Alert_Meta::class           => DI\autowire()
 				->constructorParameter( 'object_types', static fn() => [
 					'post_types' => [ Alert::NAME ],
-				] ),
+				] )
+				->constructorParameter( 'class_manager', DI\get( Alert_Color_Options::class ) ),
 		];
 	}
 
