@@ -27,8 +27,19 @@ class Alert_Controller extends Controller {
 
 		echo $this->view->render( self::VIEW, [
 			'dto'             => $alert,
+			'alert_classes'   => $this->get_alert_classes( $alert ),
 			'link_attributes' => $this->get_link_attributes( $alert ),
 		] );
+	}
+
+	protected function get_alert_classes( Alert_Dto $alert ): string {
+		$classes = [ 'tribe-alerts' ];
+		if ( $alert->color_class ) {
+			$classes[] = 'tribe_alerts--colored';
+			$classes[] = $alert->color_class;
+		}
+
+		return Markup_Utils::class_attribute( $classes );
 	}
 
 	protected function get_link_attributes( Alert_Dto $alert ): string {
