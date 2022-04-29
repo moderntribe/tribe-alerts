@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Alert\Components\Alert;
 
@@ -16,7 +16,7 @@ class Alert_Definer implements Definer_Interface {
 
 	public function define(): array {
 		return [
-			Color_Options_Manager::class => Alert_Color_Options::class,
+			Color_Options_Manager::class => DI\get( Alert_Color_Options::class ),
 			self::COLOR_OPTIONS          => DI\add( apply_filters( 'tribe/alerts/color_options', [
 				'#000000' => [ 'name' => __( 'Black', 'tribe-alerts' ), 'class' => 'black' ],
 				'#737373' => [ 'name' => __( 'Grey', 'tribe-alerts' ), 'class' => 'grey' ],
