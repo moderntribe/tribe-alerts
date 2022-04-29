@@ -89,7 +89,7 @@ The alert front-end is set to automatically display using the `wp_footer` hook. 
 You can hide the automatic `wp_footer` output by defining the following in your wp-config.php:
 
 ```php
-define( 'TRIBE_ALERTS_AUTOMATIC_OUTPUT', true );
+define( 'TRIBE_ALERTS_AUTOMATIC_OUTPUT', false );
 ```
 
 ### Enabling Color Options
@@ -97,7 +97,7 @@ define( 'TRIBE_ALERTS_AUTOMATIC_OUTPUT', true );
 Color options are disabled by default. You can enable it by defining the following in your wp-config.php:
 
 ```php
-define( 'TRIBE_ALERTS_COLOR_OPTIONS', false );
+define( 'TRIBE_ALERTS_COLOR_OPTIONS', true );
 ```
 
 Color options array could be filtered with `tribe/alerts/color_options`.
