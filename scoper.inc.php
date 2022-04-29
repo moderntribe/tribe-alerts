@@ -42,6 +42,7 @@ return [
 			  ->in( 'vendor' ),
 		Finder::create()->append( [
 			'composer.json',
+			'core.php',
 		] ),
 	],
 
