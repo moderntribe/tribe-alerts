@@ -1,23 +1,10 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 namespace Tribe\Alert\Components\Alert;
 
 use Tribe\Tests\Test_Case;
 
 final class Alert_Color_Options_Test extends Test_Case {
-
-	private function get_test_color_options(): array {
-		return [
-			'#ffffff' => [
-				'name'  => __( 'White', 'tribe-alerts' ),
-				'class' => 'white',
-			],
-			'#000000' => [
-				'name'  => __( 'Black', 'tribe-alerts' ),
-				'class' => 'black',
-			],
-		];
-	}
 
 	public function test_it_finds_correct_class_names(): void {
 		$class_manager = new Alert_Color_Options( $this->get_test_color_options() );
@@ -51,6 +38,19 @@ final class Alert_Color_Options_Test extends Test_Case {
 			'#000000' => 'Black',
 		], $class_manager->get_acf_options() );
 
+	}
+
+	private function get_test_color_options(): array {
+		return [
+			'#ffffff' => [
+				'name'  => __( 'White', 'tribe-alerts' ),
+				'class' => 'white',
+			],
+			'#000000' => [
+				'name'  => __( 'Black', 'tribe-alerts' ),
+				'class' => 'black',
+			],
+		];
 	}
 
 }

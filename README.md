@@ -100,7 +100,9 @@ Color options are disabled by default. You can enable it by defining the followi
 define( 'TRIBE_ALERTS_COLOR_OPTIONS', false );
 ```
 
-An array of default color options could be overwritten within `alert.color_options` DI container.
+Color options array could be filtered with `tribe/alerts/color_options`.
+
+Default CSS color class name prefix is `tribe_alerts--`. It could be filtered with `tribe/alerts/color_options/css_class_prefix`.
 
 ### Credits
 
