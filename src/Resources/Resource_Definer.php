@@ -4,8 +4,8 @@ namespace Tribe\Alert\Resources;
 
 use DI;
 use Psr\Container\ContainerInterface;
-use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Alert\Core;
+use Tribe\Libs\Container\Definer_Interface;
 
 class Resource_Definer implements Definer_Interface {
 
