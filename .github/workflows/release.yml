@@ -1,0 +1,62 @@
+name: Build and Release WordPress Plugin
+
+on: release
+
+jobs:
+  build-and-release-plugin:
+    name: Build and attach the WordPress plugin zip to the release
+    runs-on: ubuntu-latest
+
+    env:
+      ZIP_NAME: tribe-alerts.zip
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer
+          coverage: none
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create composer .env
+        run: echo "${{ secrets.COMPOSER_ENV }}" > .env
+
+      - name: Install optimized composer dependencies
+        run: composer install --no-progress --no-dev --no-suggest --optimize-autoloader
+
+      - name: Clean up files
+        run: |
+          rm -rf .env
+          rm -rf composer.lock
+
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: Install node modules
+        run: yarn install --prefer-offline
+
+      - name: Build assets
+        run: yarn prod
+
+      - name: Zip release
+        run: git archive --format=zip --worktree-attributes -o ${{ env.ZIP_NAME }} ${{ github.event.release.tag_name }}
+
+      - name: Add vendor folder to release zip
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -ur ${{ env.ZIP_NAME }} vendor
+
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@v0.1.1
+        with:
+          args: ${{ env.ZIP_NAME }} application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
