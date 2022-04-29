@@ -62,7 +62,7 @@ jobs:
       - name: Update folders in zip with scoped versions
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -ur ${{ env.ZIP_NAME }} composer.json vendor src
+          args: zip -qq -ur ${{ env.ZIP_NAME }} composer.json core.php vendor src
 
       - name: Upload to release
         uses: JasonEtco/upload-to-release@v0.1.1
