@@ -78,7 +78,7 @@ return [
 		// '',                            // Any namespace
 	],
 	'exclude-classes'         => [
-		// 'ReflectionClassConstant',
+		'ACF',
 	],
 	'exclude-functions'       => [
 		// 'mb_str_split',
