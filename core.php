@@ -4,7 +4,7 @@
  * Plugin Name:       Tribe Alerts
  * Plugin URI:        https://github.com/moderntribe/tribe-alerts
  * Description:       Tribe Alerts WordPress Plugin
- * Version:           1.0.8
+ * Version:           1.0.9
  * Requires PHP:      7.4
  * Author:            Modern Tribe
  * Author URI:        https://tri.be
@@ -14,9 +14,10 @@
  * Domain Path:       /languages
  */
 
+namespace Tribe\Alert;
+
 use Tribe\Alert\Activation\Activator;
 use Tribe\Alert\Activation\Deactivator;
-use Tribe\Alert\Core;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
