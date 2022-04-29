@@ -26,7 +26,7 @@ class Meta_Definer implements Definer_Interface {
 				->constructorParameter( 'object_types', static fn() => [
 					'post_types' => [ Alert::NAME ],
 				] )
-				->constructorParameter( 'class_manager', DI\get( Alert_Color_Options::class ) ),
+				->constructorParameter( 'color_options', DI\get( Alert_Color_Options::class ) ),
 		];
 	}
 

@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php declare( strict_types=1 );
 
 namespace Tribe\Alert\Components\Alert;
 
 class Alert_Color_Options implements Color_Options_Manager {
 
+	public const CSS_CLASS_PREFIX = 'tribe_alerts--';
+
 	/**
-	 * @var array{name: string, class: string}
+	 * @var array<string, array{name: string, class: string}>
 	 */
 	protected array $color_options;
 
@@ -18,16 +20,31 @@ class Alert_Color_Options implements Color_Options_Manager {
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<string, string>
 	 */
 	public function get_acf_options(): array {
 		return wp_list_pluck( $this->color_options, 'name' );
 	}
 
+	/**
+	 * @param string $hex Six-digit hex color code in lowercase, e.g., #ffffff.
+	 *
+	 * @return string
+	 */
 	public function get_color_class( string $hex ): string {
 		$color = $this->color_options[ $hex ] ?? '';
+		if ( ! isset( $color['class'] ) ) {
+			return '';
+		}
 
-		return $color ? sanitize_html_class( sprintf( 'tribe_alerts--%s', $color['class'] ) ) : '';
+		/**
+		 * Filter the css class prefix.
+		 *
+		 * @param string
+		 */
+		$prefix = apply_filters( 'tribe/alerts/color_options/css_class_prefix', self::CSS_CLASS_PREFIX );
+
+		return sanitize_html_class( sprintf( "$prefix%s", $color['class'] ) );
 	}
 
 }

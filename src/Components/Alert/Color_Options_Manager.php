@@ -5,14 +5,29 @@ namespace Tribe\Alert\Components\Alert;
 interface Color_Options_Manager {
 
 	/**
-	 * Should return multidimensional array where key is HEX color and value is array of a color name and class name.
+	 * Returns multidimensional array of color options.
 	 *
-	 * @return array
+	 * The key is a six-digit hex color code in lowercase, e.g., #ffffff.
+	 * The value is a 2 elements array: color name and class name.
+	 *
+	 * @return array<string, array{name: string, class: string}>
 	 */
 	public function get_all_options(): array;
 
+	/**
+	 * Returns an array where the key is a hex color and the value is a color name.
+	 *
+	 * @return array<string, string>
+	 */
 	public function get_acf_options(): array;
 
+	/**
+	 * Returns css color class name.
+	 *
+	 * @param string $hex Six-digit hex color code in lowercase, e.g., #ffffff.
+	 *
+	 * @return string
+	 */
 	public function get_color_class( string $hex ): string;
 
 }

@@ -6,7 +6,7 @@ use Tribe\Tests\Test_Case;
 
 final class Alert_Color_Options_Test extends Test_Case {
 
-	public function get_test_color_options(): array {
+	private function get_test_color_options(): array {
 		return [
 			'#ffffff' => [
 				'name'  => __( 'White', 'tribe-alerts' ),
@@ -27,6 +27,12 @@ final class Alert_Color_Options_Test extends Test_Case {
 
 		$white = $class_manager->get_color_class( '#ffffff' );
 		$this->assertSame( $white, 'tribe_alerts--white' );
+
+		$white_uppercase = $class_manager->get_color_class( '#FFFFFF' );
+		$this->assertSame( $white_uppercase, '' );
+
+		$white_mixed_case = $class_manager->get_color_class( '#FFfFfF' );
+		$this->assertSame( $white_mixed_case, '' );
 
 		$null = $class_manager->get_color_class( '' );
 		$this->assertSame( $null, '' );

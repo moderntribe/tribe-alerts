@@ -34,11 +34,11 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 	public const OPTION_INCLUDE    = 'include';
 	public const OPTION_EXCLUDE    = 'exclude';
 
-	protected Color_Options_Manager $class_manager;
+	protected Color_Options_Manager $color_options;
 
-	public function __construct( array $object_types, Color_Options_Manager $class_manager ) {
+	public function __construct( array $object_types, Color_Options_Manager $color_options ) {
 		parent::__construct( $object_types );
-		$this->class_manager = $class_manager;
+		$this->color_options = $color_options;
 	}
 
 	public function get_keys(): array {
@@ -58,7 +58,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		$group->add_field( $this->get_cta_group() );
 		$group->add_field( $this->get_rules_group() );
 
-		if ( defined( 'TRIBE_ALERTS_COLOR_OPTIONS' ) && TRIBE_ALERTS_COLOR_OPTIONS ) {
+		if ( defined( 'TRIBE_ALERTS_COLOR_OPTIONS' ) && true === TRIBE_ALERTS_COLOR_OPTIONS ) {
 			$group->add_field( $this->get_colors_field() );
 		}
 
@@ -226,12 +226,13 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		$field = new ACF\Field( self::NAME . '_' . self::FIELD_COLOR );
 
 		$field->set_attributes( [
-			'label'         => __( 'Backgroung Color', 'tribe-alerts' ),
+			'label'         => __( 'Color Theme', 'tribe-alerts' ),
+			'instructions'  => __( 'Select a background color', 'tribe-alerts' ),
 			'name'          => self::FIELD_COLOR,
-			'type'          => 'radio',
-			'swatch'        => true,
+			'type'          => 'swatch',
+			'allow_null'    => false,
 			'default_value' => '',
-			'choices'       => $this->class_manager->get_acf_options(),
+			'choices'       => $this->color_options->get_acf_options(),
 		] );
 
 		return $field;
