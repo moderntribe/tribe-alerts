@@ -26,13 +26,23 @@ jobs:
       - name: Create composer .env
         run: echo "${{ secrets.COMPOSER_ENV }}" > .env
 
-      - name: Install optimized composer dependencies
-        run: composer install --no-progress --no-dev --no-suggest --optimize-autoloader
+      - name: Install composer dependencies
+        run: composer install --no-progress --no-dev --no-suggest
+
+      - name: Install PHP-Scoper
+        run: wget https://github.com/humbug/php-scoper/releases/download/0.17.2/php-scoper.phar
+
+      - name: Run PHP-Scoper
+        run: php php-scoper.phar add-prefix --force
+
+      - name: Copy scoped files back to source folder
+        run: rsync -av build/ .
+
+      - name: Create scoped autoloader
+        run: composer dump-autoload --classmap-authoritative --no-dev
 
       - name: Clean up files
-        run: |
-          rm -rf .env
-          rm -rf composer.lock
+        run: rm -rf .env
 
       - name: Install node
         uses: actions/setup-node@v2
@@ -49,10 +59,10 @@ jobs:
       - name: Zip release
         run: git archive --format=zip --worktree-attributes -o ${{ env.ZIP_NAME }} ${{ github.event.release.tag_name }}
 
-      - name: Add vendor folder to release zip
+      - name: Update folders in zip with scoped versions
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -ur ${{ env.ZIP_NAME }} vendor
+          args: zip -qq -ur ${{ env.ZIP_NAME }} composer.json vendor src
 
       - name: Upload to release
         uses: JasonEtco/upload-to-release@v0.1.1

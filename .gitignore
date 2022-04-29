@@ -62,6 +62,7 @@ dev/tests/wp-content/plugins/*
 ############
 npm-debug.log
 yarn-error.log
+/build
 /node_modules
 /public/wp
 /public/wp-content/*
