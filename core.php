@@ -4,7 +4,7 @@
  * Plugin Name:       Tribe Alerts
  * Plugin URI:        https://github.com/moderntribe/tribe-alerts
  * Description:       Tribe Alerts WordPress Plugin
- * Version:           1.0.7
+ * Version:           1.0.8
  * Requires PHP:      7.4
  * Author:            Modern Tribe
  * Author URI:        https://tri.be
