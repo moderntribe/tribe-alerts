@@ -4,7 +4,7 @@
  * Plugin Name:       Tribe Alerts
  * Plugin URI:        https://github.com/moderntribe/tribe-alerts
  * Description:       Tribe Alerts WordPress Plugin
- * Version:           1.0.13
+ * Version:           1.0.14
  * Requires PHP:      7.4
  * Author:            Modern Tribe
  * Author URI:        https://tri.be
@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( Core::class ) ) {
 	// Require the vendor folder via multiple locations
 	$autoloaders = (array) apply_filters( 'tribe/alerts/autoloaders', [
+		trailingslashit( __DIR__ ) . 'vendor/scoped-autoload.php',
 		trailingslashit( __DIR__ ) . 'vendor/autoload.php',
 		trailingslashit( WP_CONTENT_DIR ) . '../vendor/autoload.php',
 		trailingslashit( WP_CONTENT_DIR ) . 'vendor/autoload.php',

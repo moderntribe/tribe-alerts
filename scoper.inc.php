@@ -22,6 +22,20 @@ function scoper_wp_file( string $file ): array {
 	);
 }
 
+function poly_str_ends_with( string $haystack, string $needle ): bool {
+	if ( '' === $needle || $needle === $haystack ) {
+		return true;
+	}
+
+	if ( '' === $haystack ) {
+		return false;
+	}
+
+	$needleLength = strlen( $needle );
+
+	return $needleLength <= strlen( $haystack ) && 0 === substr_compare( $haystack, $needle, - $needleLength );
+}
+
 // You can do your own things here, e.g. collecting symbols to expose dynamically
 // or files to exclude.
 // However beware that this file is executed by PHP-Scoper, hence if you are using
@@ -34,7 +48,7 @@ return [
 	// will be generated instead.
 	//
 	// For more see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#prefix
-	'prefix'                  => '',
+	'prefix'                  => 'Tribe\\Alert_Scoped',
 
 	// By default when running php-scoper add-prefix, it will prefix all relevant code found in the current working
 	// directory. You can however define which files should be scoped by defining a collection of Finders in the
@@ -63,9 +77,6 @@ return [
 			'core.php',
 		] ),
 	],
-	'whitelist'               => [
-		'Tribe\Alert\*',
-	],
 
 	// List of excluded files, i.e. files for which the content will be left untouched.
 	// Paths are relative to the configuration file unless if they are already absolute
@@ -82,10 +93,16 @@ return [
 	//
 	// For more see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#patchers
 	'patchers'                => [
-		static function ( string $filePath, string $prefix, string $contents ): string {
-			// Change the contents here.
+		static function ( string $filePath, string $prefix, string $content ): string {
 
-			return $contents;
+			if ( ! poly_str_ends_with( $filePath, 'tribe-alerts/core.php' ) &&
+			     ! poly_str_ends_with( $filePath, 'tribe-alerts/src/functions.php' )
+			) {
+				return $content;
+			}
+
+			// scoper is putting this in a global namespace for some reason
+			return str_replace( '\\tribe_alert()->', 'tribe_alert()->', $content );
 		},
 	],
 
@@ -93,6 +110,7 @@ return [
 	//
 	// For more information see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#excluded-symbols
 	'exclude-namespaces'      => [
+		'Tribe\Alert',
 		// 'Acme\Foo'                     // The Acme\Foo namespace (and sub-namespaces)
 		// '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
 		// '~^$~',                        // The root namespace only
@@ -107,8 +125,7 @@ return [
 	'exclude-constants'       => scoper_wp_file( 'exclude-wordpress-constants.json' ),
 
 	// List of symbols to expose.
-	//
-	// For more information see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#exposed-symbols
+	// See: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#exposed-symbols
 	'expose-global-constants' => true,
 	'expose-global-classes'   => true,
 	'expose-global-functions' => true,

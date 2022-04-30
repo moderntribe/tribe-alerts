@@ -9,6 +9,8 @@ jobs:
 
     env:
       ZIP_NAME: tribe-alerts.zip
+      ZIP_FOLDER: tribe-alerts
+      SCOPED_FILES: "composer.json core.php vendor src"
 
     steps:
       - name: Checkout
@@ -56,13 +58,16 @@ jobs:
       - name: Build assets
         run: yarn prod
 
-      - name: Zip release
-        run: git archive --format=zip --worktree-attributes -o ${{ env.ZIP_NAME }} ${{ github.event.release.tag_name }}
+      - name: Create zip via git archive
+        run: git archive --prefix "${{ env.ZIP_FOLDER }}"/ --format=zip --worktree-attributes -o "${{ env.ZIP_NAME }} ${{ github.event.release.tag_name }}"
 
-      - name: Update folders in zip with scoped versions
+      - name: Prepare scoped files for zipping
+        run: mkdir "${{ env.ZIP_FOLDER }}"; mv -t "${{ env.ZIP_FOLDER }} ${{ env.SCOPED_FILES }}"
+
+      - name: Update zip with scoped folders and file
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -ur ${{ env.ZIP_NAME }} composer.json core.php vendor src
+          args: zip -qq -ur "${{ env.ZIP_NAME }} ${{ env.SCOPED_FILES }}"
 
       - name: Upload to release
         uses: JasonEtco/upload-to-release@v0.1.1
