@@ -104,6 +104,15 @@ return [
 			// scoper is putting this in a global namespace for some reason
 			return str_replace( '\\tribe_alert()->', 'tribe_alert()->', $content );
 		},
+		static function ( string $filePath, string $prefix, string $content ): string {
+
+			if ( ! poly_str_ends_with( $filePath, 'Object_Meta/Meta_Repository.php' ) ) {
+				return $content;
+			}
+
+			// Ensure our meta repo filter is unique from other tribe-libs instances
+			return str_replace( 'tribe_get_meta_repo', 'tribe_get_meta_repo_scoped', $content );
+		},
 	],
 
 	// List of symbols to consider internal i.e. to leave untouched.
