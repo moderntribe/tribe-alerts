@@ -1,6 +1,9 @@
 name: Build and Release WordPress Plugin
 
-on: release
+on:
+  release:
+    types: [published]
+
 
 jobs:
   build-and-release-plugin:
