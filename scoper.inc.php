@@ -4,6 +4,24 @@ ini_set( 'memory_limit', '1024M' );
 
 use Isolated\Symfony\Component\Finder\Finder;
 
+/**
+ * Exclude WordPress functions/classes via auto generated excludes.
+ *
+ * @link https://github.com/snicco/php-scoper-wordpress-excludes
+ *
+ * @param string $file The name of the file in the generated folder.
+ *
+ * @return array
+ */
+function scoper_wp_file( string $file ): array {
+	return json_decode( file_get_contents(
+			sprintf(
+				'https://raw.githubusercontent.com/snicco/php-scoper-wordpress-excludes/master/generated/%s',
+				$file )
+		)
+	);
+}
+
 // You can do your own things here, e.g. collecting symbols to expose dynamically
 // or files to exclude.
 // However beware that this file is executed by PHP-Scoper, hence if you are using
@@ -45,6 +63,9 @@ return [
 			'core.php',
 		] ),
 	],
+	'whitelist'               => [
+		'Tribe\Alert\*',
+	],
 
 	// List of excluded files, i.e. files for which the content will be left untouched.
 	// Paths are relative to the configuration file unless if they are already absolute
@@ -77,15 +98,13 @@ return [
 		// '~^$~',                        // The root namespace only
 		// '',                            // Any namespace
 	],
-	'exclude-classes'         => [
+	'exclude-classes'         => array_merge( [
 		'ACF',
-	],
-	'exclude-functions'       => [
+	], scoper_wp_file( 'exclude-wordpress-classes.json' ) ),
+	'exclude-functions'       => array_merge( [
 		'/^acf_/',
-	],
-	'exclude-constants'       => [
-		// 'STDIN',
-	],
+	], scoper_wp_file( 'exclude-wordpress-functions.json' ) ),
+	'exclude-constants'       => scoper_wp_file( 'exclude-wordpress-constants.json' ),
 
 	// List of symbols to expose.
 	//
