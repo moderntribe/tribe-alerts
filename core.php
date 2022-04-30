@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( Core::class ) ) {
 	// Require the vendor folder via multiple locations
 	$autoloaders = (array) apply_filters( 'tribe/alerts/autoloaders', [
-		trailingslashit( __DIR__ ) . 'vendor/scoped-autoload.php',
+		trailingslashit( __DIR__ ) . 'vendor/scoper-autoload.php',
 		trailingslashit( __DIR__ ) . 'vendor/autoload.php',
 		trailingslashit( WP_CONTENT_DIR ) . '../vendor/autoload.php',
 		trailingslashit( WP_CONTENT_DIR ) . 'vendor/autoload.php',
