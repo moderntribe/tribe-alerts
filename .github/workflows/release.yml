@@ -70,7 +70,7 @@ jobs:
       - name: Update zip with scoped folders and file
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -ur ${{ env.ZIP_NAME }} ${{ env.SCOPED_FILES }}
+          args: zip -qq -ur ${{ env.ZIP_NAME }} ${{ env.ZIP_FOLDER }}/*
 
       - name: Upload to release
         uses: JasonEtco/upload-to-release@v0.1.1
