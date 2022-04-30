@@ -13,7 +13,6 @@ jobs:
     env:
       ZIP_NAME: tribe-alerts.zip
       ZIP_FOLDER: tribe-alerts
-      SCOPED_FILES: "composer.json core.php vendor src"
 
     steps:
       - name: Checkout
@@ -40,12 +39,6 @@ jobs:
       - name: Run PHP-Scoper
         run: php php-scoper.phar add-prefix --force
 
-      - name: Copy scoped files back to source folder
-        run: rsync -av build/ .
-
-      - name: Create scoped autoloader
-        run: composer dump-autoload --classmap-authoritative --no-dev
-
       - name: Clean up files
         run: rm -rf .env
 
@@ -64,10 +57,17 @@ jobs:
       - name: Create zip via git archive
         run: git archive --prefix ${{ env.ZIP_FOLDER }}/ --format=zip --worktree-attributes -o ${{ env.ZIP_NAME }} ${{ github.event.release.tag_name }}
 
-      - name: Prepare scoped files for zipping
-        run: mkdir ${{ env.ZIP_FOLDER }}; mv -t ${{ env.ZIP_FOLDER }} ${{ env.SCOPED_FILES }}
+      - name: Create scoped autoloader
+        run: |
+          cp composer.lock build/
+          composer dump-autoload --working-dir build --classmap-authoritative --no-dev
 
-      - name: Update zip with scoped folders and file
+      - name: Copy scoped files to plugin directory
+        run: |
+          mkdir ${{ env.ZIP_FOLDER }}
+          rsync -av build/ ${{ env.ZIP_FOLDER }}/
+
+      - name: Update zip with scoped folders and files
         uses: montudor/action-zip@v1
         with:
           args: zip -qq -ur ${{ env.ZIP_NAME }} ${{ env.ZIP_FOLDER }}/*
