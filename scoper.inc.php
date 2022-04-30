@@ -106,18 +106,17 @@ return [
 	'exclude-constants'       => scoper_wp_file( 'exclude-wordpress-constants.json' ),
 
 	// List of symbols to expose.
-	//
-	// For more information see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#exposed-symbols
-	'expose-global-constants' => true,
-	'expose-global-classes'   => true,
-	'expose-global-functions' => true,
-	'expose-namespaces'       => [
-		// 'Acme\Foo'                     // The Acme\Foo namespace (and sub-namespaces)
-		// '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
-		// '~^$~',                        // The root namespace only
-		// '',                            // Any namespace
-	],
-	'expose-classes'          => [],
-	'expose-functions'        => [],
-	'expose-constants'        => [],
+	// See: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#exposed-symbols
+//	'expose-global-constants' => true,
+//	'expose-global-classes'   => true,
+//	'expose-global-functions' => true,
+//	'expose-namespaces'       => [
+//		// 'Acme\Foo'                     // The Acme\Foo namespace (and sub-namespaces)
+//		// '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
+//		// '~^$~',                        // The root namespace only
+//		// '',                            // Any namespace
+//	],
+//	'expose-classes'          => [],
+//	'expose-functions'        => [],
+//	'expose-constants'        => [],
 ];
