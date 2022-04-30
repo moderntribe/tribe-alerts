@@ -54,9 +54,6 @@ jobs:
       - name: Build assets
         run: yarn prod
 
-      - name: Create zip via git archive
-        run: git archive --prefix ${{ env.ZIP_FOLDER }}/ --format=zip --worktree-attributes -o ${{ env.ZIP_NAME }} ${{ github.event.release.tag_name }}
-
       - name: Create scoped autoloader
         run: |
           cp composer.lock build/
@@ -67,10 +64,13 @@ jobs:
           mkdir ${{ env.ZIP_FOLDER }}
           rsync -av build/ ${{ env.ZIP_FOLDER }}/
 
+      - name: Create zip via git archive
+        run: git archive --prefix ${{ env.ZIP_FOLDER }}/ --format=zip --worktree-attributes -o ${{ env.ZIP_NAME }} ${{ github.event.release.tag_name }}
+
       - name: Update zip with scoped folders and files
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -ur ${{ env.ZIP_NAME }} ${{ env.ZIP_FOLDER }}/*
+          args: zip -ur ${{ env.ZIP_NAME }} ${{ env.ZIP_FOLDER }}
 
       - name: Upload to release
         uses: JasonEtco/upload-to-release@v0.1.1
