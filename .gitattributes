@@ -18,5 +18,6 @@
 /resources/src      export-ignore
 /phpcs.xml.dist     export-ignore
 /phpunit.xml.dist   export-ignore
+/scoper.inc.php     export-ignore
 /dev                export-ignore
 /public             export-ignore

@@ -4,7 +4,7 @@
  * Plugin Name:       Tribe Alerts
  * Plugin URI:        https://github.com/moderntribe/tribe-alerts
  * Description:       Tribe Alerts WordPress Plugin
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires PHP:      7.4
  * Author:            Modern Tribe
  * Author URI:        https://tri.be
@@ -14,14 +14,20 @@
  * Domain Path:       /languages
  */
 
+namespace Tribe\Alert;
+
+use Tribe\Alert\Activation\Activator;
+use Tribe\Alert\Activation\Deactivator;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
 // Prevent duplicate autoloading during tests
-if ( ! class_exists( \Tribe\Alert\Core::class ) ) {
+if ( ! class_exists( Core::class ) ) {
 	// Require the vendor folder via multiple locations
 	$autoloaders = (array) apply_filters( 'tribe/alerts/autoloaders', [
+		trailingslashit( __DIR__ ) . 'vendor/scoper-autoload.php',
 		trailingslashit( __DIR__ ) . 'vendor/autoload.php',
 		trailingslashit( WP_CONTENT_DIR ) . '../vendor/autoload.php',
 		trailingslashit( WP_CONTENT_DIR ) . 'vendor/autoload.php',
@@ -50,9 +56,9 @@ add_action( 'plugins_loaded', static function (): void {
 }, 5, 0 );
 
 
-function tribe_alert(): \Tribe\Alert\Core {
-	return \Tribe\Alert\Core::instance();
+function tribe_alert(): Core {
+	return Core::instance();
 }
 
-register_activation_hook( __FILE__, new \Tribe\Alert\Activation\Activator() );
-register_deactivation_hook( __FILE__, new \Tribe\Alert\Activation\Deactivator() );
+register_activation_hook( __FILE__, new Activator() );
+register_deactivation_hook( __FILE__, new Deactivator() );
