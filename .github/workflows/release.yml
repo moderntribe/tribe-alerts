@@ -1,6 +1,9 @@
 name: Build and Release WordPress Plugin
 
-on: release
+on:
+  release:
+    types: [published]
+
 
 jobs:
   build-and-release-plugin:
@@ -59,15 +62,15 @@ jobs:
         run: yarn prod
 
       - name: Create zip via git archive
-        run: git archive --prefix "${{ env.ZIP_FOLDER }}"/ --format=zip --worktree-attributes -o "${{ env.ZIP_NAME }} ${{ github.event.release.tag_name }}"
+        run: git archive --prefix "${{ env.ZIP_FOLDER }}"/ --format=zip --worktree-attributes -o "${{ env.ZIP_NAME }}" ${{ github.event.release.tag_name }}
 
       - name: Prepare scoped files for zipping
-        run: mkdir "${{ env.ZIP_FOLDER }}"; mv -t "${{ env.ZIP_FOLDER }} ${{ env.SCOPED_FILES }}"
+        run: mkdir "${{ env.ZIP_FOLDER }}"; mv -t "${{ env.ZIP_FOLDER }}" "${{ env.SCOPED_FILES }}"
 
       - name: Update zip with scoped folders and file
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -ur "${{ env.ZIP_NAME }} ${{ env.SCOPED_FILES }}"
+          args: zip -qq -ur "${{ env.ZIP_NAME }}" "${{ env.SCOPED_FILES }}"
 
       - name: Upload to release
         uses: JasonEtco/upload-to-release@v0.1.1
