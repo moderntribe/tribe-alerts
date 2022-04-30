@@ -81,7 +81,7 @@ return [
 		'ACF',
 	],
 	'exclude-functions'       => [
-		// 'mb_str_split',
+		'/^acf_/',
 	],
 	'exclude-constants'       => [
 		// 'STDIN',
