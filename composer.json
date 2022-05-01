@@ -42,7 +42,6 @@
     "johnbillion/extended-cpts": "^5.0",
     "league/plates": "^3.4",
     "moderntribe/tribe-libs": "^3.4.13",
-    "nickford/acf-swatch": "^1.0",
     "spatie/data-transfer-object": "^2.8"
   },
   "require-dev": {
@@ -60,7 +59,8 @@
     "larapack/dd": "^1.1",
     "lucatume/function-mocker": "^1.3",
     "lucatume/wp-browser": "^3.0",
-    "moderntribe/coding-standards": "^2.0"
+    "moderntribe/coding-standards": "^2.0",
+    "nickford/acf-swatch": "^1.0"
   },
   "autoload": {
     "psr-4": {
