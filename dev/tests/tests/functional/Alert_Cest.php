@@ -233,7 +233,7 @@ class Alert_Cest {
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test alert message' );
 		$I->seeElement( '.' . Alert_Controller::COLOR_THEME_CLASS );
-		$I->seeElement( sprintf( '.%swhite', Alert_Color_Options::CSS_CLASS_PREFIX ) );
+		$I->seeElement( sprintf( '.%s-white', Alert_Color_Options::CSS_CLASS_PREFIX ) );
 	}
 
 }

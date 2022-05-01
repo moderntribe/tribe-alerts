@@ -10,10 +10,10 @@ final class Alert_Color_Options_Test extends Test_Case {
 		$class_manager = new Alert_Color_Options( $this->get_test_color_options() );
 
 		$black = $class_manager->get_color_class( '#000000' );
-		$this->assertSame( $black, sprintf( '%sblack', Alert_Color_Options::CSS_CLASS_PREFIX ) );
+		$this->assertSame( $black, sprintf( '%s-black', Alert_Color_Options::CSS_CLASS_PREFIX ) );
 
 		$white = $class_manager->get_color_class( '#ffffff' );
-		$this->assertSame( $white, sprintf( '%swhite', Alert_Color_Options::CSS_CLASS_PREFIX ) );
+		$this->assertSame( $white, sprintf( '%s-white', Alert_Color_Options::CSS_CLASS_PREFIX ) );
 
 		$white_uppercase = $class_manager->get_color_class( '#FFFFFF' );
 		$this->assertSame( $white_uppercase, '' );

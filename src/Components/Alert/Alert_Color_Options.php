@@ -4,7 +4,7 @@ namespace Tribe\Alert\Components\Alert;
 
 class Alert_Color_Options implements Color_Options_Manager {
 
-	public const CSS_CLASS_PREFIX = 'tribe-alerts__theme-';
+	public const CSS_CLASS_PREFIX = 'tribe-alerts__theme';
 
 	/**
 	 * @var array<string, array{name: string, class: string}>
@@ -44,7 +44,7 @@ class Alert_Color_Options implements Color_Options_Manager {
 		 */
 		$prefix = apply_filters( 'tribe/alerts/color_options/css_class_prefix', self::CSS_CLASS_PREFIX );
 
-		return sanitize_html_class( sprintf( "$prefix%s", $color['class'] ) );
+		return sanitize_html_class( sprintf( "$prefix-%s", $color['class'] ) );
 	}
 
 }
