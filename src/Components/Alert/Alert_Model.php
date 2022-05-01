@@ -34,7 +34,7 @@ class Alert_Model {
 			'id'      => $this->active_alert->ID,
 			'title'   => get_the_title( $this->active_alert ),
 			'content' => $alert->get_meta( Alert_Meta::FIELD_MESSAGE ),
-			'cta'     => array_merge( $group_cta, (array) $group_cta[ Alert_Meta::FIELD_CTA_LINK ] ?? [] ),
+			'cta'     => array_merge( $group_cta, (array) ( $group_cta[ Alert_Meta::FIELD_CTA_LINK ] ?? [] ) ),
 		];
 
 		if ( defined( 'TRIBE_ALERTS_COLOR_OPTIONS' ) && true === TRIBE_ALERTS_COLOR_OPTIONS ) {
