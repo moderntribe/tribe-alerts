@@ -1,6 +1,6 @@
 # Tribe Alerts
 
-Tribe Alerts WordPress Plugin
+Displays a customizable banner on that screen and remembers when users have dismissed it.
 
 ---
 Display custom banner alerts on your website.
@@ -175,3 +175,9 @@ define( 'TRIBE_ALERTS_AUTOMATIC_OUTPUT', false );
 ### License
 
 GNU General Public License GPLv2 (or later). Please see [License File](LICENSE.md) for more information.
+
+### Modern Tribe
+
+<p align="center">
+<a href="https://tri.be/contact/"><img src="https://moderntribe-common.s3.us-west-2.amazonaws.com/marketing/ModernTribe-Banner.png"></a>
+</p>
