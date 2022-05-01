@@ -8,7 +8,8 @@ use Tribe\Libs\Utils\Markup_Utils;
 
 class Alert_Controller extends Controller {
 
-	public const VIEW = 'alert';
+	public const VIEW              = 'alert';
+	public const COLOR_THEME_CLASS = 'tribe-alerts__has-theme';
 
 	protected Alert_Model $model;
 
@@ -35,7 +36,7 @@ class Alert_Controller extends Controller {
 	protected function get_alert_classes( Alert_Dto $alert ): string {
 		$classes = [ 'tribe-alerts' ];
 		if ( $alert->color_class ) {
-			$classes[] = 'tribe_alerts--colored';
+			$classes[] = self::COLOR_THEME_CLASS;
 			$classes[] = $alert->color_class;
 		}
 
