@@ -4,7 +4,7 @@ namespace Tribe\Alert\Components\Alert;
 
 class Alert_Color_Options implements Color_Options_Manager {
 
-	public const CSS_CLASS_PREFIX = 'tribe_alerts--';
+	public const CSS_CLASS_PREFIX = 'tribe-alerts__theme-';
 
 	/**
 	 * @var array<string, array{name: string, class: string}>
