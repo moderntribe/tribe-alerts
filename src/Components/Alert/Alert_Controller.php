@@ -28,7 +28,7 @@ class Alert_Controller extends Controller {
 
 		echo $this->view->render( self::VIEW, [
 			'dto'             => $alert,
-			'alert_classes'   => $this->get_alert_classes( $alert ),
+			'classes'         => $this->get_alert_classes( $alert ),
 			'link_attributes' => $this->get_link_attributes( $alert ),
 		] );
 	}
