@@ -53,8 +53,8 @@ add_action( 'plugins_loaded', static function (): void {
 	}
 
 	if ( defined( 'TRIBE_ALERTS_COLOR_OPTIONS' ) &&
-	     TRIBE_ALERTS_COLOR_OPTIONS &&
-	     ! function_exists( 'include_field_types_swatch' )
+		 TRIBE_ALERTS_COLOR_OPTIONS &&
+		 ! function_exists( 'include_field_types_swatch' )
 	) {
 		add_action(
 			'admin_notices',
