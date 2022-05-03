@@ -162,6 +162,9 @@ $config_defaults = [
 	'TRIBE_GLOMAR'                   => tribe_getenv( 'TRIBE_GLOMAR', '' ),
 
 	'TRIBE_LOG_CLI'                  => tribe_getenv( 'TRIBE_LOG_CLI', true ),
+
+	// Display alert color option fields
+	'TRIBE_ALERTS_COLOR_OPTIONS'     => tribe_getenv( 'TRIBE_ALERTS_COLOR_OPTIONS', true ),
 ];
 
 // ==============================================================

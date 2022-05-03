@@ -130,6 +130,7 @@ return [
 	], scoper_wp_file( 'exclude-wordpress-classes.json' ) ),
 	'exclude-functions'       => array_merge( [
 		'/^acf_/',
+		'include_field_types_swatch',
 	], scoper_wp_file( 'exclude-wordpress-functions.json' ) ),
 	'exclude-constants'       => scoper_wp_file( 'exclude-wordpress-constants.json' ),
 

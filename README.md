@@ -152,7 +152,7 @@ composer update
 
 ### Displaying an Alert
 
-The alert front-end is set to automatically display using the `wp_footer` hook. If you need to manually add it to a theme or a plugin, add the following code to render the alert view:
+The banner is set to automatically display using the `wp_footer` hook. If you need to manually add it to a theme or a plugin, add the following code to render the alert view:
 
 ```php
 
@@ -168,6 +168,41 @@ You can hide the automatic `wp_footer` output by defining the following in your 
 define( 'TRIBE_ALERTS_AUTOMATIC_OUTPUT', false );
 ```
 
+### ACF Swatch Field Options
+
+Color options are disabled by default. You can enable it by defining the following in your wp-config.php:
+
+```php
+define( 'TRIBE_ALERTS_COLOR_OPTIONS', true );
+```
+
+Filter the color options provided to the ACF swatch field:
+
+```php
+add_filter( 'tribe/alerts/color_options', static fn ( array $options ) => [
+    '#880ED4' => [
+        'name'  => esc_html__( 'Purple', 'tribe-alerts' ),
+        'class' => 'purple-mono',
+    ],
+    '#8155BA' => [
+        'name'  => esc_html__( 'Violet', 'tribe-alerts' ),
+        'class' => 'violet',
+    ],
+    '#323E42' => [
+        'name'  => esc_html__( 'Charcoal', 'tribe-alerts' ),
+        'class' => 'charcoal',
+    ],          
+], 10, 1 );
+```
+
+The default CSS class prefix for the color theme is `tribe-alerts__theme`, which ends up being `tribe-alerts__theme-$name` once a color is selected.
+
+Filter the CSS class prefix:
+
+```php
+add_filter( 'tribe/alerts/color_options/css_class_prefix', static fn ( string $prefix ) => 'new-prefix', 10, 1 );
+```
+
 ### Credits
 
 - Based on [Spatie Skeleton](https://github.com/spatie/package-skeleton-php)
@@ -178,6 +213,4 @@ GNU General Public License GPLv2 (or later). Please see [License File](LICENSE.m
 
 ### Modern Tribe
 
-<p align="center">
-<a href="https://tri.be/contact/"><img src="https://moderntribe-common.s3.us-west-2.amazonaws.com/marketing/ModernTribe-Banner.png"></a>
-</p>
+![https://tri.be/contact/](https://moderntribe-common.s3.us-west-2.amazonaws.com/marketing/ModernTribe-Banner.png)

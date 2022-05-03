@@ -12,9 +12,22 @@ use Tribe\Libs\Pipeline\Contracts\Pipeline;
 
 class Alert_Definer implements Definer_Interface {
 
+	public const COLOR_OPTIONS = 'alert.color_options';
+
 	public function define(): array {
 		return [
-			Alert_Rule_Manager::class => DI\autowire()
+			Color_Options_Manager::class => DI\get( Alert_Color_Options::class ),
+			self::COLOR_OPTIONS          => DI\add( apply_filters( 'tribe/alerts/color_options', [
+				'#000000' => [ 'name' => esc_html__( 'Black', 'tribe-alerts' ), 'class' => 'black' ],
+				'#737373' => [ 'name' => esc_html__( 'Grey', 'tribe-alerts' ), 'class' => 'grey' ],
+				'#ffffff' => [ 'name' => esc_html__( 'White', 'tribe-alerts' ), 'class' => 'white' ],
+			] ) ),
+			Alert_Color_Options::class   => DI\autowire()
+				->constructorParameter(
+					'color_options',
+					static fn( ContainerInterface $c ) => $c->get( self::COLOR_OPTIONS )
+				),
+			Alert_Rule_Manager::class    => DI\autowire()
 				->constructorParameter(
 					'pipeline',
 					static function ( ContainerInterface $c ) {

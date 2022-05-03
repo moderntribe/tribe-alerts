@@ -2,6 +2,7 @@
 
 namespace Tribe\Alert\Meta;
 
+use Tribe\Alert\Components\Alert\Color_Options_Manager;
 use Tribe\Alert\Post_Types\Alert\Alert;
 use Tribe\Alert\Traits\With_Field_Prefix;
 use Tribe\Libs\ACF;
@@ -27,15 +28,25 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 	public const FIELD_RULES_INCLUDE_PAGES = 'include_pages';
 	public const FIELD_RULES_EXCLUDE_PAGES = 'exclude_pages';
 
+	public const FIELD_COLOR = 'alert_color';
+
 	public const OPTION_EVERY_PAGE = 'every_page';
 	public const OPTION_INCLUDE    = 'include';
 	public const OPTION_EXCLUDE    = 'exclude';
+
+	protected Color_Options_Manager $color_options;
+
+	public function __construct( array $object_types, Color_Options_Manager $color_options ) {
+		parent::__construct( $object_types );
+		$this->color_options = $color_options;
+	}
 
 	public function get_keys(): array {
 		return [
 			self::FIELD_MESSAGE,
 			self::GROUP_CTA,
 			self::GROUP_RULES,
+			self::FIELD_COLOR,
 		];
 	}
 
@@ -46,6 +57,10 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		$group->add_field( $this->get_alert_message_field() );
 		$group->add_field( $this->get_cta_group() );
 		$group->add_field( $this->get_rules_group() );
+
+		if ( defined( 'TRIBE_ALERTS_COLOR_OPTIONS' ) && true === TRIBE_ALERTS_COLOR_OPTIONS ) {
+			$group->add_field( $this->get_colors_field() );
+		}
 
 		return $group->get_attributes();
 	}
@@ -205,6 +220,22 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		}
 
 		return $group;
+	}
+
+	private function get_colors_field(): ACF\Field {
+		$field = new ACF\Field( self::NAME . '_' . self::FIELD_COLOR );
+
+		$field->set_attributes( [
+			'label'         => esc_html__( 'Color Theme', 'tribe-alerts' ),
+			'instructions'  => esc_html__( 'Select a background color', 'tribe-alerts' ),
+			'name'          => self::FIELD_COLOR,
+			'type'          => 'swatch',
+			'allow_null'    => false,
+			'default_value' => '',
+			'choices'       => $this->color_options->get_acf_options(),
+		] );
+
+		return $field;
 	}
 
 	private function get_allowed_post_types(): array {

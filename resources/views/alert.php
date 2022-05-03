@@ -4,11 +4,12 @@
  * @var \League\Plates\Template\Template        $this
  * @var \Tribe\Alert\Components\Alert\Alert_Dto $dto
  * @var string                                  $link_attributes
+ * @var string                                  $classes
  */
 ?>
 
 <div
-	class="tribe-alerts"
+	<?php echo $classes; ?>
 	id="tribe-alerts"
 	data-alert-id="<?php echo $this->e( $dto->id ); ?>"
 >

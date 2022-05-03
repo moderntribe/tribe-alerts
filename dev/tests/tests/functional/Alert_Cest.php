@@ -1,5 +1,7 @@
 <?php declare( strict_types=1 );
 
+use Tribe\Alert\Components\Alert\Alert_Color_Options;
+use Tribe\Alert\Components\Alert\Alert_Controller;
 use Tribe\Alert\Meta\Alert_Meta;
 use Tribe\Alert\Meta\Alert_Settings_Meta;
 use Tribe\Alert\Post_Types\Alert\Alert;
@@ -182,6 +184,56 @@ class Alert_Cest {
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->dontSeeElement( '.tribe-alerts' );
 		$I->dontSee( 'Test alert message' );
+	}
+
+	public function test_it_does_not_display_color_css_classes_when_not_active( FunctionalTester $I ): void {
+		$alert_id = $I->havePostInDatabase( [
+			'post_type'   => Alert::NAME,
+			'post_status' => 'publish',
+			'post_title'  => 'Test global alert',
+		] );
+
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test alert message', $alert_id );
+		update_field( Alert_Meta::GROUP_RULES, [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_EVERY_PAGE,
+			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [],
+			Alert_Meta::FIELD_RULES_EXCLUDE_PAGES => [],
+		], $alert_id );
+
+		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
+
+		$I->amOnPage( '/' );
+
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+		$I->dontSeeElement( Alert_Controller::COLOR_THEME_CLASS );
+	}
+
+	public function test_it_displays_color_css_classes_when_active( FunctionalTester $I ): void {
+		putenv( 'TRIBE_ALERTS_COLOR_OPTIONS=true' );
+
+		$alert_id = $I->havePostInDatabase( [
+			'post_type'   => Alert::NAME,
+			'post_status' => 'publish',
+			'post_title'  => 'Test global alert',
+		] );
+
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test alert message', $alert_id );
+		update_field( Alert_Meta::GROUP_RULES, [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_EVERY_PAGE,
+			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [],
+			Alert_Meta::FIELD_RULES_EXCLUDE_PAGES => [],
+		], $alert_id );
+		update_field( Alert_Meta::FIELD_COLOR, '#ffffff', $alert_id );
+
+		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
+
+		$I->amOnPage( '/' );
+
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+		$I->seeElement( '.' . Alert_Controller::COLOR_THEME_CLASS );
+		$I->seeElement( sprintf( '.%s-white', Alert_Color_Options::CSS_CLASS_PREFIX ) );
 	}
 
 }

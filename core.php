@@ -52,6 +52,20 @@ add_action( 'plugins_loaded', static function (): void {
 		return;
 	}
 
+	if ( defined( 'TRIBE_ALERTS_COLOR_OPTIONS' ) &&
+	     TRIBE_ALERTS_COLOR_OPTIONS &&
+	     ! function_exists( 'include_field_types_swatch' )
+	) {
+		add_action(
+			'admin_notices',
+			static function (): void { ?>
+				<div class="notice notice-error">
+					<p><?php esc_html_e( 'Tribe Alerts requires the "Advanced Custom Fields: Color Swatches" plugin to be installed and activated!', 'tribe-alerts' ); ?></p>
+				</div>
+			<?php }
+		);
+	}
+
 	tribe_alert()->init( __FILE__ );
 }, 5, 0 );
 
