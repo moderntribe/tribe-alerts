@@ -226,8 +226,8 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		$field = new ACF\Field( self::NAME . '_' . self::FIELD_COLOR );
 
 		$field->set_attributes( [
-			'label'         => __( 'Color Theme', 'tribe-alerts' ),
-			'instructions'  => __( 'Select a background color', 'tribe-alerts' ),
+			'label'         => esc_html__( 'Color Theme', 'tribe-alerts' ),
+			'instructions'  => esc_html__( 'Select a background color', 'tribe-alerts' ),
 			'name'          => self::FIELD_COLOR,
 			'type'          => 'swatch',
 			'allow_null'    => false,
