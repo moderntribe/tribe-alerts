@@ -27,6 +27,7 @@ jobs:
           list-files: shell
           filters: |
             pluginsrc:
+              - added|modified: 'core.php'
               - added|modified: 'src/**/*.php'
               - added|modified: 'resources/views/**/*.php'
 
