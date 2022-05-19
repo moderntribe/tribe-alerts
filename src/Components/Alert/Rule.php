@@ -10,11 +10,12 @@ interface Rule {
 	 * Determine if we should display an alert. A rule can return
 	 * a result or pass itself onto the next rule for processing.
 	 *
-	 * @param mixed[]  $rules The Alert Meta ACF Rules Group.
-	 * @param \Closure $next  The next rule in the pipeline.
+	 * @param bool     $display Whether an alert will display.
+	 * @param \Closure $next    The next rule in the pipeline.
+	 * @param mixed[]  $rules   The Alert Meta ACF Rules Group.
 	 *
 	 * @return bool
 	 */
-	public function handle( array $rules, Closure $next ): bool;
+	public function handle( bool $display, Closure $next, array $rules ): bool;
 
 }

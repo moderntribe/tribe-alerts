@@ -13,14 +13,14 @@ class Display_All_Rule implements Rule {
 	 *
 	 * @inheritDoc
 	 */
-	public function handle( array $rules, Closure $next ): bool {
+	public function handle( bool $display, Closure $next, array $rules ): bool {
 		$type = $rules[ Alert_Meta::FIELD_RULES_DISPLAY_TYPE ] ?? '';
 
 		if ( $type === Alert_Meta::OPTION_EVERY_PAGE ) {
 			return true;
 		}
 
-		return $next( $rules );
+		return $next( $display );
 	}
 
 }
