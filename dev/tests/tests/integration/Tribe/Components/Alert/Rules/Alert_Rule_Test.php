@@ -35,7 +35,7 @@ final class Alert_Rule_Test extends Test_Case {
 		$rule    = new Display_All_Rule();
 		$closure = static fn() => false;
 
-		$this->assertTrue( $rule->handle( $rules, $closure ) );
+		$this->assertTrue( $rule->handle( false, $closure, $rules ) );
 	}
 
 	public function test_it_would_only_display_on_certain_pages(): void {
@@ -60,10 +60,12 @@ final class Alert_Rule_Test extends Test_Case {
 		$closure = static fn() => false;
 
 		// Test each post would show the alert.
+		$GLOBALS['wp_query']->is_singular = true;
+
 		foreach ( $included as $post_id ) {
 			$GLOBALS['post'] = get_post( $post_id );
 
-			$this->assertTrue( $rule->handle( $rules, $closure ) );
+			$this->assertTrue( $rule->handle( false, $closure, $rules ) );
 		}
 
 		// Mock the current post is not in the included list.
@@ -71,7 +73,7 @@ final class Alert_Rule_Test extends Test_Case {
 		$_post->ID       = 99999;
 		$GLOBALS['post'] = $_post;
 
-		$this->assertFalse( $rule->handle( $rules, $closure ) );
+		$this->assertFalse( $rule->handle( false, $closure, $rules ) );
 	}
 
 	public function test_it_would_exclude_certain_pages(): void {
@@ -99,15 +101,16 @@ final class Alert_Rule_Test extends Test_Case {
 		foreach ( $excluded as $post_id ) {
 			$GLOBALS['post'] = get_post( $post_id );
 
-			$this->assertFalse( $rule->handle( $rules, $closure ) );
+			$this->assertFalse( $rule->handle( false, $closure, $rules ) );
 		}
 
 		// Mock the current post is not in the excluded list.
-		$_post           = clone $GLOBALS['post'];
-		$_post->ID       = 99999;
-		$GLOBALS['post'] = $_post;
+		$_post                            = clone $GLOBALS['post'];
+		$_post->ID                        = 99999;
+		$GLOBALS['post']                  = $_post;
+		$GLOBALS['wp_query']->is_singular = true;
 
-		$this->assertTrue( $rule->handle( $rules, $closure ) );
+		$this->assertTrue( $rule->handle( false, $closure, $rules ) );
 	}
 
 }

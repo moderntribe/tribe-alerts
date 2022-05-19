@@ -1,4 +1,4 @@
-<?php declare( strict_types=1 );
+<?php declare(strict_types=1);
 
 use Tribe\Alert\Components\Alert\Alert_Color_Options;
 use Tribe\Alert\Components\Alert\Alert_Controller;
@@ -6,7 +6,7 @@ use Tribe\Alert\Meta\Alert_Meta;
 use Tribe\Alert\Meta\Alert_Settings_Meta;
 use Tribe\Alert\Post_Types\Alert\Alert;
 
-class Alert_Cest {
+final class Alert_Cest {
 
 	public function test_it_excludes_alert_from_post( FunctionalTester $I ) {
 		$alert_id = $I->havePostInDatabase( [
@@ -62,6 +62,21 @@ class Alert_Cest {
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test excluded alert message' );
+
+		// Validate pipeline bug was fixed on search page (or any page without a $post global)
+		$I->amOnPage( '/?s=meep' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+		$I->dontSee( 'Fatal error', 'b' );
+		$I->dontSeeInSource( 'Uncaught TypeError' );
+
+		$I->amOnPage( '/category/uncategorized/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+		$I->dontSee( 'Fatal error', 'b' );
+		$I->dontSeeInSource( 'Uncaught TypeError' );
 	}
 
 	public function test_it_includes_alert_on_specific_posts( FunctionalTester $I ) {
@@ -119,6 +134,16 @@ class Alert_Cest {
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test included alert message' );
+
+		$I->amOnPage( '/?s=meep' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+
+		$I->amOnPage( '/category/uncategorized/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
 	}
 
 	public function test_it_displays_a_global_alert_on_multiple_urls( FunctionalTester $I ) {
@@ -152,6 +177,18 @@ class Alert_Cest {
 		$I->amOnPage( '/regular-post' );
 		$I->seeResponseCodeIs( 200 );
 
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+
+		$I->amOnPage( '/?s=meep' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+
+		$I->amOnPage( '/category/uncategorized/' );
+		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test alert message' );

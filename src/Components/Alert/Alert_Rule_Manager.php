@@ -26,7 +26,7 @@ class Alert_Rule_Manager {
 			return false;
 		}
 
-		return $this->pipeline->send( $rules )->thenReturn();
+		return $this->pipeline->send( false, [ $rules ] )->thenReturn();
 	}
 
 }

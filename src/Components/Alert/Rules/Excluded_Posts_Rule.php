@@ -13,14 +13,18 @@ class Excluded_Posts_Rule implements Rule {
 	 *
 	 * @inheritDoc
 	 */
-	public function handle( array $rules, Closure $next ): bool {
+	public function handle( bool $display, Closure $next, array $rules ): bool {
 		$type = $rules[ Alert_Meta::FIELD_RULES_DISPLAY_TYPE ] ?? '';
 
 		if ( $type === Alert_Meta::OPTION_EXCLUDE ) {
+			if ( ! is_singular() ) {
+				return false;
+			}
+
 			$post = get_post();
 
 			if ( ! isset( $post->ID ) ) {
-				return $next( $rules );
+				return $next( $display );
 			}
 
 			$excluded_posts = $rules[ Alert_Meta::FIELD_RULES_EXCLUDE_PAGES ] ?? [];
@@ -34,7 +38,7 @@ class Excluded_Posts_Rule implements Rule {
 			return true;
 		}
 
-		return $next( $rules );
+		return $next( $display );
 	}
 
 }
