@@ -156,7 +156,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'name'          => self::FIELD_RULES_DISPLAY_TYPE,
 			'type'          => 'radio',
 			'choices'       => [
-				self::OPTION_EVERY_PAGE => esc_html__( 'Show on every page', 'tribe-alerts' ),
+				self::OPTION_EVERY_PAGE => esc_html__( 'Show everywhere', 'tribe-alerts' ),
 				self::OPTION_INCLUDE    => esc_html__( 'Show only on specified pages', 'tribe-alerts' ),
 				self::OPTION_EXCLUDE    => esc_html__( 'Exclude from specific pages', 'tribe-alerts' ),
 			],
