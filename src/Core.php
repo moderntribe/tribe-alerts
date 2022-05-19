@@ -26,7 +26,7 @@ final class Core {
 
 	public const    PLUGIN_FILE        = 'plugin.file';
 	public const    VERSION_DEFINITION = 'plugin.version';
-	public const    VERSION            = '1.2.1';
+	public const    VERSION            = '1.2.2';
 	public const    RESOURCES_PATH     = 'plugin.resources_path';
 	public const    RESOURCES_URI      = 'plugin.resources_uri';
 	public const    DIST_DIR_PATH      = 'plugin.dist_dir_path';
