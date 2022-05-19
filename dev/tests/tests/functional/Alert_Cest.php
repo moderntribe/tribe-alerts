@@ -70,6 +70,13 @@ final class Alert_Cest {
 		$I->dontSeeElement( '.tribe-alerts' );
 		$I->dontSee( 'Fatal error', 'b' );
 		$I->dontSeeInSource( 'Uncaught TypeError' );
+
+		$I->amOnPage( '/category/uncategorized/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+		$I->dontSee( 'Fatal error', 'b' );
+		$I->dontSeeInSource( 'Uncaught TypeError' );
 	}
 
 	public function test_it_includes_alert_on_specific_posts( FunctionalTester $I ) {
@@ -127,6 +134,16 @@ final class Alert_Cest {
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test included alert message' );
+
+		$I->amOnPage( '/?s=meep' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+
+		$I->amOnPage( '/category/uncategorized/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
 	}
 
 	public function test_it_displays_a_global_alert_on_multiple_urls( FunctionalTester $I ) {
@@ -160,6 +177,18 @@ final class Alert_Cest {
 		$I->amOnPage( '/regular-post' );
 		$I->seeResponseCodeIs( 200 );
 
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+
+		$I->amOnPage( '/?s=meep' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+
+		$I->amOnPage( '/category/uncategorized/' );
+		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test alert message' );

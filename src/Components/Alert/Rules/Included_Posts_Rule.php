@@ -17,6 +17,10 @@ class Included_Posts_Rule implements Rule {
 		$type = $rules[ Alert_Meta::FIELD_RULES_DISPLAY_TYPE ] ?? '';
 
 		if ( $type === Alert_Meta::OPTION_INCLUDE ) {
+			if ( ! is_singular() ) {
+				return false;
+			}
+
 			$post = get_post();
 
 			if ( ! isset( $post->ID ) ) {
