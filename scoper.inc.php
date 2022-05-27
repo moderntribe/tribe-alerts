@@ -110,8 +110,10 @@ return [
 				return $content;
 			}
 
-			// Ensure our meta repo filter is unique from other tribe-libs instances
-			return str_replace( 'tribe_get_meta_repo', 'tribe_get_meta_repo_scoped', $content );
+			$filter = uniqid( 'tribe_alerts_get_meta_repo_' );
+
+			// Ensure our meta repo WP filter is unique from other tribe-libs instances
+			return str_replace( 'tribe_get_meta_repo', $filter, $content );
 		},
 	],
 
