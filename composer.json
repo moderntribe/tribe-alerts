@@ -67,7 +67,8 @@
       "Tribe\\Alert\\": "src"
     },
     "files": [
-      "src/functions.php"
+      "src/functions.php",
+      "vendor/php-di/php-di/src/functions.php"
     ]
   },
   "autoload-dev": {
