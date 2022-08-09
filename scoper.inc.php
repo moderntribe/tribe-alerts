@@ -136,7 +136,7 @@ return [
 		},
 		static function ( string $filePath, string $prefix, string $content ): string {
 
-			if ( ! tribe_str_starts_with( $filePath, 'php-di/src/functions.php' ) ) {
+			if ( ! tribe_str_ends_with( $filePath, 'php-di/src/functions.php' ) ) {
 				return $content;
 			}
 
