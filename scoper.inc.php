@@ -5,7 +5,8 @@ ini_set( 'memory_limit', '1024M' );
 use Isolated\Symfony\Component\Finder\Finder;
 
 /**
- * Exclude WordPress functions/classes via auto generated excludes.
+ * Exclude WordPress classes/functions/constants from scoping via
+ * automatically generated exclude files.
  *
  * @link https://github.com/snicco/php-scoper-wordpress-excludes
  *
@@ -13,16 +14,35 @@ use Isolated\Symfony\Component\Finder\Finder;
  *
  * @return array
  */
-function scoper_wp_file( string $file ): array {
+function tribe_scoper_wp_file( string $file ): array {
 	return json_decode( file_get_contents(
-			sprintf(
-				'https://raw.githubusercontent.com/snicco/php-scoper-wordpress-excludes/master/generated/%s',
-				$file )
-		)
-	);
+		sprintf(
+			'https://raw.githubusercontent.com/snicco/php-scoper-wordpress-excludes/master/generated/%s',
+			$file )
+	) );
 }
 
-function poly_str_ends_with( string $haystack, string $needle ): bool {
+/**
+ * Polyfill for php8 str_starts_with().
+ *
+ * @param string $haystack
+ * @param string $needle
+ *
+ * @return bool
+ */
+function tribe_str_starts_with( string $haystack, string $needle ): bool {
+	return 0 === strncmp( $haystack, $needle, strlen( $needle ) );
+}
+
+/**
+ * Polyfill for php8 str_ends_with().
+ *
+ * @param string $haystack
+ * @param string $needle
+ *
+ * @return bool
+ */
+function tribe_str_ends_with( string $haystack, string $needle ): bool {
 	if ( '' === $needle || $needle === $haystack ) {
 		return true;
 	}
@@ -95,9 +115,8 @@ return [
 	'patchers'                => [
 		static function ( string $filePath, string $prefix, string $content ): string {
 
-			if ( ! poly_str_ends_with( $filePath, 'tribe-alerts/core.php' ) &&
-			     ! poly_str_ends_with( $filePath, 'tribe-alerts/src/functions.php' )
-			) {
+			if ( ! tribe_str_ends_with( $filePath, 'tribe-alerts/core.php' ) &&
+			     ! tribe_str_ends_with( $filePath, 'tribe-alerts/src/functions.php' ) ) {
 				return $content;
 			}
 
@@ -106,7 +125,7 @@ return [
 		},
 		static function ( string $filePath, string $prefix, string $content ): string {
 
-			if ( ! poly_str_ends_with( $filePath, 'Object_Meta/Meta_Repository.php' ) ) {
+			if ( ! tribe_str_ends_with( $filePath, 'Object_Meta/Meta_Repository.php' ) ) {
 				return $content;
 			}
 
@@ -114,6 +133,15 @@ return [
 
 			// Ensure our meta repo WP filter is unique from other tribe-libs instances
 			return str_replace( 'tribe_get_meta_repo', $filter, $content );
+		},
+		static function ( string $filePath, string $prefix, string $content ): string {
+
+			if ( ! tribe_str_starts_with( $filePath, 'php-di/src/functions.php' ) ) {
+				return $content;
+			}
+
+			// Fix php-di function_exists's checks that don't include the proper namespace
+			return str_replace( "function_exists('DI\\", "function_exists('Tribe\\\Alert_Scoped\\\DI\\", $content );
 		},
 	],
 
@@ -129,12 +157,12 @@ return [
 	],
 	'exclude-classes'         => array_merge( [
 		'ACF',
-	], scoper_wp_file( 'exclude-wordpress-classes.json' ) ),
+	], tribe_scoper_wp_file( 'exclude-wordpress-classes.json' ) ),
 	'exclude-functions'       => array_merge( [
 		'/^acf_/',
 		'include_field_types_swatch',
-	], scoper_wp_file( 'exclude-wordpress-functions.json' ) ),
-	'exclude-constants'       => scoper_wp_file( 'exclude-wordpress-constants.json' ),
+	], tribe_scoper_wp_file( 'exclude-wordpress-functions.json' ) ),
+	'exclude-constants'       => tribe_scoper_wp_file( 'exclude-wordpress-constants.json' ),
 
 	// List of symbols to expose.
 	// See: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#exposed-symbols
