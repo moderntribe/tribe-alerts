@@ -168,6 +168,16 @@ You can hide the automatic `wp_footer` output by defining the following in your 
 define( 'TRIBE_ALERTS_AUTOMATIC_OUTPUT', false );
 ```
 
+### Customize The Alert View Markup
+
+You can filter the directory where we look for view files, e.g.
+
+```php
+add_filter( 'tribe/alerts/view_directory', static fn ( string $directory ) => get_stylesheet_directory() . 'components/alerts', 10, 1 );
+```
+
+And then copy the [resources/views/alert.php](resources/views/alert.php) to your specified folder and customize as needed.
+
 ### ACF Swatch Field Options
 
 Color options are disabled by default. You can enable it by defining the following in your wp-config.php:
