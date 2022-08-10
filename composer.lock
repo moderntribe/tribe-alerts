@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "141b62f7d64c810dd9b94dc9d0418083",
+    "content-hash": "76db3e16b6796c63c21f2d55ccb0713a",
     "packages": [
         {
             "name": "enshrined/svg-sanitize",
@@ -437,16 +437,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "3.5.1",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "4e6c4811f210dc63fc216dfa1023393eac96adaa"
+                "reference": "7ae638c80b1b4e013fa977d97bb8f02bd0a3802d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/4e6c4811f210dc63fc216dfa1023393eac96adaa",
-                "reference": "4e6c4811f210dc63fc216dfa1023393eac96adaa",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/7ae638c80b1b4e013fa977d97bb8f02bd0a3802d",
+                "reference": "7ae638c80b1b4e013fa977d97bb8f02bd0a3802d",
                 "shasum": ""
             },
             "require": {
@@ -555,9 +555,9 @@
             "description": "A library for use on Modern Tribe service projects.",
             "support": {
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
-                "source": "https://github.com/moderntribe/tribe-libs/tree/3.5.1"
+                "source": "https://github.com/moderntribe/tribe-libs/tree/3.6.0"
             },
-            "time": "2022-08-05T20:26:53+00:00"
+            "time": "2022-08-09T20:43:22+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8830,7 +8830,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4||^8.0",
+        "php": ">=7.4",
         "ext-json": "*",
         "ext-readline": "*"
     },
