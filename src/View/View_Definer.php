@@ -18,11 +18,11 @@ class View_Definer implements Definer_Interface {
 			Engine::class => DI\autowire()
 				->constructorParameter(
 					'directory',
-					static fn ( ContainerInterface $c ) => sprintf(
+					static fn ( ContainerInterface $c ) => apply_filters( 'tribe/alerts/view_directory', sprintf(
 						'%s/%s',
 						$c->get( Core::RESOURCES_PATH ),
 						self::VIEW_DIRECTORY
-					)
+					) )
 				),
 		];
 	}
