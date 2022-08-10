@@ -173,7 +173,7 @@ define( 'TRIBE_ALERTS_AUTOMATIC_OUTPUT', false );
 You can filter the directory where we look for view files, e.g.
 
 ```php
-add_filter( 'tribe/alerts/view_directory', static fn ( string $directory ) => get_stylesheet_directory() . 'components/alerts', 10, 1 );
+add_filter( 'tribe/alerts/view_directory', static fn ( string $directory ) => get_stylesheet_directory() . '/components/alerts', 10, 1 );
 ```
 
 And then copy the [resources/views/alert.php](resources/views/alert.php) to your specified folder and customize as needed.
