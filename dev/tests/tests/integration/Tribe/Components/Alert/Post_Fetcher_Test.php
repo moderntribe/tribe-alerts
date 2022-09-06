@@ -34,9 +34,7 @@ final class Post_Fetcher_Test extends Test_Case {
 		$GLOBALS['post'] = $p;
 
 		// Force WP to think we're on a singular page
-		global $wp_query;
-		$wp_query        = new WP_Query();
-		$wp_query->is_singular = true;
+		$GLOBALS['wp_query']->is_singular = true;
 
 		$this->assertEquals( $p, $this->post_fetcher->get_post() );
 	}
@@ -51,9 +49,7 @@ final class Post_Fetcher_Test extends Test_Case {
 		$GLOBALS['post'] = $p;
 
 		// Force WP to think we're on the home (aka post listing) page
-		global $wp_query;
-		$wp_query          = new WP_Query();
-		$wp_query->is_home = true;
+		$GLOBALS['wp_query']->is_home = true;
 
 		$this->assertEquals( $p, $this->post_fetcher->get_post() );
 	}
