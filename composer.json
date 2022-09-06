@@ -19,7 +19,7 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.12.2",
+        "version": "5.12.3",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -54,7 +54,7 @@
     "codeception/module-webdriver": "^1.4",
     "codeception/util-universalframework": "^1.0",
     "composer/installers": "^2.0",
-    "johnpbloch/wordpress-core": "5.9.3",
+    "johnpbloch/wordpress-core": "5.9.4",
     "johnpbloch/wordpress-core-installer": "2.0.*",
     "larapack/dd": "^1.1",
     "lucatume/function-mocker": "^1.3",
