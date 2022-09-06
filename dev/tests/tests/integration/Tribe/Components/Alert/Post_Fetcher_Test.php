@@ -3,7 +3,6 @@
 namespace Tribe\Alert\Components\Alert;
 
 use Tribe\Tests\Test_Case;
-use WP_Query;
 
 final class Post_Fetcher_Test extends Test_Case {
 
