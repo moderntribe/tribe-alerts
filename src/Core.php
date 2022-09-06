@@ -112,7 +112,7 @@ final class Core {
 	/**
 	 * Returns the PHP-DI container.
 	 *
-	 * @return \Psr\Container\ContainerInterface
+	 * @return \Psr\Container\ContainerInterface|\DI\FactoryInterface|\Invoker\InvokerInterface
 	 */
 	public function get_container(): ContainerInterface {
 		return $this->container;
