@@ -32,7 +32,7 @@ final class Alert_Rule_Test extends Test_Case {
 		$this->assertEmpty( $rules[ Alert_Meta::FIELD_RULES_EXCLUDE_PAGES ] );
 		$this->assertEmpty( $rules[ Alert_Meta::FIELD_RULES_INCLUDE_PAGES ] );
 
-		$rule    = new Display_All_Rule();
+		$rule    = $this->container->make( Display_All_Rule::class );
 		$closure = static fn() => false;
 
 		$this->assertTrue( $rule->handle( false, $closure, $rules ) );
@@ -56,7 +56,7 @@ final class Alert_Rule_Test extends Test_Case {
 		$this->assertEmpty( $rules[ Alert_Meta::FIELD_RULES_EXCLUDE_PAGES ] );
 		$this->assertNotEmpty( $included );
 
-		$rule    = new Included_Posts_Rule();
+		$rule    = $this->container->make( Included_Posts_Rule::class );
 		$closure = static fn() => false;
 
 		// Test each post would show the alert.
@@ -94,7 +94,7 @@ final class Alert_Rule_Test extends Test_Case {
 		$this->assertEmpty( $rules[ Alert_Meta::FIELD_RULES_INCLUDE_PAGES ] );
 		$this->assertNotEmpty( $excluded );
 
-		$rule    = new Excluded_Posts_Rule();
+		$rule    = $this->container->make( Excluded_Posts_Rule::class );
 		$closure = static fn() => false;
 
 		// Test each post would NOT display the alert.

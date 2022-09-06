@@ -107,30 +107,44 @@ final class Alert_Cest {
 			'post_name'   => 'included-alert',
 		] );
 
+		$blog_home_id = $I->havePostInDatabase( [
+			'post_type'   => 'page',
+			'post_status' => 'publish',
+			'post_title'  => 'Blog Homepage',
+			'post_name'   => 'blog',
+		] );
+
+		// Set blog posts home page
+		update_option( 'show_on_front', 'page' );
+		update_option( 'page_on_front', $blog_home_id );
+
 		update_field( Alert_Meta::FIELD_MESSAGE, 'Test included alert message', $alert_id );
 		update_field( Alert_Meta::GROUP_RULES, [
 			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_INCLUDE,
-			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [ $included_id, $included_id_2 ],
+			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [ $included_id, $included_id_2, $blog_home_id ],
 		], $alert_id );
 
 		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
 
 		$I->amOnPage( '/regular-post' );
 		$I->seeResponseCodeIs( 200 );
-
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->dontSeeElement( '.tribe-alerts' );
 
 		$I->amOnPage( '/included-alert' );
 		$I->seeResponseCodeIs( 200 );
-
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test included alert message' );
 
 		$I->amOnPage( '/another-included-alert' );
 		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test included alert message' );
 
+		$I->amOnPage( '/blog' );
+		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test included alert message' );
@@ -144,6 +158,10 @@ final class Alert_Cest {
 		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->dontSeeElement( '.tribe-alerts' );
+
+		// clean up after test to not break other tests.
+		delete_option( 'show_on_front' );
+		delete_option( 'page_on_front' );
 	}
 
 	public function test_it_displays_a_global_alert_on_multiple_urls( FunctionalTester $I ) {
