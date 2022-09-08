@@ -27,7 +27,7 @@ class Excluded_Posts_Rule implements Rule {
 		$type = $rules[ Alert_Meta::FIELD_RULES_DISPLAY_TYPE ] ?? '';
 
 		if ( $type === Alert_Meta::OPTION_EXCLUDE ) {
-			// If always apply to front page is checked.
+			// If "always apply to front page" is checked.
 			if ( is_front_page() && $this->apply_to_front_page( $rules ) ) {
 				return false;
 			}
