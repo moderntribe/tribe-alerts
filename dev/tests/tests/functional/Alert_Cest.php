@@ -33,6 +33,11 @@ final class Alert_Cest {
 
 		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
 
+		$I->amOnPage( '/?var1=true&var2=true' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test included alert message' );
+
 		$I->amOnPage( '/' );
 		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
@@ -77,6 +82,11 @@ final class Alert_Cest {
 		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
 
 		$I->amOnPage( '/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+
+		$I->amOnPage( '/?var1=true&var2=false' );
 		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->dontSeeElement( '.tribe-alerts' );
