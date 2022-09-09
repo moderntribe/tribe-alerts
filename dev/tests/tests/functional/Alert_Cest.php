@@ -8,7 +8,92 @@ use Tribe\Alert\Post_Types\Alert\Alert;
 
 final class Alert_Cest {
 
-	public function test_it_excludes_alert_from_post( FunctionalTester $I ) {
+	public function test_it_always_displays_on_front_page( FunctionalTester $I ): void {
+		$alert_id = $I->havePostInDatabase( [
+			'post_type'   => Alert::NAME,
+			'post_status' => 'publish',
+			'post_title'  => 'Test included alert',
+		] );
+
+		$included_id = $I->havePostInDatabase( [
+			'post_type'   => 'post',
+			'post_status' => 'publish',
+			'post_title'  => 'Another included alert',
+			'post_name'   => 'another-included-alert',
+		] );
+
+		$I->haveManyPostsInDatabase( 5 );
+
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test included alert message', $alert_id );
+		update_field( Alert_Meta::GROUP_RULES, [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE        => Alert_Meta::OPTION_INCLUDE,
+			Alert_Meta::FIELD_RULES_INCLUDE_PAGES       => [ $included_id ],
+			Alert_Meta::FIELD_RULES_APPLY_TO_FRONT_PAGE => true,
+		], $alert_id );
+
+		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
+
+		$I->amOnPage( '/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test included alert message' );
+
+		$I->amOnPage( '/another-included-alert' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test included alert message' );
+	}
+
+	public function test_it_never_displays_on_front_page( FunctionalTester $I ): void {
+		$alert_id = $I->havePostInDatabase( [
+			'post_type'   => Alert::NAME,
+			'post_status' => 'publish',
+			'post_title'  => 'Test included alert',
+		] );
+
+		$excluded_id = $I->havePostInDatabase( [
+			'post_type'   => 'post',
+			'post_status' => 'publish',
+			'post_title'  => 'Excluded alert',
+			'post_name'   => 'excluded-alert',
+		] );
+
+		$I->havePostInDatabase( [
+			'post_type'   => 'post',
+			'post_status' => 'publish',
+			'post_title'  => 'Alert Should Show',
+			'post_name'   => 'alert-should-show',
+		] );
+
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test included alert message', $alert_id );
+		update_field( Alert_Meta::GROUP_RULES, [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE        => Alert_Meta::OPTION_EXCLUDE,
+			Alert_Meta::FIELD_RULES_EXCLUDE_PAGES       => [ $excluded_id ],
+			Alert_Meta::FIELD_RULES_APPLY_TO_FRONT_PAGE => true,
+		], $alert_id );
+
+		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
+
+		$I->amOnPage( '/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+
+		$I->amOnPage( '/excluded-alert' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+
+		$I->amOnPage( '/alert-should-show' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test included alert message' );
+	}
+
+	public function test_it_excludes_alert_from_post( FunctionalTester $I ): void {
 		$alert_id = $I->havePostInDatabase( [
 			'post_type'   => Alert::NAME,
 			'post_status' => 'publish',
@@ -46,19 +131,16 @@ final class Alert_Cest {
 
 		$I->amOnPage( '/excluded-alert' );
 		$I->seeResponseCodeIs( 200 );
-
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->dontSeeElement( '.tribe-alerts' );
 
 		$I->amOnPage( '/another-excluded-alert' );
 		$I->seeResponseCodeIs( 200 );
-
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->dontSeeElement( '.tribe-alerts' );
 
 		$I->amOnPage( '/regular-post' );
 		$I->seeResponseCodeIs( 200 );
-
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test excluded alert message' );
@@ -79,7 +161,7 @@ final class Alert_Cest {
 		$I->dontSeeInSource( 'Uncaught TypeError' );
 	}
 
-	public function test_it_includes_alert_on_specific_posts( FunctionalTester $I ) {
+	public function test_it_includes_alert_on_specific_posts( FunctionalTester $I ): void {
 		$alert_id = $I->havePostInDatabase( [
 			'post_type'   => Alert::NAME,
 			'post_status' => 'publish',
@@ -164,7 +246,7 @@ final class Alert_Cest {
 		delete_option( 'page_on_front' );
 	}
 
-	public function test_it_displays_a_global_alert_on_multiple_urls( FunctionalTester $I ) {
+	public function test_it_displays_a_global_alert_on_multiple_urls( FunctionalTester $I ): void {
 		$alert_id = $I->havePostInDatabase( [
 			'post_type'   => Alert::NAME,
 			'post_status' => 'publish',
@@ -188,13 +270,11 @@ final class Alert_Cest {
 		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
 
 		$I->amOnPage( '/' );
-
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test alert message' );
 
 		$I->amOnPage( '/regular-post' );
 		$I->seeResponseCodeIs( 200 );
-
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test alert message' );
@@ -212,7 +292,7 @@ final class Alert_Cest {
 		$I->see( 'Test alert message' );
 	}
 
-	public function test_it_does_not_display_on_a_404_page( FunctionalTester $I ) {
+	public function test_it_does_not_display_on_a_404_page( FunctionalTester $I ): void {
 		$alert_id = $I->havePostInDatabase( [
 			'post_type'   => Alert::NAME,
 			'post_status' => 'publish',
@@ -229,13 +309,11 @@ final class Alert_Cest {
 		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
 
 		$I->amOnPage( '/' );
-
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test alert message' );
 
 		$I->amOnPage( '/a-missing-url' );
 		$I->seeResponseCodeIs( 404 );
-
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->dontSeeElement( '.tribe-alerts' );
 		$I->dontSee( 'Test alert message' );

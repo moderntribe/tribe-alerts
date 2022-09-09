@@ -23,10 +23,11 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 	public const FIELD_CTA_ADD_ARIA_LABEL = 'add_aria_label';
 	public const FIELD_CTA_ARIA_LABEL     = 'aria_label';
 
-	public const GROUP_RULES               = 'alert_rules';
-	public const FIELD_RULES_DISPLAY_TYPE  = 'display_type';
-	public const FIELD_RULES_INCLUDE_PAGES = 'include_pages';
-	public const FIELD_RULES_EXCLUDE_PAGES = 'exclude_pages';
+	public const GROUP_RULES                     = 'alert_rules';
+	public const FIELD_RULES_DISPLAY_TYPE        = 'display_type';
+	public const FIELD_RULES_INCLUDE_PAGES       = 'include_pages';
+	public const FIELD_RULES_EXCLUDE_PAGES       = 'exclude_pages';
+	public const FIELD_RULES_APPLY_TO_FRONT_PAGE = 'apply_to_front_page';
 
 	public const FIELD_COLOR = 'alert_color';
 
@@ -119,7 +120,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_ARIA_LABEL, [
 			'label'             => __( 'Screen Reader Label', 'tribe-alerts' ),
 			'instructions'      => __(
-				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable.',
+				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable',
 				'tribe-alerts'
 			),
 			'name'              => self::FIELD_CTA_ARIA_LABEL,
@@ -163,6 +164,30 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'default_value' => self::OPTION_EVERY_PAGE,
 		] );
 
+		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_APPLY_TO_FRONT_PAGE, [
+			'label'             => esc_html__( 'Always Apply To Front Page', 'tribe' ),
+			'name'              => self::FIELD_RULES_APPLY_TO_FRONT_PAGE,
+			'type'              => 'true_false',
+			'instructions'      => sprintf(
+				'%s<a href="%s">%s</a>%s',
+				esc_html__( 'Regardless of the configuration in ', 'tribe' ),
+				esc_url( admin_url( 'options-reading.php' ) ),
+				esc_html__( 'Settings > Reading', 'tribe' ),
+				esc_html__( ', always apply these rules to the front page', 'tribe' )
+			),
+			'ui'                => true,
+			'default_value'     => false,
+			'conditional_logic' => [
+				[
+					[
+						'field'    => $this->get_key_with_prefix( self::FIELD_RULES_DISPLAY_TYPE, self::GROUP_RULES ),
+						'operator' => '!=',
+						'value'    => self::OPTION_EVERY_PAGE,
+					],
+				],
+			],
+		] );
+
 		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_INCLUDE_PAGES, [
 			'label'             => esc_html__( 'Select pages where the alert will appear', 'tribe-alerts' ),
 			'name'              => self::FIELD_RULES_INCLUDE_PAGES,
@@ -184,7 +209,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 				'post_type',
 				'taxonomy',
 			],
-			'min'               => 1, // (int)
+			'min'               => 0, // (int)
 			'max'               => self::MAX_POSTS, // (int)
 			'return_format'     => 'object', // object, id
 		] );
@@ -210,7 +235,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 				'post_type',
 				'taxonomy',
 			],
-			'min'               => 1, // (int)
+			'min'               => 0, // (int)
 			'max'               => self::MAX_POSTS, // (int)
 			'return_format'     => 'object', // object, id
 		] );
