@@ -25,4 +25,13 @@ trait With_Front_Page_Rule {
 		return (bool) ( $rules[ Alert_Meta::FIELD_RULES_APPLY_TO_FRONT_PAGE ] ?? false );
 	}
 
+	/**
+	 * Detect the frontpage regardless of what's set in Settings > Reading.
+	 */
+	protected function is_frontpage(): bool {
+		$uri = $_SERVER['REQUEST_URI'] ?? '';
+
+		return strtok( $uri, '?' ) === '/';
+	}
+
 }
