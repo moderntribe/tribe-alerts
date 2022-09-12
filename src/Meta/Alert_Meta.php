@@ -118,8 +118,8 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		] );
 
 		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_ARIA_LABEL, [
-			'label'             => __( 'Screen Reader Label', 'tribe-alerts' ),
-			'instructions'      => __(
+			'label'             => esc_html__( 'Screen Reader Label', 'tribe-alerts' ),
+			'instructions'      => esc_html__(
 				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable',
 				'tribe-alerts'
 			),
