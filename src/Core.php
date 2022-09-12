@@ -9,6 +9,7 @@ use Tribe\Alert\Components\Alert\Alert_Definer;
 use Tribe\Alert\Meta\Meta_Definer;
 use Tribe\Alert\Resources\Resource_Definer;
 use Tribe\Alert\Resources\Resource_Subscriber;
+use Tribe\Alert\Rule_Processing\Rule_Processor_Definer;
 use Tribe\Alert\Settings\Settings_Definer;
 use Tribe\Alert\Theme\Theme_Subscriber;
 use Tribe\Alert\View\View_Definer;
@@ -40,6 +41,7 @@ final class Core {
 	 * @var \Tribe\Libs\Container\Definer_Interface[]
 	 */
 	private array $definers = [
+		Rule_Processor_Definer::class,
 		Object_Meta_Definer::class,
 		Meta_Definer::class,
 		Pipeline_Definer::class,

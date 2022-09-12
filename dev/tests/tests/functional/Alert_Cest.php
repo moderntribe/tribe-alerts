@@ -131,10 +131,15 @@ final class Alert_Cest {
 			'post_name'   => 'another-excluded-alert',
 		] );
 
+		$I->haveTermInDatabase( 'Test Tag', 'post_tag' );
+
 		update_field( Alert_Meta::FIELD_MESSAGE, 'Test excluded alert message', $alert_id );
 		update_field( Alert_Meta::GROUP_RULES, [
 			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_EXCLUDE,
 			Alert_Meta::FIELD_RULES_EXCLUDE_PAGES => [ $excluded_id, $excluded_id_2 ],
+			Alert_Meta::FIELD_TAXONOMY_ARCHIVES   => [
+				'category',
+			],
 		], $alert_id );
 
 		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
@@ -150,6 +155,12 @@ final class Alert_Cest {
 		$I->dontSeeElement( '.tribe-alerts' );
 
 		$I->amOnPage( '/regular-post' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test excluded alert message' );
+
+		$I->amOnPage( '/tag/test-tag/' );
 		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
@@ -208,7 +219,7 @@ final class Alert_Cest {
 
 		// Set blog posts home page
 		update_option( 'show_on_front', 'page' );
-		update_option( 'page_on_front', $blog_home_id );
+		update_option( 'page_for_posts', $blog_home_id );
 
 		update_field( Alert_Meta::FIELD_MESSAGE, 'Test included alert message', $alert_id );
 		update_field( Alert_Meta::GROUP_RULES, [
@@ -253,7 +264,7 @@ final class Alert_Cest {
 
 		// clean up after test to not break other tests.
 		delete_option( 'show_on_front' );
-		delete_option( 'page_on_front' );
+		delete_option( 'page_for_posts' );
 	}
 
 	public function test_it_displays_a_global_alert_on_multiple_urls( FunctionalTester $I ): void {

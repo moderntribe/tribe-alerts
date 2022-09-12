@@ -7,7 +7,6 @@ use Psr\Container\ContainerInterface;
 use Tribe\Alert\Components\Alert\Rules\Display_All_Rule;
 use Tribe\Alert\Components\Alert\Rules\Excluded_Posts_Rule;
 use Tribe\Alert\Components\Alert\Rules\Included_Posts_Rule;
-use Tribe\Alert\Post_Fetcher\Post_Fetcher_Factory;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Libs\Pipeline\Contracts\Pipeline;
 
@@ -31,8 +30,8 @@ class Alert_Definer implements Definer_Interface {
 			Alert_Rule_Manager::class    => DI\autowire()
 				->constructorParameter(
 					'pipeline',
-					static function ( ContainerInterface $c ) {
-						$pipeline = $c->get( Pipeline::class );
+					static function ( DI\FactoryInterface $c ) {
+						$pipeline = $c->make( Pipeline::class );
 
 						// Display alert rules, processed in order.
 						return $pipeline->through( [
@@ -41,16 +40,6 @@ class Alert_Definer implements Definer_Interface {
 							$c->get( Included_Posts_Rule::class ),
 						] );
 					}
-				),
-			Excluded_Posts_Rule::class   => DI\autowire()
-				->constructorParameter(
-					'post_fetcher',
-					static fn ( ContainerInterface $c ) => $c->get( Post_Fetcher_Factory::class )->make()
-				),
-			Included_Posts_Rule::class   => DI\autowire()
-				->constructorParameter(
-					'post_fetcher',
-					static fn ( ContainerInterface $c ) => $c->get( Post_Fetcher_Factory::class )->make()
 				),
 		];
 	}
