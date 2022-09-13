@@ -98,6 +98,8 @@ final class Alert_Rule_Test extends Test_Case {
 		$closure = static fn() => false;
 
 		// Test each post would NOT display the alert.
+		$GLOBALS['wp_query']->is_singular = true;
+
 		foreach ( $excluded as $post_id ) {
 			$GLOBALS['post'] = get_post( $post_id );
 

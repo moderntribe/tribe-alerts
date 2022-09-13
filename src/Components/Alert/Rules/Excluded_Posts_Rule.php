@@ -4,22 +4,19 @@ namespace Tribe\Alert\Components\Alert\Rules;
 
 use Closure;
 use Tribe\Alert\Components\Alert\Rule;
-use Tribe\Alert\Components\Alert\Rules\Traits\With_Front_Page_Rule;
 use Tribe\Alert\Meta\Alert_Meta;
-use Tribe\Alert\Post_Fetcher\Post_Fetcher;
+use Tribe\Alert\Rule_Processing\Processor_Factory;
 
 class Excluded_Posts_Rule implements Rule {
 
-	use With_Front_Page_Rule;
+	protected Processor_Factory $processor_factory;
 
-	protected Post_Fetcher $post_fetcher;
-
-	public function __construct( Post_Fetcher $post_fetcher ) {
-		$this->post_fetcher = $post_fetcher;
+	public function __construct( Processor_Factory $processor_factory ) {
+		$this->processor_factory = $processor_factory;
 	}
 
 	/**
-	 * Show on every post besides the ones included here.
+	 * Show on every post/page/archive besides the ones included here.
 	 *
 	 * @inheritDoc
 	 */
@@ -27,30 +24,15 @@ class Excluded_Posts_Rule implements Rule {
 		$type = $rules[ Alert_Meta::FIELD_RULES_DISPLAY_TYPE ] ?? '';
 
 		if ( $type === Alert_Meta::OPTION_EXCLUDE ) {
-			// If "always apply to front page" is checked.
-			if ( $this->is_frontpage() && $this->apply_to_front_page( $rules ) ) {
+			$processor = $this->processor_factory->get_processor( $rules );
+
+			// No processor found, assume this page is not excluded.
+			if ( ! $processor ) {
 				return false;
 			}
 
-			$post = $this->post_fetcher->get_post();
-
-			if ( ! isset( $post->ID ) ) {
-				return $next( $display );
-			}
-
-			$excluded_posts = $rules[ Alert_Meta::FIELD_RULES_EXCLUDE_PAGES ] ?? [];
-
-			if ( ! $excluded_posts ) {
-				return true;
-			}
-
-			foreach ( $excluded_posts as $excluded_post ) {
-				if ( $post->ID === $excluded_post->ID ) {
-					return false;
-				}
-			}
-
-			return true;
+			// Note the negation here, since we're excluding.
+			return ! $processor->process( $rules );
 		}
 
 		return $next( $display );

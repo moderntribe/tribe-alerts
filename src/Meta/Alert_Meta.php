@@ -7,6 +7,8 @@ use Tribe\Alert\Post_Types\Alert\Alert;
 use Tribe\Alert\Traits\With_Field_Prefix;
 use Tribe\Libs\ACF;
 use Tribe\Libs\ACF\Field;
+use WP_Post_Type;
+use WP_Taxonomy;
 
 class Alert_Meta extends ACF\ACF_Meta_Group {
 
@@ -28,6 +30,8 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 	public const FIELD_RULES_INCLUDE_PAGES       = 'include_pages';
 	public const FIELD_RULES_EXCLUDE_PAGES       = 'exclude_pages';
 	public const FIELD_RULES_APPLY_TO_FRONT_PAGE = 'apply_to_front_page';
+	public const FIELD_TAXONOMY_ARCHIVES         = 'taxonomy_archives';
+	public const FIELD_POST_TYPE_ARCHIVES        = 'post_type_archives';
 
 	public const FIELD_COLOR = 'alert_color';
 
@@ -118,8 +122,8 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		] );
 
 		$fields[] = new Field( self::GROUP_CTA . '_' . self::FIELD_CTA_ARIA_LABEL, [
-			'label'             => __( 'Screen Reader Label', 'tribe-alerts' ),
-			'instructions'      => __(
+			'label'             => esc_html__( 'Screen Reader Label', 'tribe-alerts' ),
+			'instructions'      => esc_html__(
 				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable',
 				'tribe-alerts'
 			),
@@ -153,7 +157,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		$fields = [];
 
 		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_DISPLAY_TYPE, [
-			'label'         => esc_html__( 'Show', 'tribe-alerts' ),
+			'label'         => esc_html__( 'Select a rule', 'tribe-alerts' ),
 			'name'          => self::FIELD_RULES_DISPLAY_TYPE,
 			'type'          => 'radio',
 			'choices'       => [
@@ -165,15 +169,15 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		] );
 
 		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_APPLY_TO_FRONT_PAGE, [
-			'label'             => esc_html__( 'Always Apply To Front Page', 'tribe' ),
+			'label'             => esc_html__( 'Apply the selected rule to the Front Page', 'tribe-alerts' ),
 			'name'              => self::FIELD_RULES_APPLY_TO_FRONT_PAGE,
 			'type'              => 'true_false',
 			'instructions'      => sprintf(
 				'%s<a href="%s">%s</a>%s',
-				esc_html__( 'Regardless of the configuration in ', 'tribe' ),
+				esc_html__( 'Regardless of the configuration in ', 'tribe-alerts' ),
 				esc_url( admin_url( 'options-reading.php' ) ),
-				esc_html__( 'Settings > Reading', 'tribe' ),
-				esc_html__( ', always apply these rules to the front page', 'tribe' )
+				esc_html__( 'Settings > Reading', 'tribe-alerts' ),
+				esc_html__( ', always apply these rules to the front page', 'tribe-alerts' )
 			),
 			'ui'                => true,
 			'default_value'     => false,
@@ -218,7 +222,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'label'             => esc_html__( 'Will appear on every page but the following selected pages', 'tribe-alerts' ),
 			'name'              => self::FIELD_RULES_EXCLUDE_PAGES,
 			'type'              => 'relationship',
-			'instructions'      => sprintf( esc_html__( 'Select up to %d posts', 'tribe-alerts' ), self::MAX_POSTS ),
+			'instructions'      => sprintf( esc_html__( 'Select up to %d posts', 'tribe-alerts' ), (int) apply_filters( 'tribe/alerts/meta/max_posts', self::MAX_POSTS ) ),
 			'required'          => false,
 			'conditional_logic' => [
 				[
@@ -236,8 +240,64 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 				'taxonomy',
 			],
 			'min'               => 0, // (int)
-			'max'               => self::MAX_POSTS, // (int)
+			'max'               => (int) apply_filters( 'tribe/alerts/meta/max_posts', self::MAX_POSTS ), // (int)
 			'return_format'     => 'object', // object, id
+		] );
+
+		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_TAXONOMY_ARCHIVES, [
+			'label'             => esc_html__( 'Apply the selected rule to the following Taxonomy Archives:', 'tribe-alerts' ),
+			'name'              => self::FIELD_TAXONOMY_ARCHIVES,
+			'type'              => 'select',
+			'required'          => false,
+			'conditional_logic' => [
+				[
+					[
+						'field'    => $this->get_key_with_prefix( self::FIELD_RULES_DISPLAY_TYPE, self::GROUP_RULES ),
+						'operator' => '!=',
+						'value'    => self::OPTION_EVERY_PAGE,
+					],
+				],
+			],
+			'default_value'     => [],
+			'choices'           => array_reduce( get_taxonomies( [ 'public' => true ], 'objects' ), static function ( array $taxonomies, WP_Taxonomy $tax ) {
+				$taxonomies[ $tax->name ] = $tax->labels->name;
+
+				return $taxonomies;
+			}, [] ),
+			'multiple'          => true,
+			'ui'                => true,
+			'ajax'              => true, // lazy load
+			'return_format'     => 'value', // value, label, array
+		] );
+
+		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_POST_TYPE_ARCHIVES, [
+			'label'             => esc_html__( 'Apply the selected rule to the following Post Type Archives:', 'tribe-alerts' ),
+			'name'              => self::FIELD_POST_TYPE_ARCHIVES,
+			'type'              => 'select',
+			'required'          => false,
+			'conditional_logic' => [
+				[
+					[
+						'field'    => $this->get_key_with_prefix( self::FIELD_RULES_DISPLAY_TYPE, self::GROUP_RULES ),
+						'operator' => '!=',
+						'value'    => self::OPTION_EVERY_PAGE,
+					],
+				],
+			],
+			'default_value'     => [],
+			'choices'           => array_reduce( get_post_types( [
+				'public'             => true,
+				'publicly_queryable' => true,
+				'has_archive'        => true,
+			], 'objects' ), static function ( array $post_types, WP_Post_Type $post_type ) {
+				$post_types[ $post_type->name ] = $post_type->labels->name;
+
+				return $post_types;
+			}, [] ),
+			'multiple'          => true,
+			'ui'                => true,
+			'ajax'              => true, // lazy load
+			'return_format'     => 'value', // value, label, array
 		] );
 
 		foreach ( $fields as $field ) {
