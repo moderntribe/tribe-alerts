@@ -59,4 +59,14 @@ final class Post_Factory_Test extends Test_Case {
 		$this->assertNull( $factory->get_processor( $rules ) );
 	}
 
+	public function test_it_does_not_make_post_processor(): void {
+		$factory = $this->container->make( Processor_Factory::class );
+
+		$rules = [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE => Alert_Meta::OPTION_INCLUDE,
+		];
+
+		$this->assertNull( $factory->get_processor( $rules ) );
+	}
+
 }

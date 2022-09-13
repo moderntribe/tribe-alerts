@@ -64,4 +64,14 @@ final class Front_Page_Factory_Test extends Test_Case {
 		$this->assertNull( $factory->get_processor( $rules ) );
 	}
 
+	public function test_it_does_make_a_front_page_processor(): void {
+		$factory = $this->container->make( Processor_Factory::class );
+
+		$rules = [
+			Alert_Meta::FIELD_RULES_APPLY_TO_FRONT_PAGE => true,
+		];
+
+		$this->assertNull( $factory->get_processor( $rules ) );
+	}
+
 }
