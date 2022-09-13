@@ -196,7 +196,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 			'label'             => esc_html__( 'Select pages where the alert will appear', 'tribe-alerts' ),
 			'name'              => self::FIELD_RULES_INCLUDE_PAGES,
 			'type'              => 'relationship',
-			'instructions'      => sprintf( esc_html__( 'Select up to %d posts', 'tribe-alerts' ), self::MAX_POSTS ),
+			'instructions'      => sprintf( esc_html__( 'Select up to %d posts', 'tribe-alerts' ), (int) apply_filters( 'tribe/alerts/meta/max_posts', self::MAX_POSTS ) ),
 			'required'          => false,
 			'conditional_logic' => [
 				[
@@ -214,7 +214,7 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 				'taxonomy',
 			],
 			'min'               => 0, // (int)
-			'max'               => self::MAX_POSTS, // (int)
+			'max'               => (int) apply_filters( 'tribe/alerts/meta/max_posts', self::MAX_POSTS ), // (int)
 			'return_format'     => 'object', // object, id
 		] );
 
