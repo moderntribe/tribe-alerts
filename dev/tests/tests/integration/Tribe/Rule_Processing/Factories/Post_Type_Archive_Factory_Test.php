@@ -13,6 +13,7 @@ final class Post_Type_Archive_Factory_Test extends Test_Case {
 		$factory = $this->container->make( Processor_Factory::class );
 
 		// Mock we're visiting a post type archive.
+		$GLOBALS['wp_query']->is_archive           = true;
 		$GLOBALS['wp_query']->is_post_type_archive = true;
 
 		$rules = [
