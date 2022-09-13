@@ -49,6 +49,12 @@ final class Alert_Cest {
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test included alert message' );
+
+		// Search results should not display an alert.
+		$I->amOnPage( '/?s=hello' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
 	}
 
 	public function test_it_never_displays_on_front_page( FunctionalTester $I ): void {
@@ -217,7 +223,7 @@ final class Alert_Cest {
 			'post_name'   => 'blog',
 		] );
 
-		// Set blog posts home page
+		// Set blog posts to posts page
 		update_option( 'show_on_front', 'page' );
 		update_option( 'page_for_posts', $blog_home_id );
 
