@@ -70,7 +70,7 @@ yarn-error.log
 !/public/wp-content/themes/.gitkeep
 !/public/wp-content/object-cache.php
 !/public/wp-content/memcached-object-cache.php
-!/public/wp-content/mu-plugins/tests-create-projects-cpt.php
+!/public/wp-content/mu-plugins/
 /.env
 /vendor
 /phpcs.xml
