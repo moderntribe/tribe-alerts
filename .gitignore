@@ -57,6 +57,7 @@ dev/tests/tests/_support/_generated/
 dev/tests/wp
 dev/tests/wp-content/plugins/*
 !dev/tests/wp-content/plugins/.gitkeep
+!/public/wp-content/mu-plugins/tests-create-projects-cpt.php
 
 # Project #
 ############
