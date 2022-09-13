@@ -107,6 +107,12 @@ final class Alert_Cest {
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test included alert message' );
+
+		// Search results should not display an alert.
+		$I->amOnPage( '/?s=hello' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
 	}
 
 	public function test_it_excludes_alert_from_post( FunctionalTester $I ): void {
@@ -346,6 +352,147 @@ final class Alert_Cest {
 		$I->dontSee( 'Test alert message' );
 	}
 
+	public function test_it_displays_on_the_category_archive( FunctionalTester $I ): void {
+		$I->haveTermInDatabase( 'Test Cat', 'category' );
+		$I->haveTermInDatabase( 'Test Tag', 'post_tag' );
+
+		$alert_id = $I->havePostInDatabase( [
+			'post_type'   => Alert::NAME,
+			'post_status' => 'publish',
+			'post_title'  => 'Test global alert',
+		] );
+
+		$I->havePostInDatabase( [
+			'post_type'   => 'post',
+			'post_status' => 'publish',
+			'post_title'  => 'Regular post',
+			'post_name'   => 'regular-post',
+			'tax_input'   => [
+				[ 'category' => 'test-cat' ],
+			],
+		] );
+
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test alert message', $alert_id );
+		update_field( Alert_Meta::GROUP_RULES, [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_INCLUDE,
+			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [],
+			Alert_Meta::FIELD_RULES_EXCLUDE_PAGES => [],
+			Alert_Meta::FIELD_TAXONOMY_ARCHIVES   => [
+				'category',
+			],
+		], $alert_id );
+
+		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
+
+		$I->amOnPage( '/category/test-cat/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeInSource( 'Regular Post' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+
+		// Test it's not displayed on another taxonomy.
+		$I->amOnPage( '/tag/test-tag' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+		$I->dontSee( 'Test alert message' );
+	}
+
+	public function test_it_displays_on_the_post_tag_archive( FunctionalTester $I ): void {
+		$I->haveTermInDatabase( 'Test Cat', 'category' );
+		$I->haveTermInDatabase( 'Test Tag', 'post_tag' );
+
+		$alert_id = $I->havePostInDatabase( [
+			'post_type'   => Alert::NAME,
+			'post_status' => 'publish',
+			'post_title'  => 'Test global alert',
+		] );
+
+		$I->havePostInDatabase( [
+			'post_type'   => 'post',
+			'post_status' => 'publish',
+			'post_title'  => 'Regular post',
+			'post_name'   => 'regular-post',
+			'tax_input'   => [
+				[ 'post_tag' => 'test-tag' ],
+			],
+		] );
+
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test alert message', $alert_id );
+		update_field( Alert_Meta::GROUP_RULES, [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_INCLUDE,
+			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [],
+			Alert_Meta::FIELD_RULES_EXCLUDE_PAGES => [],
+			Alert_Meta::FIELD_TAXONOMY_ARCHIVES   => [
+				'post_tag',
+			],
+		], $alert_id );
+
+		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
+
+		$I->amOnPage( '/tag/test-tag' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeInSource( 'Regular Post' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+
+		// Test it's not displayed on another taxonomy.
+		$I->amOnPage( '/category/test-cat/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+		$I->dontSee( 'Test alert message' );
+	}
+
+	public function test_it_displays_on_a_custom_taxonomy_archive( FunctionalTester $I ): void {
+		$I->haveTermInDatabase( 'Test Location', 'location' );
+		$I->haveTermInDatabase( 'Test Tag', 'post_tag' );
+
+		$alert_id = $I->havePostInDatabase( [
+			'post_type'   => Alert::NAME,
+			'post_status' => 'publish',
+			'post_title'  => 'Test global alert',
+		] );
+
+		$I->havePostInDatabase( [
+			'post_type'   => 'post',
+			'post_status' => 'publish',
+			'post_title'  => 'Regular post',
+			'post_name'   => 'regular-post',
+			'tax_input'   => [
+				[ 'location' => 'test-location' ],
+			],
+		] );
+
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test alert message', $alert_id );
+		update_field( Alert_Meta::GROUP_RULES, [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_INCLUDE,
+			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [],
+			Alert_Meta::FIELD_RULES_EXCLUDE_PAGES => [],
+			Alert_Meta::FIELD_TAXONOMY_ARCHIVES   => [
+				'location',
+			],
+		], $alert_id );
+
+		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
+
+		$I->amOnPage( '/locations/test-location' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeInSource( 'Regular Post' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
+
+		// Test it's not displayed on another taxonomy.
+		$I->amOnPage( '/tag/test-tag/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->dontSeeElement( '.tribe-alerts' );
+		$I->dontSee( 'Test alert message' );
+	}
+
 	public function test_it_does_not_display_color_css_classes_when_not_active( FunctionalTester $I ): void {
 		$alert_id = $I->havePostInDatabase( [
 			'post_type'   => Alert::NAME,
@@ -389,11 +536,49 @@ final class Alert_Cest {
 		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
 
 		$I->amOnPage( '/' );
-
 		$I->seeElement( '.tribe-alerts' );
 		$I->see( 'Test alert message' );
 		$I->seeElement( '.' . Alert_Controller::COLOR_THEME_CLASS );
 		$I->seeElement( sprintf( '.%s-white', Alert_Color_Options::CSS_CLASS_PREFIX ) );
+	}
+
+	public function test_it_displays_on_a_post_type_archive( FunctionalTester $I ): void {
+		$alert_id = $I->havePostInDatabase( [
+			'post_type'   => Alert::NAME,
+			'post_status' => 'publish',
+			'post_title'  => 'Test global alert',
+		] );
+
+		$project_id = $I->havePostInDatabase( [
+			'post_type' => 'project',
+		] );
+
+		$I->seePostInDatabase( [
+			'ID'        => $project_id,
+			'post_type' => 'project',
+		] );
+
+		$I->haveManyPostsInDatabase( 5, [
+			'post_type' => 'project',
+		] );
+
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test alert message', $alert_id );
+		update_field( Alert_Meta::GROUP_RULES, [
+			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_INCLUDE,
+			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [],
+			Alert_Meta::FIELD_RULES_EXCLUDE_PAGES => [],
+			Alert_Meta::FIELD_POST_TYPE_ARCHIVES  => [
+				'project',
+			]
+		], $alert_id );
+
+		update_field( Alert_Settings_Meta::FIELD_ACTIVE_ALERT, [ $alert_id ], 'option' );
+
+		$I->amOnPage( '/projects/' );
+		$I->seeResponseCodeIs( 200 );
+		$I->seeInSource( '<!-- tribe alerts -->' );
+		$I->seeElement( '.tribe-alerts' );
+		$I->see( 'Test alert message' );
 	}
 
 }
