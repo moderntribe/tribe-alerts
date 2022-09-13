@@ -169,15 +169,15 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		] );
 
 		$fields[] = new Field( self::GROUP_RULES . '_' . self::FIELD_RULES_APPLY_TO_FRONT_PAGE, [
-			'label'             => esc_html__( 'Apply the selected rule to the Front Page', 'tribe' ),
+			'label'             => esc_html__( 'Apply the selected rule to the Front Page', 'tribe-alerts' ),
 			'name'              => self::FIELD_RULES_APPLY_TO_FRONT_PAGE,
 			'type'              => 'true_false',
 			'instructions'      => sprintf(
 				'%s<a href="%s">%s</a>%s',
-				esc_html__( 'Regardless of the configuration in ', 'tribe' ),
+				esc_html__( 'Regardless of the configuration in ', 'tribe-alerts' ),
 				esc_url( admin_url( 'options-reading.php' ) ),
-				esc_html__( 'Settings > Reading', 'tribe' ),
-				esc_html__( ', always apply these rules to the front page', 'tribe' )
+				esc_html__( 'Settings > Reading', 'tribe-alerts' ),
+				esc_html__( ', always apply these rules to the front page', 'tribe-alerts' )
 			),
 			'ui'                => true,
 			'default_value'     => false,
@@ -305,39 +305,6 @@ class Alert_Meta extends ACF\ACF_Meta_Group {
 		}
 
 		return $group;
-	}
-
-	/**
-	 * @return \Tribe\Libs\ACF\Field
-	 */
-	private function get_tax_field(): ACF\Field {
-		$field = new ACF\Field( self::NAME . '_' . self::FIELD_TAXONOMY_ARCHIVES );
-
-		$field->set_attributes( [
-			'label'             => __( '', 'tribe' ),
-			'name'              => self::FIELD_TAXONOMY_ARCHIVES,
-			'type'              => 'select',
-			'instructions'      => __( '', 'tribe' ),
-			'required'          => false,
-			'conditional_logic' => false,
-			'wrapper'           => [
-				'width' => '',
-				'class' => '',
-				'id'    => '',
-			],
-			'placeholder'       => __( '', 'tribe' ),
-			'default_value'     => [],
-			'choices'           => [
-				'red'  => __( 'Red', 'tribe' ),
-				'blue' => __( 'Blue', 'tribe' ),
-			],
-			'multiple'          => false,
-			'ui'                => false,
-			'ajax'              => false, // lazy load
-			'return_format'     => 'value', // value, label, array
-		] );
-
-		return $field;
 	}
 
 	private function get_colors_field(): ACF\Field {
