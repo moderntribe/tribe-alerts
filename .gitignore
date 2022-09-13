@@ -57,7 +57,6 @@ dev/tests/tests/_support/_generated/
 dev/tests/wp
 dev/tests/wp-content/plugins/*
 !dev/tests/wp-content/plugins/.gitkeep
-!/public/wp-content/mu-plugins/tests-create-projects-cpt.php
 
 # Project #
 ############
@@ -71,6 +70,7 @@ yarn-error.log
 !/public/wp-content/themes/.gitkeep
 !/public/wp-content/object-cache.php
 !/public/wp-content/memcached-object-cache.php
+!/public/wp-content/mu-plugins/tests-create-projects-cpt.php
 /.env
 /vendor
 /phpcs.xml
