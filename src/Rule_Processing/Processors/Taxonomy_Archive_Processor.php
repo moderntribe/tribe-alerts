@@ -5,7 +5,6 @@ namespace Tribe\Alert\Rule_Processing\Processors;
 use Tribe\Alert\Meta\Alert_Meta;
 use Tribe\Alert\Rule_Processing\Processor;
 
-
 class Taxonomy_Archive_Processor implements Processor {
 
 	public function process( array $rules ): bool {

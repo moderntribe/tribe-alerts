@@ -3,7 +3,6 @@
 namespace Tribe\Alert\Rule_Processing\Factories;
 
 use Closure;
-use Tribe\Alert\Meta\Alert_Meta;
 use Tribe\Alert\Rule_Processing\Processor;
 use Tribe\Alert\Rule_Processing\Processors\Front_Page_Processor;
 
