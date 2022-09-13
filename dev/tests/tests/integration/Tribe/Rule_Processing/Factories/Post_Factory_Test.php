@@ -7,11 +7,14 @@ use Tribe\Alert\Rule_Processing\Processor_Factory;
 use Tribe\Alert\Rule_Processing\Processors\Excluded_Post_Processor;
 use Tribe\Alert\Rule_Processing\Processors\Included_Post_Processor;
 use Tribe\Tests\Test_Case;
-use Tribe\Tests\Traits\Alert_Generator;
 
 final class Post_Factory_Test extends Test_Case {
 
-	use Alert_Generator;
+	protected function tearDown(): void {
+		parent::tearDown();
+
+		$GLOBALS['post'] = null;
+	}
 
 	public function test_it_makes_an_excluded_post_processor(): void {
 		// Mock we're visiting a singular post.
