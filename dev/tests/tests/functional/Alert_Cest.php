@@ -279,11 +279,11 @@ final class Alert_Cest {
 		delete_option( 'page_for_posts' );
 	}
 
-	public function test_it_displays_a_global_alert_on_multiple_urls( FunctionalTester $I ): void {
+	public function test_it_displays_a_global_alert_on_multiple_urls_with_encoding( FunctionalTester $I ): void {
 		$alert_id = $I->havePostInDatabase( [
 			'post_type'   => Alert::NAME,
 			'post_status' => 'publish',
-			'post_title'  => 'Test global alert',
+			'post_title'  => 'Test global alert with "Double Quotes" & \'Single Quotes\'',
 		] );
 
 		$I->havePostInDatabase( [
@@ -293,7 +293,7 @@ final class Alert_Cest {
 			'post_name'   => 'regular-post',
 		] );
 
-		update_field( Alert_Meta::FIELD_MESSAGE, 'Test alert message', $alert_id );
+		update_field( Alert_Meta::FIELD_MESSAGE, 'Test alert message "Double Quotes" & \'Single Quotes\'', $alert_id );
 		update_field( Alert_Meta::GROUP_RULES, [
 			Alert_Meta::FIELD_RULES_DISPLAY_TYPE  => Alert_Meta::OPTION_EVERY_PAGE,
 			Alert_Meta::FIELD_RULES_INCLUDE_PAGES => [],
@@ -304,25 +304,29 @@ final class Alert_Cest {
 
 		$I->amOnPage( '/' );
 		$I->seeElement( '.tribe-alerts' );
-		$I->see( 'Test alert message' );
+		$I->seeInSource( 'Test global alert with &#8220;Double Quotes&#8221; &#038; &#8216;Single Quotes&#8217;' );
+		$I->seeInSource( 'Test alert message &#8220;Double Quotes&#8221; &#038; &#8216;Single Quotes&#8217;' );
 
 		$I->amOnPage( '/regular-post' );
 		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
-		$I->see( 'Test alert message' );
+		$I->seeInSource( 'Test global alert with &#8220;Double Quotes&#8221; &#038; &#8216;Single Quotes&#8217;' );
+		$I->seeInSource( 'Test alert message &#8220;Double Quotes&#8221; &#038; &#8216;Single Quotes&#8217;' );
 
 		$I->amOnPage( '/?s=meep' );
 		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
-		$I->see( 'Test alert message' );
+		$I->seeInSource( 'Test global alert with &#8220;Double Quotes&#8221; &#038; &#8216;Single Quotes&#8217;' );
+		$I->seeInSource( 'Test alert message &#8220;Double Quotes&#8221; &#038; &#8216;Single Quotes&#8217;' );
 
 		$I->amOnPage( '/category/uncategorized/' );
 		$I->seeResponseCodeIs( 200 );
 		$I->seeInSource( '<!-- tribe alerts -->' );
 		$I->seeElement( '.tribe-alerts' );
-		$I->see( 'Test alert message' );
+		$I->seeInSource( 'Test global alert with &#8220;Double Quotes&#8221; &#038; &#8216;Single Quotes&#8217;' );
+		$I->seeInSource( 'Test alert message &#8220;Double Quotes&#8221; &#038; &#8216;Single Quotes&#8217;' );
 	}
 
 	public function test_it_does_not_display_on_a_404_page( FunctionalTester $I ): void {

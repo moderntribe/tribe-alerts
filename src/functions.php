@@ -19,3 +19,14 @@ function render_alert(): void {
 
 	tribe_alert()->get_container()->get( Alert_Controller::class )->render();
 }
+
+/**
+ * Format content that is not already formatted out of the box by WordPress.
+ *
+ * @param string $content The content to format.
+ *
+ * @return string The formatted content.
+ */
+function format_content( string $content ): string {
+	return convert_chars( wptexturize( $content ) );
+}
