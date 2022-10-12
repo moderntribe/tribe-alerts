@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use function Tribe\Alert\format_content;
+
 /**
  * @var \League\Plates\Template\Template        $this
  * @var \Tribe\Alert\Components\Alert\Alert_Dto $dto
@@ -26,18 +28,18 @@
 		</button>
 
 		<?php if ( $dto->title ) : ?>
-			<h2 class="tribe-alerts__title"><?php echo $this->e( $dto->title ); ?></h2>
+			<h2 class="tribe-alerts__title"><?php echo esc_html( $dto->title ) ?></h2>
 		<?php endif; ?>
 
 		<?php if ( $dto->content ) : ?>
-			<div class="tribe-alerts__content"><?php echo $this->e( $dto->content ); ?></div>
+			<div class="tribe-alerts__content"><?php echo esc_html( format_content( $dto->content ) ) ?></div>
 		<?php endif; ?>
 
 		<?php if ( $dto->cta->url ) : ?>
 			<a class="a-link tribe-alerts__link"
 				<?php echo $link_attributes; ?>
-			   href="<?php echo $this->e( $dto->cta->url, 'esc_url' ); ?>">
-				<?php echo $this->e( $dto->cta->title ); ?>
+			   href="<?php echo esc_url( $dto->cta->url ) ?>">
+				<?php echo esc_html( format_content( $dto->cta->title ) ) ?>
 			</a>
 		<?php endif; ?>
 	</div>
