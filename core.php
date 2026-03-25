@@ -34,7 +34,6 @@ if ( ! class_exists( Core::class ) ) {
 	] );
 
 	$autoload = current( array_filter( $autoloaders, 'file_exists' ) );
-error_log(print_r($autoload, true));
 	require_once $autoload;
 }
 
@@ -66,9 +65,19 @@ add_action( 'plugins_loaded', static function (): void {
 		);
 	}
 
-	tribe_alert()->init( __FILE__ );
-}, 5, 0 );
+	// Bootstrap on init so translations follow WordPress 6.7+ rules (load_plugin_textdomain).
+	// Use priority -1 so subscribers can register their own `init` hooks (e.g. post type at priority 0)
+	// before WordPress runs priority 0; registering those during an `init` 0 callback can skip them this request.
+	add_action( 'init', static function (): void {
+		load_plugin_textdomain(
+			'tribe-alerts',
+			false,
+			dirname( plugin_basename( __FILE__ ) ) . '/languages'
+		);
 
+		tribe_alert()->init( __FILE__ );
+	}, -1, 0 );
+}, 5, 0 );
 
 function tribe_alert(): Core {
 	return Core::instance();
