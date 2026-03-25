@@ -64,15 +64,9 @@ npm-debug.log
 yarn-error.log
 /build
 /node_modules
-/public/wp
-/public/wp-content/*
-!/public/wp-content/plugins/.gitkeep
-!/public/wp-content/themes/.gitkeep
-!/public/wp-content/object-cache.php
-!/public/wp-content/memcached-object-cache.php
-!/public/wp-content/mu-plugins/
 /.env
 /vendor
 /phpcs.xml
 /phpunit.xml
 .phpunit.result.cache
+auth.json

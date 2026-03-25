@@ -34,7 +34,7 @@ if ( ! class_exists( Core::class ) ) {
 	] );
 
 	$autoload = current( array_filter( $autoloaders, 'file_exists' ) );
-
+error_log(print_r($autoload, true));
 	require_once $autoload;
 }
 
