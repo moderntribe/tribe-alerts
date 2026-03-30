@@ -42,7 +42,9 @@ jobs:
         run: chmod 777 dev/tests/tests/_output
 
       - name: Create composer .env
-        run: echo "${{ secrets.COMPOSER_ENV }}" > .env
+        run: |
+          echo "${{ secrets.COMPOSER_ENV }}" > .env
+          echo '${{ secrets.AUTH_JSON }}' > auth.json
 
       - name: Create local config
         run: |

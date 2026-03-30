@@ -28,7 +28,9 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create composer .env
-        run: echo "${{ secrets.COMPOSER_ENV }}" > .env
+        run: |
+          echo "${{ secrets.COMPOSER_ENV }}" > .env
+          echo '${{ secrets.AUTH_JSON }}' > auth.json
 
       - name: Install composer dependencies
         run: composer install --no-progress --no-dev --no-suggest
@@ -40,7 +42,9 @@ jobs:
         run: php php-scoper.phar add-prefix --force
 
       - name: Clean up files
-        run: rm -rf .env
+        run: |
+          rm -rf .env
+          rm -rf auth.json
 
       - name: Install node
         uses: actions/setup-node@v2

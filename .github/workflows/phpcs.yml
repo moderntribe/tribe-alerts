@@ -80,6 +80,7 @@ jobs:
         if: ${{ steps.filter.outputs.pluginsrc == 'true' }}
         run: |
           echo "${{ secrets.COMPOSER_ENV }}" > .env
+          echo '${{ secrets.AUTH_JSON }}' > auth.json
           composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - name: PHPCS
