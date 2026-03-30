@@ -13,7 +13,7 @@ jobs:
       cache_version: 0 # increment to flush all caches
       php_extensions: tokenizer, xmlwriter, simplexml
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Add GitHub oAuth
         env:
@@ -42,7 +42,7 @@ jobs:
 
       - name: Cache PHP extensions
         if: ${{ steps.filter.outputs.pluginsrc == 'true' }}
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ${{ steps.cache-php-extensions.outputs.dir }}
           key: ${{ steps.cache-php-extensions.outputs.key }}
@@ -70,7 +70,7 @@ jobs:
       - name: Check for Cached Composer Dependencies
         if: ${{ steps.filter.outputs.pluginsrc == 'true' }}
         id: cache-composer-dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
