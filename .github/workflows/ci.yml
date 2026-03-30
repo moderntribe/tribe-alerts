@@ -78,7 +78,7 @@ jobs:
         working-directory: dev/docker
 
       - name: Install node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
