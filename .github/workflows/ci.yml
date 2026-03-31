@@ -73,14 +73,6 @@ jobs:
         run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
         working-directory: dev/docker
 
-      - name: Debug
-        run: |
-          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests pwd
-          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests ls -la
-          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests ls -la dev/public/
-          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests ls -la dev/public/wp-content
-          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests ls -la dev/public/wp-content/plugins
-
       - name: Install composer dependencies
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests composer install --optimize-autoloader -d /application/www
         working-directory: dev/docker
