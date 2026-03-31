@@ -75,10 +75,11 @@ jobs:
 
       - name: Debug
         run: |
-         pwd
-         ls -la dev/public/
-         ls -la dev/public/wp-content
-         ls -la dev/public/wp-content/plugins
+          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash pwd
+          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash ls -la
+          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash ls -la dev/public/
+          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash ls -la dev/public/wp-content
+          docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash ls -la dev/public/wp-content/plugins
 
       - name: Install composer dependencies
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests composer install --optimize-autoloader -d /application/www
