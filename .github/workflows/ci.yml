@@ -73,10 +73,6 @@ jobs:
         run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
         working-directory: dev/docker
 
-      - name: Install composer dependencies
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests composer install --optimize-autoloader -d /application/www
-        working-directory: dev/docker
-
       - name: Create test databases
         run: |
           mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_tests;"
@@ -85,6 +81,16 @@ jobs:
       - name: Install WordPress for CI
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash /application/www/dev/tests/ci/gha-wordpress-setup.sh
         working-directory: dev/docker
+
+      - name: Install composer dependencies
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests composer install --optimize-autoloader -d /application/www
+        working-directory: dev/docker
+
+      - name: Debug
+        run: |
+          ls -la dev/public
+          ls -la dev/public/wp-content
+
 
       - name: Install node
         uses: actions/setup-node@v4
