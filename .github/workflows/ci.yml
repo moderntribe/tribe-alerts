@@ -75,6 +75,7 @@ jobs:
 
       - name: Debug
         run: |
+         pwd
          ls -la dev/public/
          ls -la dev/public/wp-content
          ls -la dev/public/wp-content/plugins
