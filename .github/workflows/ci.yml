@@ -79,7 +79,7 @@ jobs:
 
       - name: Debug folder
         run: |
-          ls -la
+          ls -la dev/public
 
       - name: Install node
         uses: actions/setup-node@v4
