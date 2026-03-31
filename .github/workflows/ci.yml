@@ -73,23 +73,9 @@ jobs:
         run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
         working-directory: dev/docker
 
-      - name: Create test databases
-        run: |
-          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_tests;"
-          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_acceptance;"
-
-      - name: Install WordPress for CI
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash /application/www/dev/tests/ci/gha-wordpress-setup.sh
-        working-directory: dev/docker
-
       - name: Install composer dependencies
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests composer install --optimize-autoloader -d /application/www
         working-directory: dev/docker
-
-      - name: Create test databases
-        run: |
-          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_tests;"
-          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_acceptance;"
 
       - name: Install node
         uses: actions/setup-node@v4
@@ -102,6 +88,15 @@ jobs:
 
       - name: Build assets
         run: yarn prod
+
+      - name: Create test databases
+        run: |
+          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_tests;"
+          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_acceptance;"
+
+      - name: Install WordPress for CI
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash /application/www/dev/tests/ci/gha-wordpress-setup.sh
+        working-directory: dev/docker
 
       - name: Run unit tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
