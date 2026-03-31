@@ -69,12 +69,12 @@ jobs:
         run: docker network create --driver=bridge --subnet=172.20.10.0/24 global_proxy
         working-directory: dev/docker
 
+      - name: Ensure WordPress plugin install paths exist
+        run: mkdir -p dev/public/wp-content/plugins
+
       - name: Start project containers
         run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
         working-directory: dev/docker
-
-      - name: Ensure WordPress plugin install paths exist
-        run: mkdir -p dev/public/wp-content/plugins
 
       - name: Install composer dependencies
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests composer install --optimize-autoloader -d /application/www
