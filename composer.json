@@ -28,6 +28,7 @@
     "php": ">=7.4",
     "ext-json": "*",
     "ext-readline": "*",
+    "enshrined/svg-sanitize": "^0.22",
     "johnbillion/extended-cpts": "^5.1",
     "league/plates": "^3.6",
     "moderntribe/tribe-libs": "^4.2",
@@ -70,9 +71,6 @@
     "format": "vendor/bin/phpcbf --standard=phpcs.xml.dist"
   },
   "config": {
-    "audit": {
-      "ignore": ["PKSA-4g5g-4rkv-myqs"]
-    },
     "sort-packages": true,
     "platform": {
       "php": "8.3"
