@@ -36,7 +36,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Open permissions on output and directories
         run: chmod 777 dev/tests/tests/_output
@@ -59,7 +59,7 @@ jobs:
 
       - name: Check for Cached Composer Dependencies
         id: cache-composer-dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: dev/docker/composer/cache
           key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -81,7 +81,7 @@ jobs:
         working-directory: dev/docker
 
       - name: Install node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
