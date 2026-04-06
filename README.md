@@ -316,4 +316,4 @@ GNU General Public License GPLv2 (or later). See [LICENSE.md](LICENSE.md).
 
 ## Modern Tribe
 
-[![Modern Tribe](https://moderntribe-common.s3.us-west-2.amazonaws.com/marketing/ModernTribe-Banner.png)](https://tri.be/contact/)
+[![Modern Tribe](https://moderntribe-common.s3.us-west-2.amazonaws.com/marketing/ModernTribe-Banner.png)](https://moderntribeagency.com/contact/)
