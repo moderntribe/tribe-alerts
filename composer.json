@@ -26,6 +26,7 @@
   ],
   "require": {
     "php": ">=7.4",
+    "cweagans/composer-patches": "^1.7",
     "ext-json": "*",
     "ext-readline": "*",
     "enshrined/svg-sanitize": "^0.22",
@@ -89,6 +90,11 @@
       "dev/public/wp-content/plugins/{$name}": [
         "type:wordpress-plugin"
       ]
+    },
+    "patches": {
+      "php-di/php-di": {
+        "PHP 8.4: explicit nullable parameter declarations": "patches/php-di-php84-explicit-nullable.patch"
+      }
     }
   }
 }
