@@ -20,4 +20,5 @@
 /phpunit.xml.dist   export-ignore
 /scoper.inc.php     export-ignore
 /dev                export-ignore
+/bin                export-ignore
 /public             export-ignore

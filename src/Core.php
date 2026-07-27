@@ -89,7 +89,7 @@ final class Core {
 		// Build an auto-wiring service container.
 		$builder = new ContainerBuilder();
 		$builder->useAutowiring( true );
-		$builder->useAnnotations( false );
+		$builder->useAttributes( false );
 		$builder->addDefinitions( [ self::PLUGIN_FILE => $plugin_path ] );
 		$builder->addDefinitions( [ self::VERSION_DEFINITION => self::VERSION ] );
 		$builder->addDefinitions( [ self::RESOURCES_PATH => plugin_dir_path( $plugin_path ) . self::RESOURCES_DIR ] );
