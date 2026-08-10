@@ -71,8 +71,6 @@ final class Core {
 
 	/**
 	 * Singleton constructor.
-	 *
-	 * @return self
 	 */
 	public static function instance(): self {
 		if ( ! isset( self::$instance ) ) {

@@ -13,8 +13,6 @@ interface Rule {
 	 * @param bool     $display Whether an alert will display.
 	 * @param \Closure $next    The next rule in the pipeline.
 	 * @param mixed[]  $rules   The Alert Meta ACF Rules Group.
-	 *
-	 * @return bool
 	 */
 	public function handle( bool $display, Closure $next, array $rules ): bool;
 

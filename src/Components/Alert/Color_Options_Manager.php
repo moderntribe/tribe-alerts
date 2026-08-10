@@ -25,8 +25,6 @@ interface Color_Options_Manager {
 	 * Returns css color class name.
 	 *
 	 * @param string $hex Six-digit hex color code in lowercase, e.g., #ffffff.
-	 *
-	 * @return string
 	 */
 	public function get_color_class( string $hex ): string;
 

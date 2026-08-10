@@ -18,8 +18,6 @@ class Included_Post_Processor implements Processor {
 	 * Determine if the currently viewed post should display the Alert Banner.
 	 *
 	 * @param array $rules
-	 *
-	 * @return bool
 	 */
 	public function process( array $rules ): bool {
 		$included_posts = $rules[ Alert_Meta::FIELD_RULES_INCLUDE_PAGES ] ?? [];

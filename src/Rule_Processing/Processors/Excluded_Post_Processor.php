@@ -19,8 +19,6 @@ class Excluded_Post_Processor implements Processor {
 	 * Alert Banner.
 	 *
 	 * @param array $rules
-	 *
-	 * @return bool
 	 */
 	public function process( array $rules ): bool {
 		$excluded_posts = $rules[ Alert_Meta::FIELD_RULES_EXCLUDE_PAGES ] ?? [];
