@@ -17,10 +17,6 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:moderntribe/tribe-libs.git"
-    },
-    {
-      "type": "vcs",
       "url": "git@github.com:nickforddesign/acf-swatch.git"
     },
     {
@@ -29,13 +25,13 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.0",
     "ext-json": "*",
     "ext-readline": "*",
     "enshrined/svg-sanitize": "^0.22",
     "johnbillion/extended-cpts": "^5.1",
     "league/plates": "^3.6",
-    "moderntribe/tribe-libs": "5.0.0.x-dev",
+    "moderntribe/tribe-libs": "^5.0",
     "spatie/data-transfer-object": "^2.8"
   },
   "require-dev": {
