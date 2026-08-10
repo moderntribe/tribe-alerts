@@ -16,19 +16,21 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.3'
           tools: composer
           coverage: none
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create composer .env
-        run: echo "${{ secrets.COMPOSER_ENV }}" > .env
+        run: |
+          echo "${{ secrets.COMPOSER_ENV }}" > .env
+          echo '${{ secrets.AUTH_JSON }}' > auth.json
 
       - name: Install composer dependencies
         run: composer install --no-progress --no-dev --no-suggest
@@ -40,10 +42,12 @@ jobs:
         run: php php-scoper.phar add-prefix --force
 
       - name: Clean up files
-        run: rm -rf .env
+        run: |
+          rm -rf .env
+          rm -rf auth.json
 
       - name: Install node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'

@@ -27,7 +27,7 @@ final class Core {
 
 	public const    PLUGIN_FILE        = 'plugin.file';
 	public const    VERSION_DEFINITION = 'plugin.version';
-	public const    VERSION            = '1.7.1';
+	public const    VERSION            = '1.8';
 	public const    RESOURCES_PATH     = 'plugin.resources_path';
 	public const    RESOURCES_URI      = 'plugin.resources_uri';
 	public const    DIST_DIR_PATH      = 'plugin.dist_dir_path';
@@ -89,7 +89,7 @@ final class Core {
 		// Build an auto-wiring service container.
 		$builder = new ContainerBuilder();
 		$builder->useAutowiring( true );
-		$builder->useAnnotations( false );
+		$builder->useAttributes( false );
 		$builder->addDefinitions( [ self::PLUGIN_FILE => $plugin_path ] );
 		$builder->addDefinitions( [ self::VERSION_DEFINITION => self::VERSION ] );
 		$builder->addDefinitions( [ self::RESOURCES_PATH => plugin_dir_path( $plugin_path ) . self::RESOURCES_DIR ] );

@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '7.4' ]
+        php-versions: [ '8.3' ]
 
     env:
       cache_version: 1 # increment to flush all caches
@@ -36,13 +36,15 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
 
       - name: Open permissions on output and directories
         run: chmod 777 dev/tests/tests/_output
 
       - name: Create composer .env
-        run: echo "${{ secrets.COMPOSER_ENV }}" > .env
+        run: |
+          echo "${{ secrets.COMPOSER_ENV }}" > .env
+          echo '${{ secrets.AUTH_JSON }}' > auth.json
 
       - name: Create local config
         run: |
@@ -57,7 +59,7 @@ jobs:
 
       - name: Check for Cached Composer Dependencies
         id: cache-composer-dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: dev/docker/composer/cache
           key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -66,6 +68,9 @@ jobs:
       - name: Create docker network
         run: docker network create --driver=bridge --subnet=172.20.10.0/24 global_proxy
         working-directory: dev/docker
+
+      - name: Ensure WordPress plugin install paths exist
+        run: mkdir -p dev/public/wp-content/plugins
 
       - name: Start project containers
         run: docker-compose --project-name=${{ env.PROJECT_ID }} up -d --force-recreate
@@ -76,7 +81,7 @@ jobs:
         working-directory: dev/docker
 
       - name: Install node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
@@ -89,8 +94,12 @@ jobs:
 
       - name: Create test databases
         run: |
-          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE tribe_tribe_alerts_tests;"
-          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE tribe_tribe_alerts_acceptance;"
+          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_tests;"
+          mysql -h 127.0.0.1 -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS tribe_tribe_alerts_acceptance;"
+
+      - name: Install WordPress for CI
+        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests bash /application/www/dev/tests/ci/gha-wordpress-setup.sh
+        working-directory: dev/docker
 
       - name: Run unit tests
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run unit
@@ -100,19 +109,7 @@ jobs:
         run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run integration
         working-directory: dev/docker
 
-      - name: Run functional tests
-        run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run functional
-        working-directory: dev/docker
-
-      # - name: Run acceptance tests
-      #   run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept --config "/application/www/dev/tests" run acceptance
-      #   working-directory: dev/docker
-
-      # - name: Run webdriver tests
-      #   run: docker-compose --project-name=${{ env.PROJECT_ID }} exec -T php-tests php /application/www/vendor/bin/codecept -vvv --config "/application/www/dev/tests" run webdriver
-      #   working-directory: dev/docker
-
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: ${{ failure() }}
         with:
           name: test-artifacts

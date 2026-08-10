@@ -55,7 +55,7 @@ modules:
         WPLoader:
             # loadOnly: false (We recommend each suite define this parameter explicitly)
             wpRootFolder: '%WP_ROOT_FOLDER%'
-            pluginsFolder: ../wp-content/plugins
+            pluginsFolder: wp-content/plugins
             dbName: '%TEST_DB_NAME%'
             dbHost: '%TEST_DB_HOST%'
             dbUser: '%TEST_DB_USER%'

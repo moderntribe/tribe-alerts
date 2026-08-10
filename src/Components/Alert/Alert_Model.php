@@ -51,13 +51,17 @@ class Alert_Model {
 	}
 
 	protected function can_display(): bool {
-		if ( ! $this->active_alert ) {
+		if ( ! $this->active_alert || $this->is_alert_published() ) {
 			return false;
 		}
 
 		$alert = Alert::factory( $this->active_alert->ID );
 
 		return $this->rule_manager->should_display( (array) $alert->get_meta( Alert_Meta::GROUP_RULES ) );
+	}
+
+	protected function is_alert_published(): bool {
+		return $this->active_alert && $this->active_alert->post_status && $this->active_alert->post_status !== 'publish';
 	}
 
 }

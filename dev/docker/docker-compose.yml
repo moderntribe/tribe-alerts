@@ -26,11 +26,12 @@ x-chrome: &chrome
         - 4444
 
 x-php: &php
-    image: moderntribe/squareone-php:74-3.0
+    image: moderntribe/squareone-php:82-1.0.0
     working_dir: /application
     user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
     volumes:
-        - ../..:/application/www/public/wp-content/plugins/tribe-alerts
+        # Repo root is the plugin; WP lives under dev/public (see dev/tests WP_ROOT_FOLDER / CI).
+        - ../..:/application/www/dev/public/wp-content/plugins/tribe-alerts
         - ../..:/application/www
         - ./php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/zz-overrides.ini
         - ./php/msmtp.conf:/etc/msmtprc:ro

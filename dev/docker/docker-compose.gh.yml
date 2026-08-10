@@ -50,6 +50,11 @@ services:
       proxy:
         ipv4_address: 172.20.10.100
 
+  php-tests:
+    extra_hosts:
+      - "tribe-alertstest.tribe:172.20.10.100"
+      - "tribe-alerts.tribe:172.20.10.100"
+
 networks:
   proxy:
     external:
