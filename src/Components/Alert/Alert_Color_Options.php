@@ -28,8 +28,6 @@ class Alert_Color_Options implements Color_Options_Manager {
 
 	/**
 	 * @param string $hex Six-digit hex color code in lowercase, e.g., #ffffff.
-	 *
-	 * @return string
 	 */
 	public function get_color_class( string $hex ): string {
 		$color = $this->color_options[ $hex ] ?? '';

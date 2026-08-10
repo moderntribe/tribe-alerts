@@ -18,8 +18,6 @@ class Alert_Rule_Manager {
 	 * @see \Tribe\Alert\Meta\Alert_Meta::GROUP_RULES
 	 *
 	 * @param array $rules
-	 *
-	 * @return bool
 	 */
 	public function should_display( array $rules ): bool {
 		if ( empty( $rules ) ) {

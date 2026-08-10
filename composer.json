@@ -47,7 +47,7 @@
     "larapack/dd": "^1.1",
     "lucatume/function-mocker": "^2.0",
     "lucatume/wp-browser": "^3.2",
-    "moderntribe/coding-standards": "^2.0",
+    "moderntribe/coding-standards": "^3.0",
     "nickford/acf-swatch": "^1.0",
     "wpengine/advanced-custom-fields-pro": "^6.4"
   },
